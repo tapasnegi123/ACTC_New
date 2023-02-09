@@ -1,0 +1,98 @@
+
+  <!-- Page title -->
+<div class="page-title">
+  <div class="container">
+    <div class="row align-items-center justify-content-center text-center special-box-padding">
+      <div class="col-12">
+        <h3>{{title}}</h3>
+      </div>
+      <div class="hl"></div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-us">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 col-12 p-lg-5  p-md-0 order-lg-0 order-md-1 order-1">
+        <div class="contact-details d-flex p-3">
+          <div class="align-items-start">
+            <img src="../../../assets/images/Location_blue_new.svg" alt=""/>
+          </div>
+          <div class="contact-detail-description align-items-center ms-4 ">
+            <h4 class="mt-4">LOCATION</h4>
+            <p class="mb-5 ">Jawaharlal Nehru Stadium Complex (East Gate, Lodhi Rd, New Delhi, Delhi 110003</p>
+          </div>
+        </div>
+        <div class="contact-details d-flex p-3">
+          <div class="align-items-start">
+            <img src="../../../assets/images/login_img_blue.svg" alt=""/>
+          </div>
+          <div class="contact-detail-description align-items-center ms-4 ">
+            <h4 class="mt-4">EMAIL</h4>
+            <div class="mb-5 d-flex flex-lg-column flex-md-row flex-row"><p>nsrs.kheloindia@gmail.com, </p> <p>nsrs.sai@gov.in</p></div>
+          </div>
+          
+        </div>
+        <div class="contact-details d-flex p-3 ">
+          <div class="align-items-start">
+            <img src="../../../assets/images/call_blue_new.svg" alt=""/>
+          </div>
+          <div class="contact-detail-description align-items-center ms-4 border-0">
+            <h4 class="mt-4">PHONE</h4>
+            <div class="mb-5 d-flex flex-lg-column flex-md-row flex-row"><p>Toll Free:1800-202-5155,</p><p> 1800-258-5155</p></div>
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-lg-6 col-md-12 col-12 order-lg-1 order-md-0 order-0 ">
+        <div class="contact-form p-5 mb-5 ">
+        
+          <form class="row justify-content-center" [formGroup]="contactForm">
+           <div class="col-12">
+            <div class="my-5">
+             
+              <input type="text" class="form-control border-0 py-4"  formControlName="fullName" placeholder="Full Name" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div  *ngIf="contactUsControl['fullName'].invalid && contactUsControl['fullName'].touched"  class="text-danger">
+                <ng-container *ngIf="contactUsControl['fullName'].errors?.['required']"><i class="bi bi-exclamation-circle"></i>Please enter your name</ng-container>
+                <ng-container *ngIf="contactUsControl['fullName'].errors?.['pattern']"><i class="bi bi-exclamation-circle"></i>Please Enter a valid name</ng-container>
+              </div>
+            </div>
+           </div>
+           <div class="col-6">
+            <div class="my-5">
+
+              <input type="email" class="form-control border-0 py-4" formControlName="emailAddress" placeholder="Your Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div  *ngIf="contactUsControl['emailAddress'].invalid && contactUsControl['emailAddress'].touched"  class="text-danger">
+                <ng-container *ngIf="contactUsControl['emailAddress'].errors?.['required']"><i class="bi bi-exclamation-circle"></i>Please enter your email</ng-container>
+                <ng-container *ngIf="contactUsControl['emailAddress'].errors?.['invalidEmail']"><i class="bi bi-exclamation-circle"></i>Please enter valid email</ng-container>
+              </div>
+            </div>
+           </div>
+           <div class="col-6">
+            <div class="my-5">
+             
+              <input type="text" class="form-control border-0 py-4" formControlName="phoneNo" placeholder="Phone" maxlength="10"  aria-describedby="emailHelp">
+              <div *ngIf="contactUsControl['phoneNo'].touched && contactUsControl['phoneNo'].invalid" class="text-danger">  
+                <div *ngIf="contactUsControl['phoneNo'].errors?.['required']"><i class="bi bi-exclamation-circle"></i>Mobile Number is required.</div>  
+                <div *ngIf="contactUsControl['phoneNo'].errors?.['pattern']"><i class="bi bi-exclamation-circle"></i>Please, Enter 10 digit Mobile Number.</div>  
+            </div>  
+            </div>
+           </div>
+            <div class="col-12">
+              <div class="my-5">
+              
+               
+               <textarea class="form-control border-0 py-4" formControlName="message" placeholder="Message"  rows="8"></textarea>
+               <div *ngIf="contactUsControl['message'].invalid && contactUsControl['message'].touched"  class="text-danger"><i class="bi bi-exclamation-circle"></i>Please enter your message</div>
+              </div>
+            </div>
+            <button type="submit"  [disabled]="!contactForm.valid" class="btn form-btn my-5" (click)="ContactUs(contactForm.value)">Submit</button>
+            <!-- <div *ngIf="showMsg"  class="animated fadeInUp animatedFadeInUp text-success">Form has been submitted</div> -->
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    

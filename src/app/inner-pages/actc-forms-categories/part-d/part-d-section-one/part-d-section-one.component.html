@@ -1,0 +1,295 @@
+<form [formGroup]="sectionOneForm" *ngIf="(getAllData$ | async) as partDData;else loader">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">STATUS OF NCOE</h2>
+    <div class="hl d-block mx-auto"></div>
+
+    <div class="table-1 padding-box">
+
+      <h4 class="text-start">1.1 TOPS NCOEs</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">NAME OF THE DESIGNATED TOPS NCOE</th>
+              <th scope="col" colspan="2">SANCTIONED ATHLETES</th>
+              <th scope="col" colspan="2">SANCTIONED COACHES</th>
+              <th scope="col" rowspan="2">ACTION</th>
+            </tr>
+
+            <tr>
+              <th>MALE</th>
+              <th>FEMALE</th>
+              <th>MALE</th>
+              <th>FEMALE</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="sectionOne">
+            <tr *ngFor="let first of FormArrayOne.controls ; let i = index" [formArrayName]="i">
+              <td>
+                <select class="form-select" (change)="DDChange($event,i)" formControlName="Academy_Id"
+                  id="Academy_Id" aria-label="Default select example">
+                  <option value="" selected disabled>Select</option>
+                  <ng-container *ngFor="let tops of getTOPSNCOEDDArr">
+                    <option [value]="tops.id">{{tops.name}}</option>
+                  </ng-container>
+                </select>
+                <div *ngIf="FormArrayOne.controls[i].get('Academy_Id')?.touched">
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('Academy_Id')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input maxlength="3" formControlName="S_Athlete_B" type="text" id="S_Athlete_B" >
+                <div *ngIf="FormArrayOne.controls[i].get('S_Athlete_B')?.touched">
+                  <div class="text-danger"
+                    *ngIf="FormArrayOne.controls[i].get('S_Athlete_B')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Athlete_B')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <input maxlength="3" formControlName="S_Athlete_G" type="text" id="S_Athlete_G" >
+                <div *ngIf="FormArrayOne.controls[i].get('S_Athlete_G')?.touched">
+                  <div class="text-danger"
+                    *ngIf="FormArrayOne.controls[i].get('S_Athlete_G')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Athlete_G')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <input maxlength="2" type="text" formControlName="S_Coach_B" id="S_Coach_B" >
+                <div *ngIf="FormArrayOne.controls[i].get('S_Coach_B')?.touched">
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Coach_B')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Coach_B')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <input maxlength="2" type="text" formControlName="S_Coach_G" id="S_Coach_G" >
+                <div *ngIf="FormArrayOne.controls[i].get('S_Coach_G')?.touched">
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Coach_G')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="FormArrayOne.controls[i].get('S_Coach_G')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                  </div>
+                </div>
+              </td>
+              <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                <div style="cursor: pointer;" (click)="RemoveField(i,'firstDelete')">
+                  <img src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                  DELETE
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <button [hidden]="DisableAddButton(FormArrayOne) || isDisabled" type="button" class="btn add_btn mt-3"
+          (click)="AddNewData('firstStep')">+ ADD</button>
+      </div>
+    </div>
+
+    <div class="table-2 padding-box">
+
+      <h4 class="text-start">1.2 Status of Athletes</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">NAME OF THE DESIGNATED TOPS NCOE</th>
+              <!-- <th scope="col" rowspan="2">CENTER TYPE</th> -->
+              <th scope="col" colspan="2">CURRENT STRENGTH</th>
+              <th scope="col" colspan="2">VACANCY</th>
+              <th scope="col" rowspan="2">REMARKS</th>
+            </tr>
+            <tr>
+              <th>MALE</th>
+              <th>FEMALE</th>
+              <th>MALE</th>
+              <th>FEMALE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="sectionTwo">
+              <ng-container *ngFor="let second of FormArrayTwo.controls ; let i = index" [formGroupName]="i">
+                <tr>
+                  <!--academy_name-->
+                  <td>
+                    <!-- <input type="text" formControlName="academy_name" placeholder="Select"> -->
+                    {{FormArrayTwo.controls[i].get('academy_name')?.value}}
+                  </td>
+                  <td>
+                    <input maxlength="3" type="text" formControlName="C_Athlete_B" (keydown)="vacancyNonNegative('C_Athlete_B', i)"
+                    (input)="ptchValueFromCurrentStrenthToSanctionedAthlete($event.target, 'C_Athlete_B' , i)">
+                    <div *ngIf="FormArrayTwo.controls[i].get('C_Athlete_B')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_B')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_B')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                      </div><div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_B')?.errors?.['max']">
+                        <i class="bi bi-exclamation-circle"></i>current strength of male should be less then sanctioned athlete.	
+                      </div>
+                    </div>
+                  </td>
+                  <!--label-->
+                  <td>
+                    <input maxlength="3" type="text" formControlName="C_Athlete_G" (keydown)="vacancyNonNegative('C_Athlete_G', i)"
+                    (input)="ptchValueFromCurrentStrenthToSanctionedAthlete($event.target, 'C_Athlete_G' , i)">
+                    <div *ngIf="FormArrayTwo.controls[i].get('C_Athlete_G')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_G')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_G')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('C_Athlete_G')?.errors?.['max']">
+                        <i class="bi bi-exclamation-circle"></i>current strength of female should be less then sanctioned athlete.
+                      </div>
+                    </div>
+                  </td>
+                  <!--label-->
+                  <td>
+                      {{(FormArrayOne.controls[i].get('S_Athlete_B')?.value) - (FormArrayTwo.controls[i].get('C_Athlete_B')?.value)}}
+                  </td>
+
+                  <td>
+                      {{(FormArrayOne.controls[i].get('S_Athlete_G')?.value) - (FormArrayTwo.controls[i].get('C_Athlete_G')?.value)}}
+                  </td>
+                  <td>
+                    <input type="text" formControlName="Remarks_Athlete" #Remarks_Athlete
+                      (input)="InputAtheleteAndCoachData(i,'Remarks_Athlete',Remarks_Athlete.value)">
+                      <div *ngIf="FormArrayTwo.controls[i].get('Remarks_Athlete')?.touched">
+                        <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Remarks_Athlete')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>alphanumerical upto 100 characters only
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="table-3 padding-box">
+
+      <h4 class="text-start">1.3 Status of Coaches</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">NAME OF THE DESIGNATED TOPS NCOE</th>
+              <!-- <th scope="col" rowspan="2">CENTER TYPE</th> -->
+              <th scope="col" colspan="2">CURRENT STRENGTH</th>
+              <th scope="col" colspan="2">VACANCY</th>
+              <th scope="col" rowspan="2">REMARKS</th>
+            </tr>
+            <tr>
+              <th>MALE</th>
+              <th>FEMALE</th>
+              <th>MALE</th>
+              <th>FEMALE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="sectionThree">
+              <ng-container *ngFor="let third of FormArrayThree.controls ; let i = index" [formArrayName]="i">
+                <tr>
+                  <td>
+                    <!-- <input type="text" formControlName="academy_name" placeholder="Select"> -->
+                    {{FormArrayThree.controls[i].get('academy_name')?.value}}
+                  </td>
+                  <td>
+                    <input maxlength="2" type="text" formControlName="C_Coach_B" (keydown)="vacancyNonNegative('C_Coach_B', i)"
+                    (input)="ptchValueFromCurrentStrenthToSanctionedAthlete($event.target, 'C_Coach_B' , i)">
+                    <div *ngIf="FormArrayThree.controls[i].get('C_Coach_B')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_B')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_B')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_B')?.errors?.['max']">
+                        <i class="bi bi-exclamation-circle"></i>current strength of male should be less then sanctioned coach.
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <input maxlength="2" type="text" formControlName="C_Coach_G" (keydown)="vacancyNonNegative('C_Coach_G', i)"
+                    (input)="ptchValueFromCurrentStrenthToSanctionedAthlete($event.target, 'C_Coach_G' , i)">
+                    <div *ngIf="FormArrayThree.controls[i].get('C_Coach_G')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_G')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_G')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('C_Coach_G')?.errors?.['max']">
+                        <i class="bi bi-exclamation-circle"></i>current strength of female should be less then sanctioned coach.
+                      </div>
+                    </div>
+                  </td>
+                  <!--label-->
+                  <td>
+                      {{(FormArrayOne.controls[i].get('S_Coach_B')?.value) - (FormArrayThree.controls[i].get('C_Coach_B')?.value)}}
+                  </td>
+                  <td>
+                      {{(FormArrayOne.controls[i].get('S_Coach_G')?.value) - (FormArrayThree.controls[i].get('C_Coach_G')?.value)}}
+                    </td>
+                  <td><input type="text" formControlName="Remarks_Coach" id="Remarks_Coach" #Remarks_Coach
+                      (input)="InputAtheleteAndCoachData(i,'Remarks_Coach',Remarks_Coach.value)">
+                      <div *ngIf="FormArrayThree.controls[i].get('Remarks_Coach')?.touched">
+                        <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Remarks_Coach')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>alphanumerical upto 100 characters only
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <div class="button-left">
+            <button type="button" class="btn me-2  previous-btn"  (click)="GoToSectionHome()">
+              PREVIOUS
+            </button>
+            <button type="button" class="btn ms-2  next-btn"
+            (click)="NextButton(isDisabled,sectionOneForm)" [disabled]="DisableAddButton(FormArrayOne) || !formListData.isfilledby_nsf">
+              NEXT
+            </button>
+          </div>
+          <div class="button-right">
+            <button [hidden]="isDisabled " type="button" class="btn  save-btn" (click)="SaveData(sectionOneForm)">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

@@ -1,0 +1,60 @@
+<div class="modal-content tournamentModal">
+  <div class="modal-header">
+    <h2 class="modal-title text-center w-100" style="font-weight: bold;">EVENT DETAILS</h2>
+    <button type="button" class="btn-close ms-0" aria-label="Close"
+      (click)="activeModal.close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container" [formGroup]="AddEventForm">
+        <div class="row">
+          <!-- event_name -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Event Name<i class="text-danger">*</i></h4>
+            <input type="text" class="form-control" placeholder="Event Name" formControlName="event_name">
+            <ng-container *ngIf="AddEventForm.get('event_name')?.touched">
+              <div class="text-danger" *ngIf="AddEventForm.get('event_name')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- gender_category -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Gender<i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example" placeholder="Gender"
+              formControlName="gender_category">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let data of genderArray" [value]="data.id">{{data.value}}</option>
+            </select>
+            <ng-container *ngIf="AddEventForm.get('gender_category')?.touched">
+              <div class="text-danger" *ngIf="AddEventForm.get('gender_category')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- eventtype -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Event Type<i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example" placeholder="Event Type"
+              formControlName="eventtype">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let data of eventTypeArray" [value]="data.id">{{data.value}}</option>
+            </select>
+            <ng-container *ngIf="AddEventForm.get('eventtype')?.touched">
+              <div class="text-danger" *ngIf="AddEventForm.get('eventtype')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Save/ Cancel -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="saveEvent()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="Loader"></loader>

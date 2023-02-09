@@ -1,0 +1,132 @@
+// #header-3{
+//     background-color: red !important;
+// }
+
+$primary1:#FCB316;
+$primary2:#ffffff;
+$primary3:#000000;
+$light-black: #333333;
+$dropdown-border:#8B8B8B;
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
+
+
+
+// body{
+//   font-size: 16px;
+// }
+
+
+// p,a{
+//   font-size: 1.4rem !important;
+// }
+
+
+
+.navbar-nav .nav-link .active {
+  // color: white !important;
+  background-color: #AA7608 !important;
+  // padding: 16px !important;
+  color: $primary2;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.2rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: "Lato";
+}
+
+/* Header Css */
+#header-1 {
+  background-color: $primary3;
+}
+#header-1 a {
+  font-size: 1.6rem;
+  line-height: 1.1rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: white;
+}
+@media screen and (max-width:375px) {
+    #header-1 a{
+        font-size: 1.38rem;
+    }
+}
+.buttons .btn {
+    font-size: 1.2rem;
+    line-height: 0.9rem;
+  width: 2.8rem;
+ 
+}
+.light-button{
+    background-color: $light-black ;
+}
+.search{
+    position: relative;
+}
+.search input{
+    padding: 0.75rem 1.4rem;
+}
+.search img{
+    position: absolute;
+    height: 1.3rem;
+    width: 1.3rem;
+    top: 30%;
+    left: 4%;
+    padding: 0.1rem;
+}
+#header-1 .dropdown{
+    border-right: 1px solid $dropdown-border !important;
+    a{
+      color: #000000;
+   
+    }
+    
+}
+.globe{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+#header-3{
+    background-color: #3B454D;
+    color:#ffffff;
+    font-size: 1.2rem;
+    line-height: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: "Lato";
+    box-shadow: 0px 3px 6px #0000001A !important;
+    border-bottom: 1px solid #DFDFDF;
+    opacity: 1;
+}
+#header-3 .nav-link{
+    color: #ffffff;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+    line-height: 1rem;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px;
+    font-family: "Lato";
+    text-transform: uppercase;
+    
+}
+
+#header-3 .nav-link:hover{
+  color: white !important;
+  background-color: #1f91c0 !important;
+  // padding: 16px !important;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  color: white;
+    font-size: 1.3rem;
+    line-height: 1rem;
+    font-weight: 400 !important;
+    letter-spacing: 0.5px;
+    font-family: "Lato";
+}

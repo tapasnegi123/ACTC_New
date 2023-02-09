@@ -1,0 +1,180 @@
+<div class="row">
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="main_1" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+      <div class="w-100">
+        <div class="section_bar">
+          <ul class="nav nav-pills nav_bar_height" id="pills-tab" role="tablist">
+            <li class="nav-item mx-2" role="presentation" *ngFor="let navLink of navLinkBtns,let i=index">
+              <button class="nav-link" [ngClass]="section == navLink.id ? 'active':''" (click)="toggleTabContent(navLink.id)">
+                {{navLink.name}}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Main 1 -->
+        <div class="row">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+              tabindex="0">
+              <ng-container>
+                <ng-template [ngIf]="section == 1 ">
+                  <div class="table-responsive"  *ngIf="(sectionFirstData$ | async) as ncoeData">
+                    <h4>Status of NCOE</h4>
+                    <table class="table table-bordered">
+                      <thead style="vertical-align: middle;">
+                        <tr>
+                          <th rowspan="3">NAME OF NCOE</th>
+                          <th colspan="6">ATHLETES</th>
+                          <th colspan="6">COACHES</th>
+                         
+                        </tr>
+                        <tr>
+                          <th colspan="2">SANCTIONS</th>
+                          <th colspan="2">CURRENT</th>
+                          <th colspan="2">VACANCY</th>
+                          <th colspan="2">SANCTIONS</th>
+                          <th colspan="2">CURRENT</th>
+                          <th colspan="2">VACANCY</th>
+    
+                        </tr>
+                        <tr>
+                          <th>M</th>
+                          <th>F</th>
+                          <th>M</th>
+                          <th>F</th>
+                          <th>M</th>
+                          <th>F</th>
+                          <th>M</th>
+                          <th>F</th>
+                          <th>M</th>
+                          <th>F</th>
+                          <th>M</th>
+                          <th>F</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                       <tr *ngFor="let data of ncoeData">
+                        <td>{{data.academy_name}}</td>
+                        <td>{{data.S_Athlete_B}}</td>
+                        <td>{{data.S_Athlete_G}}</td>
+                        <td>{{data.C_Athlete_B}}</td>
+                        <td>{{data.C_Athlete_G}}</td>
+                        <td>{{data.V_Athlete_B}}</td>
+                        <td>{{data.V_Athlete_G}}</td>
+                        <td>{{data.S_Coach_B}}</td>
+                        <td>{{data.S_Coach_G}}</td>
+                        <td>{{data.C_Coach_B}}</td>
+                        <td>{{data.C_Coach_G}}</td>
+                        <td>{{data.V_Coach_B}}</td>
+                        <td>{{data.V_Coach_G}}</td>
+                       </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-template>
+                <ng-template  [ngIf]="section == 2">
+                  <div class="table-responsive" *ngIf="(sectionSecondData$ | async) as StaffData">
+                    <!-- <h4>{{StaffData | json}}</h4> -->
+                    <h4>Remuneration Coach & Support Staff</h4>
+                    <table class="table table-bordered remunerationCoach_SupportTable">
+                      <thead style="vertical-align: middle;">
+                      <tr>
+                        <th>S.NO</th>
+                        <th>DESIGNATION</th>
+                        <th>NUMBER REQD.</th>
+                        <th>GROSS MONTHLY SALARY</th>
+                        <th>ESTIMATED EXPENDITURE</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let data of StaffData; let i = index">
+                        <td >
+                          <!-- <ng-container *ngIf="i < 10">0{{i+1}}</ng-container>
+                          <ng-container *ngIf="i > 9">{{i+1}}</ng-container> -->
+                          <ng-container>{{i+1}}</ng-container>
+                        </td>
+                        <td>{{data.Designation}}</td>
+                        <td>{{data.No_Required}}</td>
+                        <td>{{data.Gross_Monthaly}}</td>
+                        <td>{{data.Estimated_Expenditure
+                        }}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-template>
+                <ng-template  [ngIf]="section == 3">
+                  <div class="table-responsive" *ngIf="(sectionThirdData$ | async) as equipment">
+                    <div class="table-responsive" >
+                      <h4>1.1 Consumables</h4>
+                      <table class="table table-bordered remunerationCoach_SupportTable">
+                        <thead style="vertical-align: middle;">
+                        <tr>
+                          <th>S.NO</th>
+                          <th>NAME OF EQUIPMENT</th>
+                          <th>QUANTITY</th>
+                          <th>PRICE</th>
+                          <th>ESTIMATED PRICE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let equipmentData of equipment;let i = index">
+                          <ng-container *ngIf="equipmentData?.is_consumeable == true">
+                            <td><ng-container *ngIf="i > 10">0</ng-container>{{i+1}}</td>
+                            <td>{{equipmentData.Equipment_Name}}</td>
+                            <td>{{equipmentData.Quantity}}</td>
+                            <td>{{equipmentData.Price}}</td>
+                            <td>{{equipmentData.Expected_Price}}</td>
+                          </ng-container>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="my-4">
+                      <div class="table-responsive">
+                        <h4>1.2 Non-Consumables</h4>
+                        <table class="table table-bordered remunerationCoach_SupportTable">
+                          <thead style="vertical-align: middle;">
+                          <tr>
+                            <th>S.NO</th>
+                            <th>NAME OF EQUIPMENT</th>
+                            <th>QUANTITY</th>
+                            <th>PRICE</th>
+                            <th>ESTIMATED PRICE</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr  *ngFor="let equipmentData2 of equipment;let i = index">
+                            <ng-container *ngIf="equipmentData2?.is_consumeable == false">
+                              <td><ng-container *ngIf="i > 10">0</ng-container>{{i+1}}</td>
+                              <td>{{equipmentData2.Equipment_Name}}</td>
+                              <td>{{equipmentData2.Quantity}}</td>
+                              <td>{{equipmentData2.Price}}</td>
+                              <td>{{equipmentData2.Expected_Price}}</td>
+                          </ng-container>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div >
+                </ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <button>Click me </button> -->
+</div>
+
+<div class="row justify-content-between">
+  <div class="col-auto">
+      <button type="button" class="btn my-1 left-arrow"><img src="../../../../../../assets/images/left_nav_arrow.svg" class="img-fluid" alt=""></button>
+  </div>
+  <div class="col-auto">
+      <button type="button" class="btn my-1 right-arrow"><img src="../../../../../../assets/images/right_nav_arrow.svg" class="img-fluid" alt=""></button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="modal-content tournamentModal">
+  <div class="modal-header">
+    <h2 class="modal-title text-center w-100" style="font-weight: bold;">EQUIPMENT DETAILS</h2>
+    <button type="button" class="btn-close ms-0" aria-label="Close"
+      (click)="activeModal.close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container" [formGroup]="equipementForm">
+        <div class="row">
+          <!-- equipment_Name -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Equipment Name <i class="text-danger">*</i></h4>
+            <input type="text" class="form-control" placeholder="Equipment Name" formControlName="equipment_Name">
+            <ng-container *ngIf="equipementForm.get('equipment_Name')?.touched">
+              <div class="text-danger" *ngIf="equipementForm.get('equipment_Name')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- is_consumeable -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Equipment Type <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example" formControlName="is_consumeable">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let data of EquipmentCat" [value]="data">{{data}}</option>
+            </select>
+            <ng-container *ngIf="equipementForm.get('is_consumeable')?.touched">
+              <div class="text-danger" *ngIf="equipementForm.get('is_consumeable')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Tournament Edition -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Sport Name <i class="text-danger">*</i></h4>
+            <input maxlength="2" type="text" class="form-control" placeholder="Sport Name"
+              formControlName="sport_name">
+          </div>
+          <!-- Save/ Cancel -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="saveEquipment()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="Loader"></loader>

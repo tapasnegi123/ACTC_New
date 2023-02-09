@@ -1,0 +1,688 @@
+<ng-container *ngIf="(getCompleteData$ | async);else loader">
+  <form [formGroup]="sectionTwoForm">
+
+    <div class="section section-1 form-padding-box">
+      <h2 class="text-center">OUTSTANDING PERFORMANCE AT INTERNATIONAL LEVEL</h2>
+      <div class="hl d-block mx-auto"></div>
+
+      <!--First Section-->
+      <div class="table-1 padding-box">
+
+        <h4 class="text-start">3.1 Asian Games, Olympic Games, Common Wealth Games in the last four years</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col">ATHLETE/TEAM</th>
+                <th scope="col">TEAM COMPOSITION/GENDER</th>
+                <th scope="col">TEAM NAME/KID</th>
+                <th scope="col">YEAR</th>
+                <th scope="col" style="min-width: 215px !important;">NAME OF COMPETITION</th>
+                <th scope="col">VENUE</th>
+                <th scope="col">MEDAL WON</th>
+                <th scope="col">FINAL RANK/ PLACE</th>
+                <th scope="col">WORLD RANK</th>
+                <th scope="col">AS ON DATE</th>
+                <th scope="col">OTHER REMARKS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="firstStep">
+              <tr *ngFor=" let firstPhase of FirstStepFormArray.controls ; let i = index" [formGroupName]="i">
+
+                <!--Athlete / Team-->
+                <td>
+                  <select #athleteOrTeam class="form-select" formControlName="configuration" aria-label="Default select example"
+                    (input)="ChangeAtheleteOrTeam(athleteOrTeam.value,i,'firstStep', FirstStepFormArray,'Name')">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let athlete of athleteArr">
+                      <option [value]="athlete">{{athlete}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FirstStepFormArray.controls[i].get('configuration')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('configuration')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> {{FieldMandatoryError}}
+                    </div>
+                  </div>
+                </td>
+
+                <!--Team Composition / Gender-->
+                <td>
+                  <select class="form-select" formControlName="GenderComposition"
+                    aria-label="Default select example" (input)="changeTeamComposition(i, FirstStepFormArray,'Name')">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let composition of compositionArr[i]">
+                      <option [value]="composition">{{composition}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('GenderComposition')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('GenderComposition')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Team Name / KID-->
+                <td>
+                  <input #firstStepkid type="text" formControlName="Name"
+                    (change)="InputTeamKID(firstStepkid.value,i,FirstStepFormArray)">
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('teamNameOrkId')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('teamNameOrkId')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is required
+                    </div>
+                  </ng-container>
+                  <div *ngIf="FirstStepFormArray.controls[i].get('Name')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Name')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Name')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 characters only.
+                    </div>
+                  </div>
+                </td>
+
+                <!--Year-->
+                <td>
+                  <select #year class="form-select" id="firstStep" formControlName="year" #firstStepYear
+                    aria-label="Default select example" (change)="PopulateCompetitionDD(AgOgCompetionDD,i,year.value,true)">
+                    <option value="0"  selected disabled>Select</option>
+                    <ng-container *ngFor="let years of dateArr">
+                      <option [value]="years">{{years}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('year')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('year')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Name Of Competition-->
+                <td>
+                  <select #competitionId class="form-select" formControlName="Tournament_Id"
+                    aria-label="Default select example" (change)="ChangeCompetition(competitionId.value,i, FirstStepFormArray)">
+                    <option value="0" selected disabled>Select</option>
+                    <ng-container *ngFor="let data of AgOgCompetionDD[i]">
+                      <option [value]="data.tournament_detail_id">{{data.tournament_name}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('Tournament_Id')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Tournament_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Venue-->
+                <td>
+                  <input type="text" formControlName="Place">
+                  <!-- {{FirstStepFormArray.controls[i].get("Place")?.value}} -->
+                </td>
+
+                <!-- Medal Won-->
+                <td>
+                  <!-- <input type="text" formControlName="Medal_Won" > -->
+                  <select formControlName="Medal_Won" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <option *ngFor="let medals of medalsArr" [value]="medals">{{medals}}</option>
+                  </select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('Medal_Won')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Medal_Won')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Final /rank-->
+                <td>
+                  <input type="text" formControlName="Final_Rank" maxlength="2">
+                  <div *ngIf="FirstStepFormArray.controls[i].get('Final_Rank')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Final_Rank')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Final_Rank')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <!--World_Rank-->
+                <td>
+                  <input type="text" formControlName="World_Rank" maxlength="2">
+                  <div *ngIf="FirstStepFormArray.controls[i].get('World_Rank')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('World_Rank')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('World_Rank')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <!--AsOn_Date-->
+                <td>
+                  <input type="text" formControlName="AsOn_Date">
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('AsOn_Date')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('AsOn_Date')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <td><input type="text" formControlName="Remarks"></td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" id="firstStep" (click)="RemoveField(i,FirstStepFormArray)">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-end mb-2">
+          <ng-container>
+            <button [hidden]="DisableAddButton(FirstStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3"
+              id="firstStep" (click)="AddFieldsForFirstStep()">+ ADD</button>
+          </ng-container>
+        </div>
+      </div>
+
+      <!--Second Section-->
+      <div class="table-2 padding-box">
+
+        <h4 class="text-start">3.2 Other Major International Tournaments in the last four years</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <!-- <th scope="col">S.NO</th> -->
+                <th scope="col">ATHLETE/TEAM</th>
+                <th scope="col">TEAM COMPOSITION</th>
+                <th scope="col">TEAM NAME/KID</th>
+                <th scope="col">YEAR OF COMPETITION</th>
+                <th scope="col">NAME OF COMPETITION</th>
+                <th scope="col">VENUE</th>
+                <th scope="col">MEDAL WON</th>
+                <th scope="col">FINAL RANK/ PLACE</th>
+                <th scope="col">WORLD RANK</th>
+                <th scope="col">AS ON DATE</th>
+                <th scope="col">REMARKS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="secondStep" #secondStep>
+              <tr *ngFor="let secondPhase of SecondStepFormArray.controls;let i = index" [formGroupName]="i">
+
+                <!--Athlete / Team-->
+                <td>
+                  <select #athleteOrTeam formControlName="configuration" class="form-select" aria-label="Default select example"
+                    (change)="ChangeAtheleteOrTeam(athleteOrTeam.value,i,'secondStep', SecondStepFormArray,'Name')">
+                    <option value="" selected default>Select</option>
+                    <ng-container *ngFor="let athlete of athleteArr">
+                      <option [value]="athlete">{{athlete}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="SecondStepFormArray.controls[i].get('configuration')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('configuration')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+
+                <!--Team Composition / Gender-->
+                <td><select formControlName="GenderComposition" class="form-select"
+                    aria-label="Default select example" (input)="changeTeamComposition(i, SecondStepFormArray,'Name')">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let composition of secondPhaseCompositionArr[i]">
+                      <option [value]="composition">{{composition}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="SecondStepFormArray.controls[i].get('GenderComposition')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('GenderComposition')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Team Name / KID-->
+                <td><input #secondStepKid formControlName="Name"
+                    (change)="InputTeamKID(secondStepKid.value,i,SecondStepFormArray)" type="text">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Name')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Name')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Name')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 characters only.
+                    </div>
+                  </div>
+                </td>
+
+                <!--Year-->
+                <td>
+                  <select id="secondStep" formControlName="year" class="form-select"
+                    aria-label="Default select example" #secondStepYear (change)="PopulateCompetitionDD(otherInternationalCompetionDD,i,secondStepYear.value,false)">
+                    <option value="0" selected disabled>Select</option>
+                    <ng-container *ngFor="let years of dateArr">
+                      <option [value]="years">{{years}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="SecondStepFormArray.controls[i].get('year')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('year')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!--Name Of Competition-->
+                <td>
+                  <select #competitionId class="form-select" formControlName="Tournament_Id"
+                    aria-label="Default select example"
+                    (change)="ChangeCompetition(competitionId.value,i, SecondStepFormArray)">
+                    <option value="0" selected disabled>Select</option>
+                    <ng-container *ngFor="let data of otherInternationalCompetionDD[i]">
+                      <option [value]="data.tournament_detail_id">{{data.tournament_name}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="SecondStepFormArray.controls[i].get('Tournament_Id')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Tournament_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <td>
+                  <input type="text" formControlName="Place">
+                  <!-- {{SecondStepFormArray.controls[i].get("Place")?.value}} -->
+                </td>
+
+                <!-- Medal Won-->
+                <td>
+
+                  <select formControlName="Medal_Won" class="form-select" aria-label="Default select example">
+                    <option [value]="''" selected disabled>Select</option>
+                    <option *ngFor="let medals of medalsArr" [value]="medals">{{medals}}</option>
+                  </select>
+                  <ng-container *ngIf="SecondStepFormArray.controls[i].get('Medal_Won')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Medal_Won')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+
+                </td>
+
+                <!--Final /rank-->
+                <td><input type="text" formControlName="Final_Rank" maxlength="2">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Final_Rank')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Final_Rank')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Final_Rank')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <!--World_Rank-->
+                <td><input type="text" formControlName="World_Rank" maxlength="2">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('World_Rank')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('World_Rank')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('World_Rank')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <!--AsOn_Date-->
+                <td><input type="text" formControlName="AsOn_Date">
+                  <ng-container *ngIf="SecondStepFormArray.controls[i].get('AsOn_Date')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('AsOn_Date')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+
+                <td><input type="text" formControlName="Remarks"></td>
+
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" id="secondStep" (click)="RemoveField(i,SecondStepFormArray)">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(SecondStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3"
+            id="secondStep" (click)="AddFieldsForSecondStep()" #addBtn>+ ADD</button>
+        </div>
+      </div>
+
+      <!--Third Section-->
+      <div class="table-3 padding-box">
+
+        <h4 class="text-start">3.3 Planned Goals & Milestones (Senior)</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <!-- <th scope="col">S.NO</th> -->
+                <th scope="col" style="min-width: 260px !important;">EVENT</th>
+                <th scope="col">PARTICIPATION</th>
+                <th scope="col">MEDALS AT STAKE</th>
+                <th scope="col">TOP 16</th>
+                <th scope="col">TOP 8</th>
+                <th scope="col">MEDALS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="thirdStep">
+              <tr *ngFor="let oldThird of ThirdStepFormArray.controls;let i = index" [formGroupName]="i">
+                <!-- <td >01</td> -->
+                <td>
+                  <select #competitionId class="form-select" formControlName="CompetetionId"
+                    aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let data of eventList">
+                      <option [value]="data.event_id">{{data.event_name}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="ThirdStepFormArray.controls[i].get('CompetetionId')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('CompetetionId')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+                <!-- <td *ngIf="i != 0" #preDefinedTournamentName>
+                  <input type="text" formControlName="tournament_name">
+                </td> -->
+                <td><input type="text" formControlName="partcipation" maxlength="2">
+                  <div *ngIf="ThirdStepFormArray.controls[i].get('partcipation')?.touched">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('partcipation')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('partcipation')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <!-- MEDALS AT STAKE	 -->
+                <td>
+                  <input type="text" formControlName="Medals_At_Stake">
+                  <div *ngIf="ThirdStepFormArray.controls[i].get('Medals_At_Stake')?.touched">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('Medals_At_Stake')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('Medals_At_Stake')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <td><input type="text" formControlName="top16" maxlength="2">
+                  <div *ngIf="ThirdStepFormArray.controls[i].get('top16')?.touched">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('top16')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('top16')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <td><input type="text" formControlName="top8" maxlength="2">
+                  <div *ngIf="ThirdStepFormArray.controls[i].get('top8')?.touched">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('top8')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('top8')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+
+                <td><input type="text" formControlName="Medals" maxlength="2">
+                  <div *ngIf="ThirdStepFormArray.controls[i].get('Medals')?.touched">
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('Medals')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="ThirdStepFormArray.controls[i].get('Medals')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" id="thirdStep" (click)="RemoveField(i,ThirdStepFormArray)">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(ThirdStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3"
+            id="thirdtStep" #addBtn (click)="AddFieldsForThirdStep()">+ ADD</button>
+        </div>
+      </div>
+
+      <!--Fourth Section-->
+      <div class="table-4 padding-box">
+
+        <h4 class="text-start">3.4 Planned Goals & Milestones (Junior)</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <!-- <th scope="col">S.NO</th> -->
+                <th scope="col" style="min-width: 260px !important;">EVENT</th>
+                <th scope="col">PARTICIPATION</th>
+                <th scope="col">MEDALS AT STAKE</th>
+                <th scope="col">TOP 16</th>
+                <th scope="col">TOP 8</th>
+                <th scope="col">MEDALS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody #fourthSection formArrayName="fourthStep">
+              <tr *ngFor="let fourth of FourthStepFormArray.controls;let i = index" [formGroupName]="i">
+                <!-- <td >01</td> -->
+                <td>
+                  <select class="form-select" formControlName="CompetetionId" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let data of eventList">
+                      <option [value]="data.event_id">{{data.event_name}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="FourthStepFormArray.controls[i].get('CompetetionId')?.touched ">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('CompetetionId')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+
+                <!-- <td *ngIf=" i != 0">{{fourth.get('tournament_name')?.value}}</td> -->
+
+                <td><input type="text" formControlName="partcipation" maxlength="2">
+                  <div *ngIf="FourthStepFormArray.controls[i].get('partcipation')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('partcipation')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('partcipation')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <!-- MEDALS AT STAKE	 -->
+                <td>
+                  <input type="text" formControlName="Medals_At_Stake">
+                  <div *ngIf="FourthStepFormArray.controls[i].get('Medals_At_Stake')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('Medals_At_Stake')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('Medals_At_Stake')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <td><input type="text" formControlName="top16" maxlength="2">
+                  <div *ngIf="FourthStepFormArray.controls[i].get('top16')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('top16')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('top16')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <td><input type="text" formControlName="top8" maxlength="2">
+                  <div *ngIf="FourthStepFormArray.controls[i].get('top8')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('top8')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('top8')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <td><input type="text" formControlName="Medals" maxlength="2">
+                  <div *ngIf="FourthStepFormArray.controls[i].get('Medals')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('Medals')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is Required.
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FourthStepFormArray.controls[i].get('Medals')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" id="fourthStep" (click)="RemoveField(i,FourthStepFormArray)">
+                    <img id="fourthStep" src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button id="fourthStep" [hidden]="DisableAddButton(FourthStepFormArray) || isDisabled" type="button"
+            class="btn add_btn mt-3" #addBtn (click)="AddFieldsForFourthStep()">+ ADD</button>
+        </div>
+      </div>
+
+      <!--Fifth Section-->
+      <div class="table-5 padding-box">
+
+        <h4 class="text-start">3.5 Targets & Strategies for achieving above results</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 40%;">PARTICULARS</th>
+                <th scope="col">REMARKS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="fifthStep">
+                <ng-container *ngFor="let fifth of FifthStepFormArray.controls;let i = index" [formGroupName]="i">
+                  <tr>
+                    <!-- <td>Additional Intermediate targets</td> -->
+                    <!-- <td><input type="text" formControlName="TS_Name"></td> -->
+                    <td style="text-align: left !important;">{{ fifth.get('TS_Name')?.value }}</td>
+                    <td>
+                      <input type="text" formControlName="Remark" style="width: 100%;">
+                      <div *ngIf="FifthStepFormArray.controls[i].get('Remark')?.touched">
+                        <div class="text-danger" *ngIf="FifthStepFormArray.controls[i].get('Remark')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                        <div class="text-danger" *ngIf="FifthStepFormArray.controls[i].get('Remark')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>Text up to 100 charectors
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div class="button-left">
+              <button type="button" class="btn me-2 previous-btn" (click)="GoToPreviousForm()">
+                PREVIOUS
+              </button>
+              <button type="button" class="btn ms-2 next-btn" [disabled]="DisableAddButton(sectionTwoForm) || !formListData.isfilledby_nsf"
+                (click)="NextButton(isDisabled,sectionTwoForm)">
+                NEXT
+              </button>
+            </div>
+            <div class="button-right">
+              <button [hidden]="isDisabled " type="button" class="btn save-btn" (click)="SaveForm(sectionTwoForm)">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

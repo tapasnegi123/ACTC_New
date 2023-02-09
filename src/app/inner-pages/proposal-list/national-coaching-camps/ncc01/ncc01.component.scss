@@ -1,0 +1,34 @@
+.ncc_tables{
+    h2{
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+    h5{
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+    table{
+        font-size: 1.4rem;
+        text-align: center;
+        select{
+            font-size: 1.4rem;
+            padding: 10px 5px;
+        }
+        input{
+            font-size: 1.4rem;
+            padding: 10px 5px;
+        }
+       th{
+        vertical-align: middle;
+        min-width:200px;
+        font-size: 1.6rem;
+       }
+       td{
+        vertical-align: middle;
+       }
+       thead{
+        background-color: #F2F2F2;
+        color: black;
+       }
+    }
+}

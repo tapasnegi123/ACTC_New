@@ -1,0 +1,297 @@
+<form [formGroup]="SectionOneForm" *ngIf="partBData$ | async; else loader">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">INTRODUCTION FOR JUNIOR CATEGORY</h2>
+
+    <div class="table-1 padding-box">
+      <h4 class="text-start">1.1 Brief Introduction to Sports</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col">DESCRIPTION</th>
+              <th scope="col">DETAIL BY NSF</th>
+              <th scope="col">INTRODUCED</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- YOG row -->
+            <tr>
+              <td style="text-align: left !important;">Whether Youth Olympic Games (YOG) sport or not? If yes, when was
+                it introduced?</td>
+              <td>
+                <select #isOG formControlName="isOG" id="isOG" class="form-select" aria-label="Default select example"
+                  (change)="IsOGToggle('isOG')">
+                  <option [value]="true">YES</option>
+                  <option [value]="false">NO</option>
+                </select>
+              </td>
+              <td>
+                <input maxlength="4" type="text" formControlName="OGYear" (input)="setValidatorsConditionally('OGYear', isOG.value)">
+                <div *ngIf="SectionOneForm.controls['OGYear'].touched">
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['OGYear'].errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['OGYear'].errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Numeric upto 4 digits.
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- YAG row -->
+            <tr>
+              <td style="text-align: left !important;">Whether Youth Asian Games (YAG)/ Youth Asian Championship (YAC)
+                sport or not? If yes, when was it
+                introduced?</td>
+              <td>
+                <select #isAG formControlName="isAG" id="isAG" class="form-select"
+                  (change)="IsOGToggle('isAG')" aria-label="Default select example">
+                  <option [value]="true">YES</option>
+                  <option [value]="false">NO</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" formControlName="AGYear" maxlength="4" (input)="setValidatorsConditionally('AGYear', isAG.value)">
+                <div *ngIf="SectionOneForm.controls['AGYear'].touched">
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['AGYear'].errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['AGYear'].errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Numeric upto 4 digits.
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- YCWG row -->
+            <tr>
+              <td style="text-align: left !important;">Whether Youth Commonwealth Games (YCWG)/ Youth Commonwealth
+                Championship (YCWC) sport or not? If
+                yes,
+                when was it introduced?</td>
+              <td>
+                <select #isCWG formControlName="isCWG" id="isCWG" class="form-select"
+                  (change)="IsOGToggle('isCWG')" aria-label="Default select example">
+                  <!-- <option selected>Select</option> -->
+                  <option [value]="true">YES</option>
+                  <option [value]="false">NO</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" formControlName="CWGYear" maxlength="4" (input)="setValidatorsConditionally('CWGYear', isCWG.value)">
+                <div *ngIf="SectionOneForm.controls['CWGYear'].touched">
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['CWGYear'].errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['CWGYear'].errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Numeric upto 4 digits.
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- Age Categories -->
+            <tr>
+              <td style="text-align: left !important;">Describe the age categories (with range of eligible age) for
+                both, Boys/ Men & Girls/ Women at
+                international level.</td>
+              <td>
+                <input type="text" #agegroup formControlName="agegroup" (keypress)="setValidatorsConditionally('agegroup', agegroup.value)">
+                <div *ngIf="SectionOneForm.controls['agegroup'].touched">
+                  <div class="text-danger" *ngIf="SectionOneForm.controls['agegroup'].errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-2 padding-box">
+
+      <h4 class="text-start">1.2 Total no. of events and medals at stake in Boys and Girls (combined) category in YOG,
+        YAG/YAC and YCWG/YCWC</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col">COMPETITION</th>
+              <th scope="col">EVENTS</th>
+              <th scope="col">MEDALS</th>
+              <th scope="col">REMARK</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="sectionTwo">
+              <ng-container *ngFor="let first of FormArrayTwo.controls ; let i = index " [formGroupName]="i">
+                <tr>
+                  <td scope="row">
+                    <input class="second-step-input border-0"
+                      style="border:0px !important; background: transparent !important;" type="text"
+                      formControlName="Competition" id="competition" #competition>
+                  </td>
+                  <td><input type="text" formControlName="Event" id="Event" maxlength="2">
+                    <div *ngIf="FormArrayTwo.controls[i].get('Event')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Event')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Event')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Medal" id="Medal" maxlength="2">
+                    <div *ngIf="FormArrayTwo.controls[i].get('Medal')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Medal')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Medal')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Remarks" id="Remarks"></td>
+                </tr>
+
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <!-- <button type="button" class="btn add_btn mt-3" [disabled]="DisableAddButton(FormArrayTwo)" (click)="AddNewField('SecondStep')">+ ADD</button> -->
+      </div>
+    </div>
+
+
+    <div class="table-3 padding-box">
+      <h4 class="text-start">1.3 What are the other types/ levels of competition played in the sport?</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col">COMPETITION</th>
+              <th scope="col">EVENTS</th>
+              <th scope="col">MEDALS</th>
+              <th scope="col">REMARK</th>
+              <th scope="col">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="sectionThree">
+              <ng-container *ngFor="let first of FormArrayThree.controls ; let i = index" [formGroupName]="i">
+                <tr>
+                  <!-- <td>01</td> -->
+                  <td scope="row">
+                    <input class="second-step-input border-0"
+                      style="border:0px !important; background: transparent !important;" type="text"
+                      formControlName="Competition" id="competition" #competition>
+                  </td>
+                  <td><input type="text" formControlName="Event" maxlength="2">
+                    <div *ngIf="FormArrayThree.controls[i].get('Event')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Event')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Event')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Medal" maxlength="2">
+                    <div *ngIf="FormArrayThree.controls[i].get('Medal')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Medal')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Medal')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Remarks"></td>
+
+                  <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0" (click)="RemoveField(i,'sectionThree')" #deleteBtn>
+                    <div><img src="/assets/images/delete-table.svg" class="d-block mx-auto"></div>
+                    <div>DELETE</div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+            <ng-container formArrayName="sectionThreeNew">
+              <ng-container *ngFor="let first of FormArrayThreeNew.controls ; let i = index" [formGroupName]="i">
+                <tr>
+                  <td>
+                    <select class="form-select" aria-label="Default select example" formControlName="CompetitionId">
+                      <option value="" disabled selected>Select</option>
+                      <ng-container *ngFor="let competition of newCompetitionDD">
+                        <option [value]="competition.competitionId">{{competition.competition}}</option>
+                      </ng-container>
+                    </select>
+                    <div *ngIf="FormArrayThreeNew.controls[i].get('CompetitionId')?.touched">
+                      <div class="text-danger"
+                        *ngIf="FormArrayThreeNew.controls[i].get('CompetitionId')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                      </div>
+                    </div>
+                  </td>
+
+                  <td><input type="text" formControlName="Event" maxlength="2">
+                    <div *ngIf="FormArrayThreeNew.controls[i].get('Event')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThreeNew.controls[i].get('Event')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThreeNew.controls[i].get('Event')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Medal" maxlength="2">
+                    <div *ngIf="FormArrayThreeNew.controls[i].get('Medal')?.touched">
+                      <div class="text-danger" *ngIf="FormArrayThreeNew.controls[i].get('Medal')?.errors?.['required']">
+                        <i class="bi bi-exclamation-circle"></i>This field is Required.
+                      </div>
+                      <div class="text-danger" *ngIf="FormArrayThreeNew.controls[i].get('Medal')?.errors?.['pattern']">
+                        <i class="bi bi-exclamation-circle"></i>Numeric upto 2 digits.
+                      </div>
+                    </div>
+                  </td>
+                  <td><input type="text" formControlName="Remarks"></td>
+                  <td [hidden]="isDisabled" class="border-0" (click)="RemoveField(i,'sectionThreeNew')" #deleteBtn>
+                    <div><img src="/assets/images/delete-table.svg" class="d-block mx-auto"></div>
+                    <div>DELETE</div>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn add_btn mt-3" [hidden]="DisableAddButton(FormArrayThreeNew) || isDisabled"
+          (click)="AddNewField()">+ ADD</button>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <div class="button-left">
+            <button type="button" class="btn me-2  previous-btn" (click)="GoToSummery()">
+              PREVIOUS
+            </button>
+            <button type="button" class="btn ms-2  next-btn" [disabled]=" DisableAddButton(FormArrayThreeNew) || !formListData.isfilledby_nsf"
+              (click)=" CheckForIsEditable(SectionOneForm.value)">
+              NEXT
+            </button>
+          </div>
+          <div class="button-right">
+            <button type="button" [hidden]="isDisabled" class="btn save-btn" (click)="SaveForm(SectionOneForm.value)">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

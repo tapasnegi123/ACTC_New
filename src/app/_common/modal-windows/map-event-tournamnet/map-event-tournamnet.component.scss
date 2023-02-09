@@ -1,0 +1,26 @@
+.tournamentModal{
+    .modal-header{
+        background-color: #1F91C0;
+        position: relative;
+        color: #fff;
+        padding-right: 35px;
+        border-radius: 0;
+        .modal-title{width: 100%;font-size: 20px;font-weight: bold;}
+        .btn-close{position: absolute;right: 15px;box-shadow: none;}
+    }  
+    .modal-body{
+        font-size: 13px;
+    }
+    .btn-secondary{
+        font-size: 14px;
+        background-color: #3A3A3A;
+        text-transform: uppercase;
+        padding: 10px 60px;
+        border-radius: 2px;
+        &:hover{color: #fff;}
+    }
+    .form-control{
+        height: 35px;
+        font-size: 13px;
+    }
+}

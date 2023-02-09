@@ -1,0 +1,210 @@
+
+.dropdown-toggle::after{
+    font-size: 1.5rem;
+}
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show{
+    border: 0px !important;
+}
+
+
+.nsf_1{
+  h2{
+      font-family: "Lato" , sans-serif;
+      font-size: 2.7rem;
+      line-height: 3.9rem;
+      font-weight: 700;
+  }
+  .list_number{
+      font-size: 1.9rem;
+      line-height: 1rem;
+      letter-spacing: 0.72px;
+  }
+  .list_name{
+      font-size: 2.1rem;
+      line-height: 9.1rem;
+  }
+
+
+
+  .btn_width{
+      width: 150px !important;
+  }
+  @media screen and (max-width:767px) {
+      .btn_width{
+          width: 120px !important;
+      }
+
+      .list_name{
+          font-size: 2.1rem;
+          line-height: 5.1rem;
+      }
+  }
+  .actc-calender{
+      margin-bottom: 10rem;
+  }
+
+  .step-box{
+      position: relative;
+  }
+  .step-lines{
+      position: absolute;
+      width: 133rem;
+      // border: red;
+      // background-color: red;
+      // height: 5px;
+      top: -40px;
+      // left: 8.5%;
+
+      .step-line{
+          height: 4rem;
+      }
+  }
+  .steps{
+      font-size: 1.8rem;
+      line-height: 6.3rem;
+      font-weight: 500;
+      letter-spacing: 0.68px;
+      
+      .step{
+          // padding: 0.2rem 9.6rem;
+          text-align: center;
+          color: white;
+          background-color: black;
+          position: relative;
+          border-radius: 4px;
+          // height: 50px;
+          // width: 200px;
+          
+      }
+
+      .active{
+          background-color: #FCB316 !important;
+          // padding: 2px 96px;
+
+          .step-dots{
+              background-color: white !important;
+          }
+      }
+
+      .step-dots{
+          position: absolute;
+          top: -13px;
+          left: 45%;
+          height: 25px;
+          width: 25px;
+          border: 1px solid #707070 !important;
+          background-color: #707070;
+          // opacity: 50%;
+      
+      }
+
+  }
+}
+::ng-deep .sidebarBody{max-width: 240px;}
+
+
+// SideBar
+.sidebar{
+  .sidebar-bg{
+      background-color: #3B454D !important;
+      width: 210px;
+  }
+  .offcanvas-header{
+      justify-content: end;
+  }
+  .btn-close{
+      right: 10px !important;
+      background: url(/assets/images/dashboard/x.svg);
+      position: relative;
+      height: 25px;
+      width: 29px;
+      background-repeat: no-repeat;
+  }
+  .side-navbar{
+      
+     .plus_btn{
+        width: 18px;
+        height: 18px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 0px;
+        background-color: #49545b;
+        color: white;
+     }
+
+
+      li {
+          
+        //   margin:0.5rem 0;
+          padding: 1.0rem 1.5rem;
+          
+          margin-left: 8px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border-bottom: 1px solid #42494f;
+          text-transform: capitalize
+          ;
+
+
+          img{
+              margin-right: 0.8rem;
+              height: 2rem;
+              filter: brightness(1);
+          }
+
+          a{
+              text-decoration: none;
+              color: white;
+              font-size: 1.2rem;
+              line-height: 1;
+              letter-spacing: 0.49px;
+              font-weight: 500;
+          }
+
+          
+      }
+      li:hover{
+        background-color: white !important;
+        border-radius: 5px 0px 0px 5px;
+        cursor: pointer;
+        img{
+            filter: brightness(0);
+        }
+        a{
+            color: black !important;
+            
+        }
+
+        .plus_btn{
+          background-color: #f0f2f6;
+          color: black;
+        }
+      }
+
+      .active{
+          background-color: white !important;
+          border-radius: 5px 0px 0px 5px;
+          cursor: pointer;
+          a{
+              color: black !important;
+              
+          }
+
+          .plus_btn{
+            background-color: #f0f2f6;
+            color: black;
+          }
+          img{
+            filter: brightness(0) !important;
+        }
+      }
+      .active:hover{
+        img{
+            filter: brightness(0);
+        }
+      }
+  }
+}

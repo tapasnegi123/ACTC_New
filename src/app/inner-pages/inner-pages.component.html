@@ -1,0 +1,11 @@
+<ng-container *ngIf="userDetail != null; else name">
+<app-inner-layout-header></app-inner-layout-header>
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #name>
+  <loader></loader>
+</ng-template>
+
+
+<!-- <app-inner-layout-footer></app-inner-layout-footer> -->

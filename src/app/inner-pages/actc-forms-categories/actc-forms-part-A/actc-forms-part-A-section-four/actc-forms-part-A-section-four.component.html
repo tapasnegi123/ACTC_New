@@ -1,0 +1,178 @@
+<ng-container *ngIf="completeData$ | async ;else loader">
+  <form [formGroup]="sectionFourthForm">
+    <div class="section section-1 form-padding-box">
+      <h2 class="text-center">BRIEF REPORT OF NATIONAL CHAMPIONSHIP/COMPETITION</h2>
+      <div class="hl d-block mx-auto"></div>
+
+      <div class="table-1 padding-box">
+
+        <h4 class="text-start">4.1 Details of National Championship/Competitions organized in the last two years</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">AGE CATEGORY</th>
+                <th scope="col" rowspan="2">NAME OF COMPETITION ORGANIZED</th>
+                <th scope="col" rowspan="2">NUMBER OF PARTICIPATING STATES</th>
+                <th scope="col" rowspan="2">NUMBER OF PARTICIPATING ATHLETES</th>
+                <th scope="col" colspan="3">VENUE DETAILS</th>
+                <th scope="col" colspan="2">DATE OF COMPETITION</th>
+                <th scope="col" rowspan="2">BEST 5 PERFORMING STATES</th>
+                <th scope="col" rowspan="2">REMARK</th>
+                <th scope="col" rowspan="2">ACTION</th>
+              </tr>
+              <tr>
+                <th>CENTER NAME</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>FROM</th>
+                <TH>TO</TH>
+              </tr>
+            </thead>
+            <tbody formArrayName="firstSection">
+              <tr *ngFor="let a of FirstStepFormArray?.controls; let i = index" [formGroupName]="i">
+                <!-- Age_Category -->
+                <td>
+                  <select formControlName="Age_Category" class="form-select" aria-label="Default select example">
+                    <option value="" disabled selected>Select</option>
+                    <ng-container *ngFor="let category of ageCategoryArray">
+                      <option [value]="category.id">{{category.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FirstStepFormArray.controls[i].get('Age_Category')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Age_Category')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!-- TournamentId -->
+                <td>
+                  <select #TournamentId class="form-select" id="firstStep" formControlName="TournamentId"
+                    aria-label="Default select example" (change)="setVanueDetailsOnComptetionSelection(TournamentId.value,i, FirstStepFormArray)">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let data of competitionDDArrayLastTwoYear">
+                      <option [value]="data?.competitionId">{{data?.competition}}</option>
+                    </ng-container>
+                  </select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('TournamentId')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('TournamentId')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+                <!-- State_participate -->
+                <td>
+                  <input type="text" formControlName="State_participate">
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('State_participate')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('State_participate')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('State_participate')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </ng-container>
+                </td>
+                <!-- Athlete_participate -->
+                <td>
+                  <input type="text" formControlName="Athlete_participate">
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('Athlete_participate')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Athlete_participate')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Athlete_participate')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                    </div>
+                  </ng-container>
+                </td>
+                <!--centerName-->
+                <td>{{ FirstStepFormArray.controls[i].get("Center_Name")?.value }}</td>
+                <!--state-->
+                <td>
+                  {{ FirstStepFormArray.controls[i].get("State")?.value  }}
+                  <!-- {{ FirstStepFormArray.controls[i].get("From_Date")?.value }} -->
+
+                  <!-- <input type="text" formControlName="State_Id"> -->
+                </td>
+                <!--city-->
+                <td>{{ FirstStepFormArray.controls[i].get("city")?.value }}</td>
+
+                <!--From_Date-->
+                <td>{{ FirstStepFormArray.controls[i].get("From_Date")?.value | date:'dd-MM-yyyy' }}</td>
+
+                <!--To_Date-->
+                <td>{{ FirstStepFormArray.controls[i].get("To_Date")?.value | date:'dd-MM-yyyy' }}</td>
+
+                <!--Best5-->
+                <td class="best5">
+                  <ng-select #select placeholder="Select" [items]="stateDDArray" bindLabel="name"
+                    placeholder="Select" bindValue="id" appendTo="body" [multiple]="true"
+                    [dropdownPosition]="'bottom'" [maxSelectedItems]="5" [closeOnSelect]="false"
+                    [hideSelected]="true" [virtualScroll]="true" notFoundText="No state found" [searchable]="false"
+                    [clearSearchOnAdd]="true" formControlName="Best5" class="custom">
+                    <!-- <ng-template ng-header-tmp>
+                    <input #customSearch style="width: 100%; line-height: 24px" type="text" (input)="select.filter(customSearch.value)"/>
+                  </ng-template> -->
+                  </ng-select>
+                  <ng-container *ngIf="FirstStepFormArray.controls[i].get('Best5')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Best5')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </ng-container>
+                </td>
+                <td>
+                  <input type="text" formControlName="Remarks">
+                  <div *ngIf="FirstStepFormArray.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FirstStepFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 words only
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" id="fourthStep" (click)="RemoveField(i,$event)">
+                    <img id="fourthStep" src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(FirstStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3"
+            id="firstSection" (click)="AddNewField()" #addBtn>+ ADD</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div class="button-left">
+              <button type="button" class="btn me-2  previous-btn" (click)="GoToPreviousForm()">
+                PREVIOUS
+              </button>
+              <button type="button" class="btn ms-2  next-btn" [disabled]="DisableAddButton(FirstStepFormArray) || !formListData.isfilledby_nsf"
+                (click)="CheckForIsEditable(sectionFourthForm.value,sectionFourthForm)">
+                NEXT
+              </button>
+            </div>
+            <div class="button-right">
+              <button [hidden]="isDisabled" type="button" class="btn  save-btn"
+                (click)="SaveForm(sectionFourthForm.value,sectionFourthForm)">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader [ngIf]="showLoader">
+  <loader></loader>
+</ng-template>

@@ -1,0 +1,70 @@
+<div class="masters_tournament manage-actc-list">
+  <div class="container">
+    <div class="row align-items-center justify-content-between my-4">
+      <div class="col-auto">
+        <div class="list_heading ">
+          ACTC - EVENT MASTER
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="d-flex">
+          <div class="buttons">
+            <div style="display: flex;">
+              <button type="btn" class="btn add-buttons" routerLink="/tournaments">TOURNAMENT</button>
+              <button type="btn" class="btn add-buttons" (click)="addEvent()">ADD +</button>
+            </div>
+          </div>
+          <!-- search input -->
+          <div class="list_search ms-3">
+            <img src="/assets/images/search.svg" class="img-fluid" alt="">
+            <input #searchInput type="text" (keyup)="filter(searchInput.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Main Table -->
+    <div class="actc_list_table">
+      <div class="container">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">S.NO</th>
+                <th scope="col">EVENT NAME</th>
+                <!-- <th scope="col">AGE CATEGORY</th> -->
+                <th scope="col">GENDER CATEGORY</th>
+                <th scope="col">EVENT TYPE</th>
+                <!-- <th scope="col">EVENT CATEGORY</th> -->
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of eventListSportWise |  slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index">
+                <td>{{eventListSportWise.indexOf(data)+1}}</td>
+                <td>{{data.event_name}}</td>
+                <!-- <td>AGE CATEGORY</td> -->
+                <td>{{data.gender_category}}</td>
+                <td>{{data.event_type}}</td>
+                <!-- <td>EVENT CATEGORY</td> -->
+                <td>
+                  <div class="d-flex justify-content-around align-items-center text-center custom-action">
+                        <a><img src="/assets/images/delete_bin.svg" class="d-block mx-auto" (click)="deleteRow(data.event_id)"></a>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="eventListSportWise?.length == 0">
+                No Data Found
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ngb-pagination *ngIf="eventListSportWise.length > 0" [collectionSize]="eventListSportWise.length" [(page)]="page"
+          [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+        </ngb-pagination>
+        <div class="total_result">TOTAL - {{eventListSportWise.length}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="Loader"></loader>

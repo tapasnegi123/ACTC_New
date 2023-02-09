@@ -1,0 +1,112 @@
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+
+
+.contact-details{
+
+    img{
+        height: 8.2rem;
+        width: 8.2rem;
+    }
+  
+    h4{
+        font-size: 2rem;
+        line-height: 2.9rem;
+        font-weight: bold;
+        color:#000000;
+    }
+    p{
+        font-size: 1.9rem;
+        line-height: 3.2rem;
+        color: #393939;
+        font-weight: 500;
+        // padding-right: 14rem;
+
+    }
+    @media screen and (max-width:767px) {
+        p{
+            padding-right: 0;
+        }
+    }
+    .contact-detail-description{
+       
+        border-bottom: dashed;
+      border-color:  #3939392d;
+      
+       
+    }
+}
+
+.contact-form{
+    background-color: white;
+    box-shadow: 0px 3px 6px #00000029;
+border-radius: 9px;
+margin-top: -2.5rem;
+
+
+
+    input{
+        border-bottom: 1px solid #00000029 !important;
+        border-radius: 0;
+        font-size: 1.5rem;
+        line-height: 1;
+        
+        &::-webkit-input-placeholder {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+    }
+    textarea{
+        border-bottom: 1px solid #00000029 !important;
+        border-radius: 0;
+        font-size: 1.5rem;
+        line-height: 1;
+
+        &::-webkit-input-placeholder {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+    }
+}
+@media screen and (max-width:991px) {
+    .contact-form{
+        margin-top: 1rem !important;
+        box-shadow: 0px 0px 0px rgb(0 0 0 / 0%) !important;
+    }
+}

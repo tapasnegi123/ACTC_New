@@ -1,0 +1,30 @@
+// modal window css
+.submitActcModal{
+    padding: 5px;
+    .modal-header{
+        background-color: #1F91C0;
+        position: relative;
+        color: #fff;
+        padding-right: 35px;
+        border-radius: 0;
+        .modal-title{width: 100%;font-size: 20px;font-weight: bold;}
+        .btn-close{position: absolute;right: 15px;box-shadow: none;}
+    }    
+    form{
+        padding: 15px 50px;
+        font-size: 14px;
+        .form-check{
+            display: inline-flex;align-items:center;
+            label{font-weight: bold;font-size: 16px;margin-left: 8px;}
+        }
+        textarea{font-size: 14px;resize: none;box-shadow: none;}
+        .btn{
+            font-size: 14px;
+            background-color: #3A3A3A;
+            text-transform: uppercase;
+            padding: 10px 60px;
+            border-radius: 2px;
+            &:hover{color: #fff;}
+        }
+    }
+}

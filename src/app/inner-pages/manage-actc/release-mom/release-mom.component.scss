@@ -1,0 +1,36 @@
+.release-mom{
+    .mom-heading{
+        font-size: 24px;
+        font-weight: 700;
+        color: black;
+    }
+
+    .blue-bar-mom{
+        background-color: #1F91C0;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        min-height: 42px;
+    }
+    .mom-form{
+        border: 1px solid #00000029;
+    padding: 42px 40px;
+    box-shadow: 2px 2px #00000029;
+        #label-text{
+            font-size: 16px;
+            text-align: center;
+        }
+        input{
+            font-size: 1.6rem;
+            padding: 8px 4px;
+        }
+        textarea{
+            font-size: 1.6rem;
+            padding: 8px 4px;
+        }
+    }
+    .mom-btns button{
+        min-width: 150px !important;
+        font-weight: 400 !important;
+    }
+}

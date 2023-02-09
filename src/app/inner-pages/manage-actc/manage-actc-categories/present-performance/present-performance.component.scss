@@ -1,0 +1,53 @@
+.present_performance{
+    padding: 10px;
+    background-color: white;
+
+    .export_list_btn{
+      select{
+        font-size: 1.3rem;
+      }
+    }
+
+    .heading{
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #060606;
+        text-transform: uppercase;
+    }
+    .section_bar{
+        background-color: #1F91C0;
+        height: 4rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    table{
+        vertical-align: middle;
+
+        thead{
+            background-color: #F2F2F2;
+        }
+
+        
+    th{
+        font-size:1.4rem;
+        padding: 1rem;
+        color: #000000;
+
+    }
+    td{
+        font-size: 1.3rem;
+        padding: 1rem;
+        color: #000000;
+
+        input{
+            border:1px solid #EEEEEE;
+            padding: 5px;
+            font-size:1.3rem;
+        }
+    }
+    }
+
+
+
+}

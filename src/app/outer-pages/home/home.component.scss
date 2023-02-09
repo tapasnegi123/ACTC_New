@@ -1,0 +1,172 @@
+$primary1:#1f91c0;
+$primary2:#ffffff;
+$primary3:#000000;
+$light-black: #333333;
+$dropdown-border:#8B8B8B;
+
+.about-hl-col{
+    background-color: $primary2 ;
+    border: 2px solid $primary2;
+}
+input::placeholder {
+  font-size: 1.3rem;
+}
+
+
+
+/* Banner */
+.banner-section{
+    position: relative;
+    border-bottom: 5px solid #1f91c0;
+}
+.banner{
+    background-image: url(/assets/images/latest-banner-1.png);
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    min-height: 51.3rem;
+}
+#banner-inner{
+    font-family: "Antonio", sans-serif !important;
+    min-height: 51.3rem;
+}  
+.banner-section h1 {
+    font-size: 4rem;
+    line-height: 6.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0;
+}  
+.banner-section p{
+    font-family: "Lato", sans-serif !important;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+    font-weight: 400;
+   color: #E2E2E2 !important;
+}
+.explore-button{
+    background-color: #1f91c0;
+    font-size: 1.6rem;
+    line-height: 1rem;
+    padding: 1.6rem 3.2rem;
+    font-weight: bold;
+    color: $primary2;
+    letter-spacing: 0.61px;
+
+    &:hover{
+        background-color: #1f91c0;
+        transform: scale(1.1);
+        color: white;
+        transition: 0.3s ease;
+    }
+}
+
+
+
+
+/* Key Status */
+.key-status h2{
+    // font-family: "Antonio", sans-serif !important;
+    font-size: 4.5rem;
+    line-height: 4.9rem;
+    font-weight: bold;
+}
+.key-status p{
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+    color:#979797;
+    font-weight: 400;
+}
+.number p{
+    font-size: 4.2rem;
+    line-height: 6.1rem;
+    color: #4B4B4B;
+    font-weight: bold;
+}
+.img{
+    padding: 1rem 2rem;
+    height: 7.3rem;
+    width: 7.8rem;
+}
+.at-col{
+    background-color: #FFC51D;
+    border-radius: 0.5rem;
+}
+.ad-col{
+    background-color: #4DB748;
+    border-radius: 0.5rem;
+}
+.spending-col{
+    background-color: #E95229;
+    border-radius: 0.5rem;
+}
+
+.key-status h5{
+    font-size: 1.7rem;
+    line-height: 1.9rem;
+    letter-spacing: 0.39px;
+color: #060606;
+font-weight: bold;
+}
+.vl{
+    width: 0.1px;
+    height: 50px;
+    border: 0.1px solid #DFDFDF;
+}
+.athelete{
+    // background-color: #FFF7E6;
+    border-radius: 0.5rem;
+    border: 1px solid #DFDFDF;
+    box-shadow: 2px 2px #689BFF42;
+}
+
+.ad{
+    // background-color: #E6FFEC;
+    box-shadow: 2px 2px #689BFF42;
+    border-radius: 0.5rem;
+    border: 1px solid #DFDFDF;
+}
+
+.spending{
+    // background-color: #E6FAFF;
+    box-shadow: 2px 2px #689BFF42;
+    border-radius: 0.5rem;
+    border: 1px solid #DFDFDF;
+}
+
+.about-text{
+    font-size: 3.8rem;
+    line-height: 7.4rem;
+    font-weight: bold;
+}
+.actc{
+    font-size: 7.4rem;
+    line-height: 7.4rem;
+    font-weight: bold;
+}
+.about{
+    background-color: #2A2A2A;
+    color: $primary2;
+}
+.about .actc-border{
+    border-right: 2px solid !important;
+    border-color: #5d5d5d !important;
+}
+
+.about p{
+    font-size: 1.8rem;
+    line-height: 3.8rem;
+    font-weight: bold;
+    color: $primary2;
+    opacity: 75%;
+}
+
+
+
+
+
+
+
+
+

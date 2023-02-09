@@ -1,0 +1,329 @@
+<form *ngIf="completeData$ | async as formData;else loader" [formGroup]="sectionOneForm">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">BRIEF INTRODUCTION OF THE SPORT </h2>
+    <div class="hl d-block mx-auto"></div>
+
+    <div class="table-1 padding-box">
+      <div class="d-flex justify-content-end mb-2">
+        <!-- <button type="button" class="btn ">Edit</button> -->
+      </div>
+
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col">DESCRIPTION</th>
+              <th scope="col">DETAIL BY NSF</th>
+              <th scope="col">INTRODUCED</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- <td scope="row">01</td> -->
+              <td style="text-align:left !important">
+                Whether Olympic Games (OG) sport or not? If yes, when was it
+                introduced?
+              </td>
+              <td>
+                <select #isOG formControlName="isOG" id="isOG" class="form-select p-3" aria-label="Default select example"
+                  (change)="IsOGToggle('isOG','OGYear', isOG.value)">
+                  <option value="" selected disabled>Select</option>
+                  <option [value]="true">YES</option>
+                  <option [value]="false">NO</option>
+                </select>
+                <div *ngIf="sectionOneForm.controls['isOG']?.touched">
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['isOG']?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input maxlength="4" type="text" id="OGYear" formControlName="OGYear" #OGYear/>
+                <div *ngIf="sectionOneForm.controls['OGYear']?.touched">
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['OGYear']?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['OGYear']?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Please Enter A Valid Year.
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="text-align:left !important">
+                Whether Asian Games (AG) sport or not? If yes, when was it introduced?
+              </td>
+              <td>
+                <select #isAG formControlName="isAG" id="isAG" (change)="IsOGToggle('isAG', 'AGYear', isAG.value)" class="form-select p-3"
+                  aria-label="Default select example">
+                  <option value="" selected disabled>Select</option>
+                  <option [value]="true">YES</option>
+                  <option [value]="false">NO</option>
+                </select>
+                <div *ngIf="sectionOneForm.controls['isAG']?.touched">
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['isAG']?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input type="text" maxlength="4" formControlName="AGYear" #AGYear/>
+                <div *ngIf="sectionOneForm.controls['AGYear']?.touched">
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['AGYear']?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger" *ngIf="sectionOneForm.controls['AGYear']?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Please Enter A Valid Year.
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="table-responsive">
+      <div class="table-2 padding-box">
+        <h4 class="text-start">3. Total no. of events and medals at stake in Men and Women (combined) category in
+          Olympic Games, Asian Games and Commonwealth Games.</h4>
+        <div class="d-flex justify-content-end mb-2">
+          <!-- <button type="button" class="btn ">Edit</button> -->
+        </div>
+        <table class="table table-hover table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <!-- <th scope="col">S.NO</th> -->
+              <th scope="col">COMPETITION</th>
+              <th scope="col">EVENTS</th>
+              <th scope="col">MEDALS</th>
+              <th scope="col">REMARK</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="international">
+              <tr *ngFor="let secondPhase of InternationalFormArray.controls;let i = index" [formGroupName]="i">
+                <td scope="row">
+                  {{ InternationalFormArray.controls[i].get('Competition')?.value }}
+                  <!-- <input class="second-step-input border-0"
+                    style="border:0px !important; background: transparent !important;" type="text"
+                    formControlName="Competition" id="competition" #competition> -->
+                </td>
+                <td>
+                  <input maxlength="16" type="text" formControlName="Event" />
+                  <div *ngIf="InternationalFormArray.controls[i].get('Event')?.touched">
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Event')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Event')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input maxlength="7" type="text" formControlName="Medal" />
+                  <div *ngIf="InternationalFormArray.controls[i].get('Medal')?.touched">
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Medal')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Medal')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input maxlength="102" type="text" formControlName="Remarks" />
+                  <div *ngIf="InternationalFormArray.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Remarks')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="InternationalFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Only 100 characters allowed
+                    </div>
+                  </div>
+                </td>
+
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <div class="table-3 padding-box">
+        <h4 class="text-start">4. What are the other types/ levels of competition played in the sport?</h4>
+        <div class="d-flex justify-content-end mb-2">
+          <!-- <button type="button" class="btn ">Edit</button> -->
+        </div>
+        <table class="table table-hover table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <!-- <th scope="col">S.NO</th> -->
+              <th scope="col">COMPETITION</th>
+              <th scope="col">EVENTS</th>
+              <th scope="col">MEDALS</th>
+              <th scope="col">REMARK</th>
+              <th scope="col">ACTION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="national">
+              <tr *ngFor="let form of NationalFormArray?.controls; let i = index"
+              [formGroupName]="i">
+                <td>
+                  {{ NationalFormArray.controls[i].get('Competition')?.value}}
+                </td>
+                <td scope="row">
+                  <input maxlength="16" type="text" formControlName="Event" />
+                  <div *ngIf="NationalFormArray.controls[i].get('Event')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArray.controls[i].get('Event')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="NationalFormArray.controls[i].get('Event')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+                
+                <td>
+                  <input maxlength="7" type="text" formControlName="Medal" />
+                  <div *ngIf="NationalFormArray.controls[i].get('Medal')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArray.controls[i].get('Medal')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="NationalFormArray.controls[i].get('Medal')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <input maxlength="102" type="text" formControlName="Remarks" />
+                  <div *ngIf="NationalFormArray.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArray.controls[i].get('Remarks')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="NationalFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Only 100 characters allowed
+                    </div>
+                  </div>
+                </td>
+
+                <td [hidden]=" i == 0 ? true: false || isDisabled" (click)="RemoveOrClearRow(i, 'nationalOld')" class="border-0" #deleteBtn>
+                  <div><img src="/assets/images/delete-table.svg" alt=""></div>
+                  <div>DELETE</div>
+                </td>
+
+              </tr>
+            </ng-container> 
+
+            <ng-container formArrayName="nationalNew">
+              <tr *ngFor="let form of NationalFormArrayNew?.controls; let i = index"
+              [formGroupName]="i">
+                
+                <!-- CompetitionId -->
+                <td>
+                  <select class="form-select" aria-label="Default select example" formControlName="CompetitionId">
+                    <option value="" disabled selected>Select</option>
+                    <ng-container *ngFor="let competition of newCompetitionDD">
+                      <option [value]="competition.competitionId">{{competition.competition}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="NationalFormArrayNew.controls[i].get('CompetitionId')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArrayNew.controls[i].get('CompetitionId')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Event -->
+                <td scope="row">
+                  <input maxlength="16" type="text" formControlName="Event" />
+                  <div *ngIf="NationalFormArrayNew.controls[i].get('Event')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArrayNew.controls[i].get('Event')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="NationalFormArrayNew.controls[i].get('Event')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+                
+                <!-- Medal -->
+                <td>
+                  <input maxlength="7" type="text" formControlName="Medal" />
+                  <div *ngIf="NationalFormArrayNew.controls[i].get('Medal')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArrayNew.controls[i].get('Medal')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="NationalFormArrayNew.controls[i].get('Medal')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digits only
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Remarks -->
+                <td>
+                  <input maxlength="102" type="text" formControlName="Remarks" />
+                  <div *ngIf="NationalFormArrayNew.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger"
+                      *ngIf="NationalFormArrayNew.controls[i].get('Remarks')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="NationalFormArrayNew.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Only 100 characters allowed
+                    </div>
+                  </div>
+                </td>
+
+                <td [hidden]="isDisabled" (click)="RemoveOrClearRow(i, 'nationalNew')" class="border-0" #deleteBtn>
+                  <div><img src="/assets/images/delete-table.svg" alt=""></div>
+                  <div>DELETE</div>
+                </td>
+              </tr>
+            </ng-container>             
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end mb-2">
+          <button  [hidden]="DisableAddButton(NationalFormArrayNew) || isDisabled" type="button" class="btn add_btn mt-3" id="firstStep"
+            (click)="AddMoreField()">+ ADD</button>
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <div class="button-left">
+            <button type="button" class="btn me-2  previous-btn" (click)="GoToPreviousForm()">
+              PREVIOUS
+            </button>
+            <button [disabled]="DisableAddButton(sectionOneForm) || !formListData.isfilledby_nsf" type="button" class="btn ms-2  next-btn" (click)="NextButton(isDisabled,sectionOneForm.value,sectionOneForm)">
+              NEXT
+            </button>
+          </div>
+          <div class="button-right">
+            <button [hidden]="isDisabled" type="button" class="btn  save-btn" (click)="SaveForm(sectionOneForm.value, sectionOneForm)"
+              #saveBtn>
+              SAVE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

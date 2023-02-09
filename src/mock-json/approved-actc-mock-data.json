@@ -1,0 +1,234 @@
+[
+  {
+    "fedCode": "AICF",
+    "federationName": "All India Chess Federation",
+    "sportsID": 52,
+    "sport_name": "Chess",
+    "isTeamGame": false,
+    "icon_img": "Icon-AICF"
+  },
+  {
+    "fedCode": "AIFF",
+    "federationName": "All India Football Federation",
+    "sportsID": 12,
+    "sport_name": "Football",
+    "isTeamGame": true,
+    "icon_img": "Icon-AIFF"
+  },
+  {
+    "fedCode": "AKFI",
+    "federationName": "Amateur Kabaddi Federation of India",
+    "sportsID": 8,
+    "sport_name": "Kabaddi",
+    "isTeamGame": true,
+    "icon_img": "Icon-AKFI"
+  },
+  {
+    "fedCode": "AFOI",
+    "federationName": "Athletics Federation of India\r\n",
+    "sportsID": 16,
+    "sport_name": "Athletics",
+    "isTeamGame": false,
+    "icon_img": "Icon-AFOI"
+  },
+  {
+    "fedCode": "BDMT",
+    "federationName": "Badminton Association of India\r\n",
+    "sportsID": 15,
+    "sport_name": "Badminton",
+    "isTeamGame": false,
+    "icon_img": "Icon-BDMT"
+  },
+  {
+    "fedCode": "BSOI",
+    "federationName": "Basketball Federation of India",
+    "sportsID": 14,
+    "sport_name": "Basketball",
+    "isTeamGame": true,
+    "icon_img": "Icon-BSOI"
+  },
+  {
+    "fedCode": "BFOI",
+    "federationName": "Boxing Federation of India",
+    "sportsID": 13,
+    "sport_name": "Boxing",
+    "isTeamGame": false,
+    "icon_img": "Icon-BFOI"
+  },
+  {
+    "fedCode": "CFOI",
+    "federationName": "Cycling Federation of India",
+    "sportsID": 19,
+    "sport_name": "Cycling",
+    "isTeamGame": false,
+    "icon_img": "Icon-CFOI"
+  },
+  {
+    "fedCode": "EFOI",
+    "federationName": "Equestrian Federation of India ",
+    "sportsID": 41,
+    "sport_name": "Equestrian",
+    "isTeamGame": false,
+    "icon_img": "Icon-EFOI"
+  },
+  {
+    "fedCode": "FAOI",
+    "federationName": "Fencing Association of India",
+    "sportsID": 21,
+    "sport_name": "Fencing",
+    "isTeamGame": false,
+    "icon_img": "Icon-FAOI"
+  },
+  {
+    "fedCode": "GYFI",
+    "federationName": "Gymnastics Federation of India(Non-Recognised)",
+    "sportsID": 11,
+    "sport_name": "Gymnastics",
+    "isTeamGame": false,
+    "icon_img": "Icon-GYFI"
+  },
+  {
+    "fedCode": "HFOI",
+    "federationName": "Handball Federation of India",
+    "sportsID": 34,
+    "sport_name": "Handball",
+    "isTeamGame": true,
+    "icon_img": "Icon-HFOI"
+  },
+  {
+    "fedCode": "HYIA",
+    "federationName": "Hockey India",
+    "sportsID": 10,
+    "sport_name": "Hockey",
+    "isTeamGame": true,
+    "icon_img": "Icon-HYIA"
+  },
+  {
+    "fedCode": "IRFU",
+    "federationName": "Indian Rugby Football Union",
+    "sportsID": 36,
+    "sport_name": "Rugby",
+    "isTeamGame": true,
+    "icon_img": "Icon-IRFU"
+  },
+  {
+    "fedCode": "JFOI",
+    "federationName": "Judo Federation of India",
+    "sportsID": 9,
+    "sport_name": "Judo",
+    "isTeamGame": false,
+    "icon_img": "Icon-JFOI"
+  },
+  {
+    "fedCode": "KAOI",
+    "federationName": "Karate Association of India",
+    "sportsID": 37,
+    "sport_name": "Karate",
+    "isTeamGame": false,
+    "icon_img": "Icon-KAOI"
+  },
+  {
+    "fedCode": "KKFI",
+    "federationName": "Kho-Kho Federation of India,",
+    "sportsID": 7,
+    "sport_name": "Kho-Kho",
+    "isTeamGame": true,
+    "icon_img": "Icon-KKFI"
+  },
+  {
+    "fedCode": "MFOI",
+    "federationName": "Mallakhamb Federation of India ",
+    "sportsID": 22,
+    "sport_name": "Mallakhamb",
+    "isTeamGame": false,
+    "icon_img": "Icon-MFOI"
+  },
+  {
+    "fedCode": "NRAI",
+    "federationName": "National Rifle Association of India",
+    "sportsID": 6,
+    "sport_name": "Shooting",
+    "isTeamGame": false,
+    "icon_img": "Icon-NRAI"
+  },
+  {
+    "fedCode": "RFOI",
+    "federationName": "Rowing Federation of India",
+    "sportsID": 20,
+    "sport_name": "Rowing",
+    "isTeamGame": false,
+    "icon_img": "Icon-RFOI"
+  },
+  {
+    "fedCode": "SFOI",
+    "federationName": "Sepaktakraw Federation of India",
+    "sportsID": 31,
+    "sport_name": "Sepaktakraw",
+    "isTeamGame": true,
+    "icon_img": "Icon-SFOI"
+  },
+  {
+    "fedCode": "SAOI",
+    "federationName": "Softball Association of India",
+    "sportsID": 38,
+    "sport_name": "Softball",
+    "isTeamGame": true,
+    "icon_img": "Icon-SAOI"
+  },
+  {
+    "fedCode": "SQFI",
+    "federationName": "Sqay Federation of India",
+    "sportsID": 47,
+    "sport_name": "Sqay",
+    "isTeamGame": false,
+    "icon_img": "Icon-SQFI"
+  },
+  {
+    "fedCode": "SWFI",
+    "federationName": "Swimming Federation of India",
+    "sportsID": 5,
+    "sport_name": "Swimming",
+    "isTeamGame": false,
+    "icon_img": "Icon-SWFI"
+  },
+  {
+    "fedCode": "TTFI",
+    "federationName": "Table Tennis Federation of India\r\n",
+    "sportsID": 18,
+    "sport_name": "Table Tennis",
+    "isTeamGame": false,
+    "icon_img": "Icon-TTFI"
+  },
+  {
+    "fedCode": "TKWD",
+    "federationName": "Taekwondo Federation of India",
+    "sportsID": 33,
+    "sport_name": "Taekwondo",
+    "isTeamGame": false,
+    "icon_img": "Icon-TKWD"
+  },
+  {
+    "fedCode": "VFOI",
+    "federationName": "Volleyball Federation of India",
+    "sportsID": 4,
+    "sport_name": "Volleyball",
+    "isTeamGame": true,
+    "icon_img": "Icon-VFOI"
+  },
+  {
+    "fedCode": "WFOI",
+    "federationName": "Wrestling Federation of India",
+    "sportsID": 2,
+    "sport_name": "Wrestling",
+    "isTeamGame": false,
+    "icon_img": "Icon-WFOI"
+  },
+  {
+    "fedCode": "WAOI",
+    "federationName": "Wushu Association of India",
+    "sportsID": 32,
+    "sport_name": "Wushu",
+    "isTeamGame": false,
+    "icon_img": "Icon-WAOI"
+  }
+]

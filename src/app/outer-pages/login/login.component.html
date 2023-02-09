@@ -1,0 +1,208 @@
+<!-- Log-in -->
+<div class="log-in">
+  <div class="container log-in-banner">
+    <div class="row align-items-center justify-content-center log-in-screen">
+      <div class="col-lg-6 col-md-10 col-12 log-in-bg">
+        <div class="row justify-content-center user-profile">
+          <div class="col-12">
+            <img
+              src="/assets/images/login_img_blue.svg"
+              class="d-block mx-auto"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="log-in-form">
+          <form class="row justify-content-center" [formGroup]="loginForm">
+            <div class="col-12">
+              <div class="mb-4 mt-4">
+                <h3 class="text-center">LOG IN</h3>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="mb-3">
+                <input
+                  #emailInput
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="User Name"
+                  aria-describedby="emailHelp"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    loginFormControl['email']?.invalid &&
+                    loginFormControl['email']?.touched
+                  "
+                >
+                  <i class="bi bi-exclamation-circle"></i>
+                  Please enter your username
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3"  id="eye_on_off">
+                <div id="eye_icons">
+                  <div (click)="onClick()">
+                  <i class="bi bi-eye" style="font-size: 18px;" *ngIf="!show"></i>
+                  <i class="bi bi-eye-slash" style="font-size: 18px;" *ngIf="show"></i>
+                  </div>
+                </div>
+               
+                
+                <input
+                [type]="password"
+                  #passwordInput
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  id="exampleInputPassword1"
+
+                 
+                />
+              
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    loginFormControl['password']?.invalid &&
+                    loginFormControl['password']?.touched
+                  "
+                >
+                  <i class="bi bi-exclamation-circle"></i>
+                  Please enter password
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3 text-end">
+                <h4 style="font-size: 1.1rem; line-height: 1; font-weight: 500">
+                  <a class="btn-link" [routerLink]="['/forgot-password']"
+                    >Forgot Password?</a>
+                </h4>
+              </div>
+            </div>
+            <div class="col-6">
+             
+              <div
+                class="mb-3 d-flex align-items-center justify-content-center"
+              >
+              <!--  -->
+              <!--  -->
+                <app-captcha
+                  (dataFromCaptchaComponent)="GetCaptcha($event)"
+                >
+                
+              </app-captcha>
+              <img (click)="ReloadCaptcha()" src="/assets/images/arrow-clockwise.svg" class="reload_btn_login" alt="">
+              <!-- <div class="mb-3">
+                <button (click)="ReloadCaptcha()" class="fa-solid">refresh</button>
+              </div> -->
+              </div>
+              
+            </div>
+           
+            <div class="col-6">
+              
+              <div class="mb-3">
+               
+                <input
+                  #code
+                  formControlName="code"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Code"
+                  aria-describedby="emailHelp"
+                />
+                
+
+                <ng-container
+                  *ngIf="
+                    loginFormControl['code']?.invalid &&
+                    loginFormControl['code']?.touched
+                  "
+                >
+                  <div
+                    class="text-danger"
+                    *ngIf="loginFormControl['code']?.errors?.['required']"
+                  >
+                    <i class="bi bi-exclamation-circle"></i>
+                    Captcha code is required
+                  </div>
+                  <div
+                    class="text-danger"
+                    *ngIf="loginFormControl['code'].pending"
+                  >
+                    <i class="bi bi-exclamation-circle"></i>
+                    Wrong captcha code
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <h2><span>OR</span></h2>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <input
+                  #mobileNumInput
+                  formControlName="mobile"
+                  type="text"
+                  class="form-control"
+                  placeholder="Mobile Number"
+                  aria-describedby="emailHelp"
+                  [maxlength]="10"
+                />
+
+                <!-- <div *ngIf="form['password']?.invalid && form['password']?.touched">
+                    Mobile Number is Required
+                </div> -->
+                <div
+                  class="text-danger"
+                  *ngIf="loginFormControl['mobile']?.invalid"
+                >
+                  <i class="bi bi-exclamation-circle"></i>
+                  Please Enter 10 digit Mobile Number.
+                </div>
+
+                <!-- <div class="text-danger" *ngIf="loginForm.controls['mobile']?.invalid && loginForm.controls['mobile']?.touched">
+                    <p>Please enter mobile number</p>
+                  </div> -->
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <button
+                  *ngIf="showButton"
+                  type="submit"
+                  class="btn form-btn w-100"
+                  (click)="CheckForLoginTypeAndLogin(loginForm.value)"
+                  #loginBtn
+                >
+                  LOG IN
+                </button>
+                <button
+                  *ngIf="!showButton"
+                  class="btn form-btn w-100"
+                  type="button"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  LOGING IN...
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

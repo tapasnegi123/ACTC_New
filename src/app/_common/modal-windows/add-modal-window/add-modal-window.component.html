@@ -1,0 +1,42 @@
+<div *ngIf="userData$ | async as userData ;else loader" class="modal-body submitActcModal">
+    <div class="modal-header">
+        <h4 class="modal-title text-center" id="modal-basic-title">ENABLE ACTC SUBMISSION FOR NSF</h4>
+        <button type="button" class="btn-close" aria-label="Close"
+            (click)="activeModal.dismiss('Cross click')"></button>
+    </div>
+    <form>
+        <div class="d-flex align-items-center justify-content-center mb-3 toprow">
+            <strong class="d-inline-block me-2 me-lg-3">Federation</strong>
+            <select (change)="changeFedrationName($event)" class="form-control">
+                <option value="" [selected]="true">Select</option>
+
+                <option *ngFor="let fedration of userData" [selected]="false" [value]="fedration.fdrid">
+                    {{fedration.federationName}}</option>
+            </select>
+        </div>
+        <div class="table-responsive">
+            <table *ngIf="fedrationId !=undefined && fedrationId !='' " class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">FEDERATION</th>
+                        <th scope="col">FINANCIAL YEAR</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{federationName}}</td>
+                        <td>{{financialYear}}</td>
+                        <td>
+                            <button class="btn" (click)="enableDisable(enable = !enable)">{{enable == false ? 'enable' :
+                                'disable'}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<ng-template #loader>
+    <loader></loader>
+  </ng-template>

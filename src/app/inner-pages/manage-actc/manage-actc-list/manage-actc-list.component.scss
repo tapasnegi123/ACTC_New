@@ -1,0 +1,179 @@
+.manage-actc-list{
+
+    hr{
+        // border: 0.1px solid #EEEEEE;
+        color: #EEEEEE;
+        opacity: 100%;
+        background-color: #EEEEEE;
+    }
+    
+
+    .list_heading{
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #000000;
+    }
+
+    .export_btn{
+
+        select{
+            width: 85px !important;
+            height: 30px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #6A6A6A;
+            border: 1px solid #DEDEDE ;
+            border-radius: 3px;
+        }
+
+        
+    }
+
+    .list_search{
+        font-size: 1.4rem;
+        font-weight: 500;
+        position: relative;
+
+        img{
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            top: 30%;
+            left: 7%;
+        }
+
+        input{
+            font-size: 1.4rem;
+            font-weight: 500;
+            border: 1px solid #E4E4E4;
+            border-radius: 3px;
+            background-color: #F8F8F8;
+            padding: 5px 0px 5px 32px;
+            min-width: 130px;
+            height: 30px;
+        }
+    }
+
+    .select_boxes{
+        select{
+            margin: 0px 5px 0px 5px;
+            min-width: 185px;
+            height: 32px;
+            font-weight: 500;
+            font-size: 1.3rem;
+        }
+
+        @media screen and (max-width:820px) {
+            select{
+                min-width: 140px;
+            }
+        }
+
+        @media screen and (max-width:576px) {
+            select{
+                min-width: 90px;
+            }
+        }
+
+    }
+
+    .buttons{
+
+        button{
+            background: transparent !important;
+            border: 0px !important;
+        }
+
+        .btn{
+             height: 32px;
+            width: 32px;
+            background-color: #1F60AB;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0px 5px 0px 5px;
+        }
+        .btn_1{
+           
+
+            img{
+                width: 15px;
+                height: 12px;
+                filter: invert(1);
+            }
+        }
+
+        .btn_2{
+            img{
+                width: 15px;
+                height: 12px;
+            }
+        }
+    }
+
+
+    .actc_list_table{
+        table{
+            vertical-align: middle !important;
+        }
+        thead{
+            background-color: #F8F9FD;
+            
+        }
+        th{
+            font-size: 1.5rem;
+            padding: 10px;
+        }
+        td{
+            font-size: 1.4rem;
+            padding: 10px;
+        }
+        .btn_pill{
+           
+            padding: 5px 10px;
+            border-radius: 16px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 108px;
+
+
+            
+        }
+        .approved{
+            background-color: #CDF2D7;
+            color: #07B112;
+            border: 0.5px solid #34A853;
+        }
+        .reject{
+            background-color: #FFE9E9;
+            color: #FA7475;
+            border: 0.5px solid #FA7475;
+        }
+        .pending{
+            background-color: #FFF1D4;
+            color: #FFAA00;
+            border: 0.5px solid #FFAA00; 
+        }
+        .back_nsf{
+            background-color: #D6ECF5;
+            color: #1F91C0;
+            border: 0.5px solid #1F91C0; 
+        }
+        .mom{
+            background-color: #FA7475;
+            color: white;
+            border: 0.5px solid #FA7475; 
+            border-radius: 3px;
+        }
+
+        .vl{
+            height: 10px;
+             border: 1px solid #EEEEEE;
+             background-color: #EEEEEE;
+        }
+    }
+}

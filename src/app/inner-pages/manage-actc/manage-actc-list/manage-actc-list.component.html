@@ -1,0 +1,116 @@
+<div class="manage-actc-list padding-box">
+    <div class="container">
+        <div class="row align-items-center justify-content-between my-4">
+            <div class="col-auto">
+                <div class="list_heading ">
+                    <!-- ACTC -->
+                </div>
+            </div>
+            <!-- <div class="col-auto">
+                <div class="d-flex">
+                    <div class="list_search ms-3">
+                        <img src="/assets/images/search.svg" class="img-fluid" alt="">
+                        <input type="text">
+                    </div>
+                  
+                </div>
+            </div> -->
+        </div>
+        <hr class="p-0 m-0">
+        <div class="row justify-content-lg-end justify-content-md-end justify-content-sm-start my-4">
+            <div class="col-auto">
+                <div class="d-flex">
+                    <div class="select_boxes d-flex ">
+                        <!-- <button *ngIf="userData.role_id==106" type="button" (click)="submissionForNSF()" class="btn btn-primary px-3 ms-2">Add+</button> -->
+                        <!-- Financial Year filter -->
+                        <!-- <select #Financial_Year class="form-select" aria-label="Default select example">
+                            <option selected value="">Financial Year</option>
+                            <ng-container *ngFor="let years of dateArrays">
+                                <option [ngValue]="years">{{years}}</option>
+                            </ng-container>
+                        </select> -->
+                        <!-- Sports Discipline filter -->
+
+                        <!-- DO = 106 SDO = 47 -->
+                        <ng-template [ngIf]="userData.role_id == 47 || userData.role_id == 106">
+                            <select #Sports_Discipline class="form-select" aria-label="Default select example">
+                                <option selected value="">Sports Discipline</option>
+                                <option *ngFor="let Sports of SportsDiscpline" [value]="Sports">{{Sports}}</option>
+                            </select>
+                        </ng-template>
+                        <!-- ACTC Status filter -->
+                        <select #ACTC_Status class="form-select" aria-label="Default select example"
+                            (change)="filterStatus(ACTC_Status.value)">
+                            <option selected value="">All</option>
+                            <ng-container *ngFor="let status of ActcStatus">
+                                <option [ngValue]="status">{{status}}</option>
+                            </ng-container>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="buttons d-flex">
+                            <div class="btn_1 btn">
+                                <button type="button"> <img src="/assets/images/search.svg" class="img-fluid"></button>
+                            </div>
+                            <!-- <div class="btn_2 btn">
+                                <button type="button"> <img src="/assets/images/sound-module-line.svg"></button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="m-0 p-0">
+        <div class="row my-4" *ngIf="completeData$ | async">
+            <div class="col-12">
+                <div class="actc_list_table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <th scope="col" *ngFor="let headings of tableHeadings">{{headings}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of FilteredListData">
+                                    <td>{{data.federationName}}</td>
+                                    <td>{{data.financialYear}}</td>
+                                    <td>{{data.sport_name}}</td>
+                                    <td>{{data.proposed_budget}}</td>
+                                    <td>{{data.approved_budget}}</td>
+                                    <td>
+                                        <div class="btn_pill" [ngClass]="{pending:data.final_status == 'Pending',
+                                        reject:data.final_status == 'Reject',approved:data.final_status == 'Approved',
+                                        back_nsf:data.final_status == ('back_nsf'||'') }">
+                                            {{data.final_status}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-evenly">
+                                            <div *ngIf="data.currentUser == userData.role_id">
+                                                <img src="/assets/images/edit-list.svg" (click)="checkForRole(data)">
+                                            </div>
+                                            <div *ngIf="data.currentUser != userData.role_id">
+                                                <img src="/assets/images/eye-fill-list.svg"
+                                                    (click)="checkForRole(data)">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" *ngIf="data.releaseMom"
+                                            (click)="data.releaseMom?navigation(data):null">{{data.releaseMom
+                                            ==='Release MOM'?'Release Mom':'View'}}</button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="FilteredListData.length == 0">
+                                    <td colspan="8" class="no_data">No Data Found !</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="total_result">TOTAL - {{FilteredListData.length}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

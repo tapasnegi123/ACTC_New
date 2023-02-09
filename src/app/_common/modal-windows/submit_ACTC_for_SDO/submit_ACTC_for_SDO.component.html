@@ -1,0 +1,28 @@
+<div class="modal-body submitActcModal">
+  <div class="modal-header">
+    <h4 class="modal-title text-center" id="modal-basic-title">SUBMIT ACTC</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <form >
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+      <div class="form-check mb-2 me-sm-3 me-xl-4">
+        <input type="radio" class="form-check-input" name="radio" id="radio1">
+        <label class="form-check-label" for="radio1">BACK TO DO</label>
+      </div>
+      <div class="form-check mb-2">
+        <input type="radio" class="form-check-input" name="radio" id="radio2">
+        <label class="form-check-label" for="radio2">APPROVED</label>
+      </div>
+      <div class="form-check mb-2">
+        <input type="radio" class="form-check-input" name="radio" id="radio3">
+        <label class="form-check-label" for="radio3">REJECT</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" rows="5" placeholder="Enter Comment"></textarea>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-secondary">Ok</button>
+    </div>
+  </form>
+</div>

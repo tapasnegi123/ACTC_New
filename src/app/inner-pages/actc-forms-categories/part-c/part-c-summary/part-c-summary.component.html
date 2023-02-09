@@ -1,0 +1,209 @@
+<form *ngIf="(getFormData$ | async) as formData ;else loader">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">SYNOPSIS OF ACTC BUDGET (TOTAL)</h2>
+    <div class="hl d-block mx-auto"></div>
+
+    <div class="table-1 padding-box">
+
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" style="min-width:40px !important; width: 30px !important;">S.NO</th>
+              <th scope="col">ITEM</th>
+              <th scope="col">CATEGORY</th>
+              <th scope="col">BUDGET (SENIORS)</th>
+              <th scope="col">BUDGET(JUNIORS)</th>
+              <th scope="col">BUDGET(TOTAL)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3">01</td>
+              <td rowspan="3">National Coaching Camps</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'National Coaching Camps' && data?.category == 'Competition' ">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+
+            <tr>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'National Coaching Camps' && data?.category == 'Training' ">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'National Coaching Camps' && data?.category == 'Others' ">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td>02</td>
+              <ng-container *ngFor="let data of formData">
+                <!-- <ng-container *ngIf="data?.item == 'International Exposure' && data?.category == 'Support Staff' "> -->
+                <ng-container *ngIf="data?.item == 'International Exposure' && data?.category == '' ">
+                  <td>{{data.item}}</td>
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td>03</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'International Competitions in India'">
+                  <td>{{data.item}}</td>
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td>04</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'National Championship'">
+                  <td>{{data.item}}</td>
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+
+            <tr>
+              <td rowspan="2">05</td>
+              <td rowspan="2">Remuneration for Foreign Coaches and Support Staff</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container
+                  *ngIf="data?.item == 'Remuneration for Foreign Coaches and Support Staff' && data.category == 'Coach'">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <ng-container *ngFor="let data of formData">
+                <ng-container
+                  *ngIf="data?.item == 'Remuneration for Foreign Coaches and Support Staff' && data.category == 'Support Staff'">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td rowspan="2">06</td>
+              <td rowspan="2">Remuneration for National Coaches and Support Staff</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container
+                  *ngIf="data?.item == 'Remuneration for National Coaches and Support Staff' && data.category == 'Coach'">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <ng-container *ngFor="let data of formData">
+                <ng-container
+                  *ngIf="data?.item == 'Remuneration for National Coaches and Support Staff' && data.category == 'Support Staff'">
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td>07</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'Administrative'">
+                  <td>{{data.item}}</td>
+                  <td>{{data.category}}</td>
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td rowspan="2">08</td>
+              <td rowspan="2">Equipment</td>
+              <td>Consumable</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'Equipment' && data?.category == 'Consumable' ">
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td>Non-Consumable</td>
+              <ng-container *ngFor="let data of formData">
+                <ng-container *ngIf="data?.item == 'Equipment' && data?.category == 'Non Conumable' ">
+                  <td>{{data.senior}}</td>
+                  <td>{{data.junior}}</td>
+                  <td>{{data.junior | addition: data.senior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td class="fw-bolder">TOTAL BUDGET</td>
+              <td></td>
+              <td>{{seniorTotalSum}}</td>
+              <td>{{juniorTotalSum}}</td>
+              <td>{{seniorTotalSum | addition:juniorTotalSum}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <!-- <button type="button" class="btn add_btn mt-3">+ Add</button> -->
+      </div>
+    </div>
+
+  </div>
+</form>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

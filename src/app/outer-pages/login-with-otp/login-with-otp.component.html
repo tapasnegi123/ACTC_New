@@ -1,0 +1,81 @@
+
+<!-- Log-in -->
+<div class="log-in">
+
+  <div class="container log-in-banner">
+    <div class="row align-items-center justify-content-center log-in-screen">
+      <div class="col-lg-6 col-md-10 col-12 log-in-bg">
+
+        <div class="row justify-content-center user-profile">
+          <div class="col-12">
+            <img src="/assets/images/login_img_blue.svg" class="d-block mx-auto" alt="">
+          </div>
+        </div>
+        <div class="log-in-form">
+          <form class="row justify-content-center" [formGroup]="loginForm">
+
+            <div class="col-12">
+              <div class="mb-4 mt-4">
+                <h3 class="text-center ">
+                  LOG IN
+                </h3>
+              </div>
+            </div>
+
+
+            <div class="col-12">
+              <div class="mb-3">
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter OTP" maxlength="6"
+                  aria-describedby="emailHelp" formControlName="otp" />
+
+                  <div class="col-12">
+                    <div class="d-flex align-items-center justify-content-between my-2">
+                      <div>
+                        <h6 style="
+                            font-size: 1.4rem !important;
+                            line-height: 2.1rem !important;
+                            font-weight: 500 !important;
+                            color: #979797;
+                          ">
+                          <i class="bi bi-exclamation-circle"></i>
+                          Haven't received OTP?
+                          <span><button type="button" *ngIf="showResendButton" class="btn-link" (click)="ResendOTP()">Resend OTP</button></span>
+                        </h6>
+                      </div>
+                      <div>
+                        <ng-container *ngIf="showTimer">
+                          <app-timer (dataFromTimer)="DataFromTimerCompo($event)"></app-timer>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="loginWithOTPFormControl['otp']?.touched && loginWithOTPFormControl['otp'].invalid" class="text-danger">
+                    <div *ngIf="loginWithOTPFormControl['otp']?.errors"><i class="bi bi-exclamation-circle"></i>OTP is required.</div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="mb-3">
+                <button type="submit" class="btn form-btn w-100" (click)="VerifyOTPAndLogin(loginForm.value)">SUBMIT</button>
+              </div>
+            </div>
+
+            <!-- <div class="col-12 text-center mt-5">
+              <h6  style="
+              font-size: 1.4rem !important;
+              line-height: 2.1rem !important;
+              font-weight: 500 !important;
+              color: #979797;
+            ">
+                Did you remembered your password? <span><a class="btn-link" (click)="GoToPreviousPage()"> Try log in</a></span>
+              </h6>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

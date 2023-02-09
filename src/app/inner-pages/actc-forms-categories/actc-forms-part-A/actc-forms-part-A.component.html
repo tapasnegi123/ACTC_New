@@ -1,0 +1,153 @@
+<!-- Form Sections -->
+
+<div *ngIf="actcFormList$ | async ; else loader" class="container form-section bg-white p-5">
+
+  <!-- Nav-Tabs -->
+  <ul class="nav nav-pills mb-0 form-tabs" id="pills-tab" role="tablist">
+
+    <!--Home-->
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" [ngClass]="section == 'Form_PartA_home' ? 'active' : ''" id="pills-home-tab home"
+        type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+        <img src="/assets/images/dashboard/home-7-fill.svg" height="22px" width="35px" alt="" (click)="FormHome()"
+          #sectionBtn>
+      </button>
+    </li>
+
+    <!--Sections-->
+    <!-- Form_PartA_00 is for Summary -->
+
+    <!-- section == data.formName ? 'active' : '' -->
+    <!-- green-class-new -->
+    <ng-container *ngFor="let data of formList">
+      <ng-container *ngIf="data.formName != 'Form_PartA_00'">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [ngClass]="{'active':section == data.formName,'green-class-new':data.isfilledby_nsf}"
+            id="pills-profile-tab" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"
+            (click)="ToggleSectionTemplate(data)">
+            SECTION {{data?.sortOrder}}
+          </button>
+        </li>
+      </ng-container>
+    </ng-container>
+  </ul>
+
+  <!--Content-->
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+      tabindex="0">
+      <div class="section section-home padding-box">
+
+        <ng-container *ngIf="section == 'Form_PartA_home'">
+          <h2 class="text-center uppercase">actc budget for senior</h2>
+          <div class="hl d-block mx-auto"></div>
+          <div class="lists pt-5 pb-0">
+
+            <ng-container *ngFor="let data of formList">
+              <div *ngIf="data.formName != 'Form_PartA_00'">
+                <div class="row mb-4 align-items-center py-2 ps-2 "
+                  style="cursor: pointer; background-color: #ffffff !important ; border:1px solid #c4c5c573 !important; border-radius:5px !important; width:100% !important; box-shadow:2px 2px #80A0EC29;">
+                  <div class="col-lg-auto col-md-2 col-2">
+                    <div>
+                      <img src="/assets/images/newtick.svg" alt="" style="filter:brightness(1) !important;">
+                    </div>
+                  </div>
+                  <div class="col-lg-auto col-md-10 col-10">
+                    <div [ngClass]=" data?.isfilledby_nsf ? 'active-td':'' " (click)="ToggleSectionTemplate(data)"
+                      style="margin: 0 15px; font-size: 1.5rem; text-transform: uppercase !important; color:#0A3D81 !important; font-weight:700; text-decoration: none !important;">
+                      {{data?.formDesc}}</div>
+                  </div>
+                </div>
+
+              </div>
+            </ng-container>
+
+            <ng-container *ngFor="let data of formList">
+              <div class="row mb-4 align-items-center py-2 ps-2 "
+                style="cursor: pointer; background-color: #ffffff !important ; border:1px solid #c4c5c573 !important; border-radius:5px !important; width:100% !important; box-shadow:2px 2px #80A0EC29;"
+                *ngIf="data.formName == 'Form_PartA_00'">
+                <div class="col-lg-auto col-md-2 col-2">
+                  <img src="assets/images/green-tick.svg" alt="" style="filter:brightness(1) !important;">
+                </div>
+                <div class="col-lg-auto col-md-10 col-10"
+                  style="margin: 0 15px; font-size: 1.5rem; text-transform: uppercase !important; color:#0A3D81 !important; font-weight:700; text-decoration: none !important;"
+                  [ngClass]="data?.isfilledby_nsf ? 'active-td':'' " (click)="ToggleSectionTemplate(data)">
+                  {{data.formDesc}}</div>
+              </div>
+            </ng-container>
+
+
+            <table class="table table-striped">
+              <tbody>
+
+              </tbody>
+
+            </table>
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex justify-content-between">
+                  <div class="button-left">
+                    <button type="button" class="btn ms-2  next-btn" (click)="GoToSectionOne('Form_PartA_01')">
+                      NEXT
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <!--
+      Insert Section Template Here
+    -->
+
+    <ng-template [ngIf]="section == 'Form_PartA_01'">
+      <app-actc-forms-part-A-section-one (dataFromChild)="DataFromChildComponent($event)" [year]="year" 
+      [formListData]="formListData"></app-actc-forms-part-A-section-one>
+    </ng-template>
+
+
+    <ng-template [ngIf]="section == 'Form_PartA_02'">
+      <app-actc-forms-part-A-section-two (dataFromChild)="DataFromChildComponent($event)" [year]="year"
+        [userDetail]="userData" [formListData]="formListData"></app-actc-forms-part-A-section-two>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_03'">
+      <app-actc-forms-part-A-section-three (dataFromChild)="DataFromChildComponent($event)" [presentYear]="year"
+        [userDetail]="userData" [formListData]="formListData"></app-actc-forms-part-A-section-three>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_04'">
+      <app-actc-forms-part-A-section-four (dataFromChild)="DataFromChildComponent($event)" [year]="year"
+        [formListData]="formListData"></app-actc-forms-part-A-section-four>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_05'">
+      <app-actc-forms-part-A-section-five (dataFromChild)="DataFromChildComponent($event)" [year]="year"
+        [formListData]="formListData"></app-actc-forms-part-A-section-five>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_06'">
+      <app-actc-forms-part-A-section-six (dataFromChild)="DataFromChildComponent($event)" [year]="year"
+        [formListData]="formListData"></app-actc-forms-part-A-section-six>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_07'">
+      <app-actc-forms-part-A-section-seven (dataFromChild)="DataFromChildComponent($event)" [year]="year"
+        [formListData]="formListData"></app-actc-forms-part-A-section-seven>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 'Form_PartA_00'">
+      <app-actc-forms-part-A-summary [year]="year"></app-actc-forms-part-A-summary>
+    </ng-template>
+
+  </div>
+</div>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>
+
+<!-- <ng-template [ngIf]="showLoader">
+  <loader></loader>
+</ng-template> -->

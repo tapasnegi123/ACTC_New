@@ -1,0 +1,57 @@
+
+<div class="dashboard-content padding-box ">
+  <!-- Dashboard Heading and Horizontal line -->
+  <div class="container ">
+    <div class="dashboard-heading text-center">
+      <h2>ANNUAL CALENDAR FOR TRAINING AND COMPETITIONS FOR {{year}} - {{year+1}}</h2>
+    </div>
+    <div class="hl d-block mx-auto mt-4" style="margin-bottom: 12rem;"></div>
+  </div>
+
+  <!-- Dashboard Form part Section -->
+  <div class="container margin-box-form px-5" id="forms">
+
+    <!-- Form part -->
+    <div class="container padding-box " >
+      <div class="container px-lg-5 px-md-0 px-0 mt-5" id="form-parts">
+        <div class="form-parts d-flex align-items-center text-center justify-content-around ">
+          <ng-container *ngFor="let btns of btnOptions">
+            <div class="part-b d-flex flex-column align-items-center" [id]="btns.btnId" 
+            [ngClass]="(section == btns.btnId)? 'active-form-part': ''"  (click)="ToggleTemplate(btns.btnId)">
+              <div><p>{{btns.btnName}}</p></div>
+              <div class="img" ><img [src]="btns.imgSrc" class=" p-4 img-fluid  " alt=""></div>
+             </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- <router-outlet></router-outlet> -->
+     <!--Present Performance-->
+     <ng-template [ngIf]="section == 1">
+      <present-performance [year]="year" [userData]="userData" (dataFromChild)="ToggleTemplate($event)" [routeData]="routeData"></present-performance>
+    </ng-template>
+
+    <!--Funding Pattern-->
+    <ng-template [ngIf]="section == 2">
+      <funding-pattern  [year]="year" [userData]="userData" (dataFromChild)="ToggleTemplate($event)" [routeData]="routeData"></funding-pattern>
+    </ng-template>
+
+    <!--kra-milestones-->
+    <ng-template [ngIf]="section == 3">
+      <kra-milestones [year]="year" (dataFromChild)="ToggleTemplate($event)" [routeData]="routeData"></kra-milestones>
+    </ng-template>
+
+    <!-- budget-synopsis -->
+    <ng-template [ngIf]="section == 4">
+      <budget-synopsis [year]="year" [userData]="userData" (dataFromChild)="ToggleTemplate($event)" [routeData]="routeData"></budget-synopsis>
+    </ng-template>
+
+    <!-- proposed-actc -->
+    <ng-template [ngIf]="section == 5">
+        <proposed-actc  [year]="year" [userData]="userData" (dataFromChild)="ToggleTemplate($event)" [routeData]="routeData"></proposed-actc>
+      </ng-template>
+
+  </div>
+</div>
+
+

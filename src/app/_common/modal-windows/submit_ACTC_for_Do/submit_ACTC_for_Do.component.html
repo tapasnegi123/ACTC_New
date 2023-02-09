@@ -1,0 +1,25 @@
+<div class="modal-body submitActcModal">
+  <div class="modal-header">
+    <h4 class="modal-title text-center" id="modal-basic-title">SUBMIT ACTC</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <form [formGroup]="DO_formSubmit">
+    <div class="d-flex justify-content-center align-items-center flex-wrap mb-3">
+      <div class="form-check mb-2 me-sm-3 me-xl-4">
+        <input type="radio" class="form-check-input" name="radiof" value="" id="radio1">
+        <label class="form-check-label" for="radio1">BACK TO NSF</label>
+      </div>
+      <div class="form-check mb-2">
+        <input type="radio" class="form-check-input" name="radiof" value="" id="radio2">
+        <label class="form-check-label" for="radio2">FORWARD TO SDO</label>
+      </div>
+    </div>
+    <!-- commnent -->
+    <div class="mb-3">
+      <textarea formControlName="commnent" class="form-control" rows="5" placeholder="Enter Comment"></textarea>
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-secondary" (click)="submitForm()">Ok</button>
+    </div>
+  </form>
+</div>

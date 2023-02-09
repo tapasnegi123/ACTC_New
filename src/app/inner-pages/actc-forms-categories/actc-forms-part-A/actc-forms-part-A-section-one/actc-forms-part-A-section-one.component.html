@@ -1,0 +1,156 @@
+<ng-container *ngIf="(introductionData$ | async) else loader">
+  <form [formGroup]="sectionOneForm" >
+    <div class="section section-1 form-padding-box" >
+      <h2 class="text-center">INTRODUCTION TO NATIONAL SPORTS FEDERATION</h2>
+      <div class="hl d-block mx-auto"></div>
+  
+      <div class="table-1 padding-box">
+        
+        <h4 class="text-start">Details of the President, Secretary General/ CEO and other Officials of the National Sports Federation (NSF)</h4>
+        <div class="table-responsive">
+          <table
+            class="table  table-bordered"
+            style="vertical-align: middle"
+          >
+          <thead >
+            <tr>
+              <th *ngFor="let heading of tableHeading" scope="col">{{heading}}</th>            
+            </tr>
+          </thead>
+          <tbody formArrayName="firstStepNew">
+            <tr *ngFor="let first of NewFirstStepFormArray.controls; let i = index"  [formGroupName]="i">
+              <!-- Name -->
+              <td>
+                <input type="text" formControlName="Name">
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('Name')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('Name')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('Name')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>{{NameErrorMessage}}
+                  </div>
+                </div>
+              </td>
+              <td>
+                <select class="form-select p-3" aria-label="Default select example" formControlName="Designation">
+                  <option value="" disabled selected>Select Option</option>
+                  <option *ngFor="let designation of designationDD" [value]="designation">
+                    {{designation}}
+                  </option>
+                </select>
+
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('Designation')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('Designation')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>{{FieldMandatoryMessage}}
+                  </div>
+                </div>
+              </td>
+              <!-- Email -->
+              <td>
+                <input type="text" formControlName="EmailId">
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('EmailId')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('EmailId')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>{{FieldMandatoryMessage}}
+                  </div>
+
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('EmailId')?.errors?.['invalidEmail']">
+                    <i class="bi bi-exclamation-circle"></i>{{ValidEmailMessage}}
+                  </div>
+                </div>
+              </td>
+  
+              <!-- Mobile No -->
+              <td>
+                <input type="text" formControlName="MobileNo" maxlength="10">
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('MobileNo')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('MobileNo')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>{{FieldMandatoryMessage}}
+                  </div>
+
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('MobileNo')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>{{MobileErrorMessage}}
+                  </div>
+                </div>
+              </td>
+              
+              <!-- Office No -->
+              <td>
+                <input type="text" formControlName="OfficeNo">
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('OfficeNo')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('OfficeNo')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>{{FieldMandatoryMessage}}
+                  </div>
+
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('OfficeNo')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>{{OfficeErrorMessage}}
+                  </div>
+                </div>
+              </td>
+  
+              <!-- Remarks -->
+              <td>
+                <input type="text" formControlName="Remarks">
+
+                <div *ngIf="NewFirstStepFormArray.controls[i].get('Remarks')?.touched">
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('Remarks')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>{{FieldMandatoryMessage}}
+                  </div>
+                  <div class="text-danger" *ngIf="NewFirstStepFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>{{RemarksErrorMessage}}
+                  </div>
+                </div>
+              </td>
+  
+              <!-- Action -->
+            <td [hidden]=" i == 0 ? true: false || isDisabled"  class="border-0">
+                <div style="cursor: pointer;"  id="fourthStep" (click)="RemoveField(i,NewFirstStepFormArray)">
+                  <img id="fourthStep"  src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="" >
+                    DELETE
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton || isDisabled" type="button" class="btn add_btn mt-3" (click)="AddNewField()">+ ADD</button>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div class="button-left">
+              <button type="button" class="btn me-2  previous-btn" (click)="GoToHome()">
+                PREVIOUS
+              </button>
+              <button [disabled]="DisableAddButton || !formListData.isfilledby_nsf" type="button" class="btn ms-2  next-btn" 
+              (click)="NextButton(isDisabled,sectionOneForm.value,sectionOneForm)" >
+                NEXT
+              </button>
+            </div>
+            <div class="button-right">
+              <button  [hidden]="isDisabled" type="button" class="btn  save-btn" (click)="SaveForm(sectionOneForm.value,sectionOneForm)">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+</ng-container>
+
+<ng-template #loader [ngIf]="showLoader">
+  <loader></loader>
+</ng-template>
+
+
+
+
+
+
+
+
+

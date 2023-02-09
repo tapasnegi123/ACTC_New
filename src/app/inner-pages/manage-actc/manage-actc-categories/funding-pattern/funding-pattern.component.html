@@ -1,0 +1,79 @@
+<div class="present_performance funding-pattern" *ngIf="(fundingPattern$ | async) as fundPatternData;else loader">
+  <div class="container padding-box">
+    <div class="row align-items-center">
+      <div class="col-9">
+        <div class="d-flex flex-column align-items-center">
+          <div class="heading">
+            <h2>FUNDING PATTERN IN ACTC</h2>
+          </div>
+          <div class="hl"></div>
+        </div>
+      </div>
+      <!-- <div class="col-3">
+        <div class="export_list_btn d-flex">
+          <select class="form-select me-2" aria-label="Default select example">
+            <option selected>Financial Year 2022 - 2023</option>
+          </select>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Export</option>
+          </select>
+        </div>
+      </div> -->
+    </div>
+
+
+
+    <!-- EDIT BUTTON -->
+
+    <!-- Blue Bar Used in Manage ACTC Sections -->
+    <div class="row">
+      <div class="section_bar w-100">
+
+      </div>
+    </div>
+
+
+    <!-- Tables used in Manage ACTC Forms -->
+    <div class="manage_actc_table" [formGroup]="fundingPatternForm">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          
+          <thead>
+            <tr>
+              <th>S.NO</th>
+              <th>FINANCIAL YEAR</th>
+              <th>FUND ALLOTED</th>
+              <th>ACTUAL SPEND</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="fundingPattern">
+            <tr *ngFor="let form of FundingPatternFormArray.controls;let i = index" [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td><input type="text" formControlName="Financialyear"></td>
+              <td><input type="text" formControlName="FundAlloted"></td>
+              <td><input type="text" formControlName="ActualSpend"></td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btns d-flex justify-content-between">
+    <div>
+      <button type="button" class="previous-btn me-3" (click)="GoToPreviousSection(1)">PREVIOUS</button>
+      <button type="button" class="previous-btn" (click)="GoToNextSection(3)">NEXT</button>
+    </div>
+
+    <div *ngIf="CheckEditableStatus">
+      <button type="button" class="previous-btn" (click)="SaveData(fundingPatternForm.value)">SAVE</button>
+    </div>
+  </div>
+
+</div>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

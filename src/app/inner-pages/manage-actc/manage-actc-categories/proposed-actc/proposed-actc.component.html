@@ -1,0 +1,83 @@
+
+<div class="present_performance funding-pattern">
+    <div class="container padding-box">
+      <!-- <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+            <div class="export_list_btn d-flex">
+               <div class="me-3">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>2022 - 2023</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+               </div>
+                <div class="mx-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Cycling</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                </div>    
+              </div>
+        </div>
+        <div class="col-auto">
+          <div class="export_list_btn d-flex">
+            <div class="d-flex mx-3" style="font-size: 1.7rem; font-weight:700">
+                <div class="me-2">Status:-</div> <div style="color:#FCB316">Pending</div>
+            </div>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Export</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+      </div> -->
+  
+
+      <!-- Navigation Buttons -->
+
+    <div class="main_navigation_proposed_actc  mt-5 mb-4">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item me-5" role="presentation" *ngFor="let btn of btnTitleAndId">
+              <button class="nav-link" data-bs-toggle="pill" role="tab" aria-controls="pills-home" (click)="ToggleSection(btn)" [ngClass]="navButtonDefault == btn.id?'active':'' " aria-selected="true">{{btn.title}}</button>
+            </li>
+        </ul>
+    </div>
+
+      <!-- Blue Bar Used in Manage ACTC Sections -->
+      <ng-template [ngIf]="navButtonDefault == 1">
+        <senior (dataFromSenior)="ToggleSection($event)" [userData]="userData" [year]="year" [isEditable]="editable" [routeData]="routeData"></senior>
+      </ng-template>
+
+      <ng-template [ngIf]="navButtonDefault == 2">
+        <junior [userData]="userData" (dataFromJunior)="ToggleSection($event)" [year]="year" [isEditable]="editable" [routeData]="routeData"></junior>
+      </ng-template>
+
+      <ng-template [ngIf]="navButtonDefault == 3">
+        <junior-development-program [year]="year" [routeData]="routeData"></junior-development-program>
+      </ng-template>
+
+      <ng-template [ngIf]="navButtonDefault == 4">
+        <coaches-development-program [year]="year" [isEditable]="editable" [routeData]="routeData"></coaches-development-program>
+      </ng-template>
+
+      <!-- BLue Bar tabs -->
+       
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="btns d-flex justify-content-between">
+     <div>
+      <button type="button" class="previous-btn me-3" (click)="GoToPreviousSection(4)">PREVIOUS</button>
+     </div>
+     <!-- <div>
+      <button type="button" class="previous-btn me-3">SAVE</button>
+     </div> -->
+    </div>
+  </div>
+  

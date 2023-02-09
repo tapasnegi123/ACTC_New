@@ -1,0 +1,347 @@
+w<!-- Graphical Dashboard -->
+<div class="dashboard_analytical padding-box">
+  <div class="container-fluid px-5">
+    <div class="row mt-0 justify-content-md-between justify-content-center" (click)="clickedOutside()">
+      <div class="col-md-9 col-12 my-md-0 my-2">
+      
+         
+                  <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+                      <div class="d-flex flex-row flex-grow-1 flex-fill justify-content-center bg-danger py-2 text-white px-1 news"><span class="d-flex align-items-center">&nbsp;For Queries</span></div>
+                      <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();"> <a href="#">For Any Queries Or Issues on ACTC Portal Please Email at: actc.helpdesk.sai@gov.in</a>
+                      </marquee>
+                  </div>
+              
+          
+    
+      </div>
+     <div class="col-md-3 col-12 my-md-0 my-2">
+      <div class="select_financial_year w-25 ">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Financial Year 2022 - 2023</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+     </div>
+    </div>
+    <hr class="mt-5 mb-2">
+    <div class="row mt-3 menu-container clickOutside">
+      <div class="proposal_row d-flex   justify-content-between  align-items-center">
+        <div class="proposal_heading d-block me-auto">
+          <h2>Proposals</h2>
+          <div class="hl"></div>
+        </div>
+        <!-- right buttons -->
+        <div class="d-flex align-items-center right_btn">
+          <div class="me-3 ">
+
+            <!-- <button type="button" class="dashboard_bg p-2" style="background-color: green; border:1px solid green; border-radius: 50%; width: 38px; height: 38px; display: flex; justify-content: center; align-items: center;  color:white; font-size:2.4rem; text-transform:uppercase;">+</button> -->
+            <!-- <div class="btn-group dropstart" >
+              <button type="button"  class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" >
+               <span  (click)="isShow()"  style="font-size:1.4rem !important; line-height:2 !important">Test Button</span>
+              </button>
+              <ul class="dropdown-menu" *ngIf="showOption">
+                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                <li><a class="dropdown-item"  href="#">Menu item</a></li>
+                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                <li><a class="dropdown-item" (click)="NavigateToFormA()">NEW ACTC</a></li>
+              </ul>
+            </div> -->
+            <div class="btn-group dropstart">
+              <button (click)="isShow()" type="button" class="btn btn-secondary dropdown-toggle">
+                <span  style="font-size:1.4rem !important; line-height:2 !important">ADD
+                  </span>
+              </button>
+              <div *ngIf="showOptionNSF" id="dropdownList">
+                <ul class="dropdown-menu">
+                  <!-- <li><a class="dropdown-item" href="#">Menu item</a></li>
+                <li><a class="dropdown-item"  href="#">Menu item</a></li>
+                <li><a class="dropdown-item" href="#">Menu item</a></li>
+                <li><a class="dropdown-item" href="#">Menu item</a></li> -->
+                  <li><a class="dropdown-item" href="#">PROPOSED</a></li>
+                  <li><a class="dropdown-item" href="#">APPROVED ACTC</a></li>
+                  <li><a class="dropdown-item" href="#">MINUTES OF MEETING</a></li>
+                  <li><a class="dropdown-item" href="#" >RELEASED SANCTIONS</a></li>
+                  <li><a class="dropdown-item" (click)="NavigateToFormA()">NEW ACTC</a></li>
+                  <li><a class="dropdown-item" (click)="NavigateToFormA()">NEW PROPOSAL</a></li>
+                </ul>
+              </div>
+              <div *ngIf="showOptionDO">
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">PROPOSED</a></li>
+                  <li><a class="dropdown-item" href="#">APPROVED ACTC</a></li>
+                  <li><a class="dropdown-item" href="#">MINUTES OF MEETING</a></li>
+                  <li><a class="dropdown-item border-0" href="#" >RELEASED SANCTIONS</a></li>
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="select_financial_year" >
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Financial Year 2022 - 2023</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div> -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- row 2 tiles  -->
+    <div class="row my-5 " (click)="clickedOutside()">
+      <div class="col-lg-auto col-md-4 col-6">
+        <div class="dashboard_tile p-4 tile_1">
+          <div class="d-flex justify-content-between">
+            <div class="num_box bg-white p-1 text-center d-inline-flex align-items-center justify-content-center">
+              44
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="tile_text">TOTAL</div>
+            <div><button type="button" class="border-0 bg-transparent"><img src="/assets/images/dashboard/tile_btn.svg"
+                  alt=""></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-auto col-md-4 col-6">
+        <div class="dashboard_tile p-4 tile_2">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="num_box bg-white p-1 text-center d-inline-flex align-items-center justify-content-center">
+              02
+            </div>
+            <div><img src="/assets/images/dashboard/progess_tile.svg" alt=""></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="tile_text">IN-PROGRESS</div>
+            <div><button type="button" class="border-0 bg-transparent"><img src="/assets/images/dashboard/tile_btn.svg"
+                  alt=""></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-auto col-md-4 col-6">
+        <div class="dashboard_tile p-4 tile_3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="num_box bg-white p-1 text-center d-inline-flex align-items-center justify-content-center">
+              02
+            </div>
+            <div><img src="/assets/images/dashboard/verifed_tile.svg" alt=""></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="tile_text">APPROVED</div>
+            <div><button type="button" class="border-0 bg-transparent"><img src="/assets/images/dashboard/tile_btn.svg"
+                  alt=""></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-auto col-md-4 col-6">
+        <div class="dashboard_tile p-4 tile_4">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="num_box bg-white p-1 text-center d-inline-flex align-items-center justify-content-center">
+              1078
+            </div>
+            <div><img src="/assets/images/dashboard/rejecteddd_tile.svg" alt=""></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="tile_text">REJECTED</div>
+            <div><button type="button" class="border-0 bg-transparent"><img src="/assets/images/dashboard/tile_btn.svg"
+                  alt=""></button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-auto col-md-4 col-6">
+        <div class="dashboard_tile p-4 tile_5">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="num_box bg-white p-1 text-center d-inline-flex align-items-center justify-content-center">
+              8047
+            </div>
+            <!-- <div><img src="/assets/images/dashboard/rejecteddd_tile.svg" alt=""></div> -->
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="tile_text">PENDING</div>
+            <div><button type="button" class="border-0 bg-transparent"><img src="/assets/images/dashboard/tile_btn.svg"
+                  alt=""></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="p-0 m-0">
+
+    <!-- row 3 -->
+    <div class="row mt-5 padding-box" (click)="clickedOutside()">
+      <div class="col-md-6 col-12">
+        <div class="mb-4">
+          <h2>Budget v/s Expenditure</h2>
+          <div class="hl"></div>
+        </div>
+        <img src="/assets/images/dashboard/Group 636.svg" class="img-fluid" alt="">
+      </div>
+      <div class="col-md-6 col-12">
+        <div class="mb-4">
+          <h2>Expenditure by Proposal heads</h2>
+          <div class="hl"></div>
+        </div>
+        <img src="/assets/images/dashboard/Group 637.svg" class="img-fluid" alt="">
+      </div>
+    </div>
+
+    <div class="row margin-box quick-links">
+
+
+      <div *ngIf="role_name === 'SDO'"
+        class="row justify-content-md-around justify-content-start align-items-center mt-4">
+      
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/verified-quick.svg" alt="">
+            </div>
+            <p class="text-center text-uppercase">Federation Details</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/meeting-quick.svg" alt="">
+            </div>
+            <p class="text-center">MINUTES OF MEETING</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/released-quick.svg" alt="">
+            </div>
+            <p class="text-center">RELEASED SANCTIONS</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div (click)="ManageACTC()" class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/new-quick.svg" alt="">
+            </div>
+            <!-- <button></button> -->
+            <p class="text-center text-uppercase">Manage ACTC</p>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+       
+      </div>
+      <div *ngIf="role_name === 'DO'"
+        class="row justify-content-md-around justify-content-start align-items-center mt-4">
+ 
+        <ng-container *ngFor="let do of linksForDO">
+          <div class="col-auto">
+            <div class="vl" style="height: 30px;"></div>
+          </div>
+          <div class="col-auto">
+            <div (click)="CheckUrlAndNavigate(do.link)" class="d-flex flex-column align-items-center justify-content-center img-links">
+              <div class="circle_box d-flex align-items-center justify-content-center ">
+                <img [src]="do.imgSrc" alt="">
+              </div>
+              <p class="text-center text-uppercase">{{do.title}}</p>
+            </div>
+          </div>  
+        </ng-container>
+      </div>
+      <div *ngIf="role_name === 'NSF'"
+        class="row justify-content-md-around justify-content-start align-items-center mt-4">
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center">
+              <img src="/assets/images/dashboard/proposed-quick.svg" alt="">
+            </div>
+            <p class="text-center m-0">PROPOSED</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/verified-quick.svg" alt="">
+            </div>
+            <p class="text-center">APPROVED ACTC</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/meeting-quick.svg" alt="">
+            </div>
+            <p class="text-center">MINUTES OF MEETING</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/released-quick.svg" alt="">
+            </div>
+            <p class="text-center">RELEASED SANCTIONS</p>
+          </div>
+
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div (click)="NavigateToFormA()" class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/new-quick.svg" alt="">
+            </div>
+            <!-- <button></button> -->
+            <p class="text-center">NEW ACTC</p>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="vl" style="height: 30px;"></div>
+        </div>
+        <div class="col-auto">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="circle_box d-flex align-items-center justify-content-center ">
+              <img src="/assets/images/dashboard/proposed-2-quick.svg" alt="">
+            </div>
+            <p class="text-center">NEW PROPOSAL</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader [ngIf]="showLoader">
+  <loader></loader>
+</ng-template>

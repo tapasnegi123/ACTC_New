@@ -1,0 +1,114 @@
+<div *ngIf="userData$ | async as masterData; else loader" class="release-mom padding-box">
+    <div class="container">
+        <div class="row mb-5">
+            <div>
+                <h3 class="mom-heading">Minutes of Meeting</h3>
+            </div>
+            <div class="hl"></div>
+        </div>
+
+        <div class="row justify-content-evenly align-items-center mt-4 blue-bar-mom mt-5">
+            <div class="col-auto">
+                <p class="m-0">FINANCIAL YEAR :- {{masterData.financialyear}}</p>
+            </div>
+            <div class="col-auto">
+                <p class="m-0">FEDERATION:-{{masterData.federationsName}}</p>
+            </div>
+            <div class="col-auto">
+                <p class="m-0">APPROVED BUDGET :- {{masterData.approved_budget}}</p>
+            </div>
+        </div>
+        <form [formGroup]="meetingForm">
+            <div class="row  align-items-center mom-form mt-5">
+                <!-- date_of_Meeting -->
+                <div class="col-md-4 col-12  my-4">
+                    <h4 class="text-center">Date of Meeting</h4>
+                    <input formControlName="date_of_Meeting" type="date" [min]="DatesOfCompetetionDFMin"
+                        [max]="DatesOfCompetetionDFMax" placeholder="Date of Meeting" class="form-control">
+                    <div *ngIf="(f['date_of_Meeting'].touched || submitted) && f['date_of_Meeting'].errors"
+                        class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+                <!-- venue_of_Meeting -->
+                <div class="col-md-4 col-12  my-4">
+                    <h4 class="text-center">Venue of Meeting</h4>
+                    <input formControlName="venue_of_Meeting" type="text" placeholder="" class="form-control">
+                    <div *ngIf="(f['venue_of_Meeting'].touched || submitted) && f['venue_of_Meeting'].errors"
+                        class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+                <!-- time_of_Meeting -->
+                <div class="col-md-4 col-12  my-4">
+                    <h4 class="text-center">Time of Meeting</h4>
+                    <input formControlName="time_of_Meeting" type="time" placeholder="" class="form-control">
+                    <div *ngIf="(f['time_of_Meeting'].touched || submitted) && f['time_of_Meeting'].errors"
+                        class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+                <!-- projected_Targets_For -->
+                <div class="col-md-6 col-12  my-4">
+                    <h4 class="text-center">Projected Targets for</h4>
+                    <textarea formControlName="projected_Targets_For" class="form-control" rows="10s" placeholder=""
+                        id="floatingTextarea"></textarea>
+                    <div *ngIf="(f['projected_Targets_For'].touched || submitted) && f['projected_Targets_For'].errors"
+                        class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+                <!-- special_Terms_And_Condition -->
+                <div class="col-md-6 col-12  my-4">
+                    <h4 class="text-center">Special Terms & Conditions</h4>
+                    <textarea formControlName="special_Terms_And_Condition" class="form-control" rows="10s"
+                        placeholder="" id="floatingTextarea"></textarea>
+                    <!-- <div *ngIf="(f['Special_Terms_And_Condition'].touched || submitted) && f['Special_Terms_And_Condition'].errors" class="text-danger">
+                        <small class="d-block text-center">Special Terms & Conditions is required</small>
+                    </div> -->
+                </div>
+                <!-- nsF_Participants -->
+                <div class="col-md-6 col-12  my-4">
+                    <h4 class="text-center">NSF Participants (<span class="text-danger"> Please Enter Comma Saprated Names </span>)</h4>
+                    <textarea formControlName="nsF_Participants" class="form-control" rows="10s"
+                        placeholder="" id="floatingTextarea"></textarea>
+                    <div *ngIf="(f['nsF_Participants'].touched || submitted) && f['nsF_Participants'].errors" class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+                <!-- sai_Participants -->
+                <div class="col-md-6 col-12  my-4">
+                    <h4 class="text-center">SAI Participants (<span class="text-danger">Please Enter Comma Saprated Names</span>)</h4>
+                    <textarea formControlName="sai_Participants" class="form-control" rows="10s"
+                        placeholder="" id="floatingTextarea"></textarea>
+                    <div *ngIf="(f['sai_Participants'].touched || submitted) && f['sai_Participants'].errors" class="text-danger">
+                        <small class="d-block text-center"><i class="bi bi-exclamation-circle"></i>This Fiels Is Mandatory</small>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mom-btns my-2">
+                    <div class="col-md-auto col-6 m-1">
+                        <button type="button" [disabled]="!meetingForm.valid  || submitted" (click)="saveDraft()"
+                            class="btn login-button text-white d-block mx-auto">SAVE AS DRAFT</button>
+                    </div>
+                    <div class="col-md-auto col-6 m-1">
+                        <button *ngIf="submitted" type="button" (click)="viewPdf('Draft')"
+                            class="btn login-button text-white d-block mx-auto">VIEW</button>
+                    </div>
+                    
+                    <div class="col-md-auto col-6 m-1">
+                        <button *ngIf="submitted" type="button" (click)="viewPdf('MOM')"
+                            class="btn login-button text-white d-block mx-auto">RELEASE MINUTES</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ng-template #loader>
+    <loader></loader>
+</ng-template>
+
+<loader *ngIf="loading"></loader>

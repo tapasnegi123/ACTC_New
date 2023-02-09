@@ -1,0 +1,102 @@
+<div class="container-fluid" style="background-color: #F8F9FD;">
+  <div class="row">
+    <div class="col-12">
+      <div class="header d-flex align-items-center p-3">
+        <div class="toggle-btn">
+          <button class="btn" (click)="openSideMenu()"><img src="/assets/images/dashboard/hamburger.svg"
+              alt="" /></button>
+        </div>
+        <div class="d-flex mx-auto">
+        
+          <div class="border rounded p-2">
+            <img src="assets/images/actc_1001.svg" class="img-fluid p-1" style="height: 80px; width: 120px;" alt="">
+            <span class=" d-inline-md-block px-3 border-end border-start mx-3  d-md-inline-block  d-none "><img src="assets/images/h_logo_2.svg" class="img-fluid p-1" style="height: 80px; width: 120px;" alt=""></span>
+            <span class=" d-md-inline-block  d-none  pe-2"><img src="assets/images/g20_new_img.png" class="img-fluid p-1" style="height: 80px; width: auto;" alt=""></span>
+          </div>
+        </div>
+
+        <div class="mb-md-0 mb-2 notification_dashboard">
+          <div class="d-flex align-items-center">
+            <button type="button" class="btn position-relative">
+              <img src="/assets/images/dashboard/bell-fill-dashboard.svg" alt="" />
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notified">
+                99+
+                <span class="visually-hidden">unread messages</span>
+              </span>
+            </button>
+            <div class="dropdown ms-3">
+              <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class=" rounded-circle dashboard_btn me-2">{{FirstChar}}</span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li class="dropdown-item">{{userDetail.user_name}}</li>
+                <li><button class="dropdown-item" routerLink="/dashboard">Home</button></li>
+                <li><a class="dropdown-item" (click)="LogOut()">Logout</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr style="padding: 0; margin:0;" />
+
+
+<!-- Sidebar -->
+
+<ng-template #contentSidebar let-offcanvas>
+  <div class="offcanvas-body  p-0" style="background-color: #3B454D;">
+    <div class="sidebar">
+      <div class="sidebar-bg w-100">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close" aria-label="Close"
+            (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="logo">
+          <img src="/assets/images/actc_logo_border.svg" class="d-block mx-auto" alt=""
+            style="width: 80px; margin-bottom: 15px;" />
+        </div>
+
+        <ul class="side-navbar p-0 list-unstyled" >
+          <ng-template [ngIf]="userDetail.role_id == 1002 ">
+            <ng-container *ngFor="let data of objLinks">
+              <li [routerLink]="[data.link]" [routerLinkActive]="'active'" (click)="offcanvas.dismiss('Cross click')">
+                <a  class="text-decoration-none">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <img [src]="data.src" alt="" />
+                      <a>{{data.title}}</a>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </ng-template>
+
+          <ng-template [ngIf]="userDetail.role_id == 106 || userDetail.role_id == 47 || userDetail.role_id == 14 || userDetail.role_id == 108 || userDetail.role_id == 123">
+            <ng-container *ngFor="let data of doSdoLinks">
+              <li [routerLink]="[data.link]" [routerLinkActive]="'active'" (click)="offcanvas.dismiss('Cross click')">
+                <a  class="text-decoration-none">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                      <img [src]="data.src" alt="" />
+                      <a>{{data.title}}</a>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </ng-template>
+         
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-template>

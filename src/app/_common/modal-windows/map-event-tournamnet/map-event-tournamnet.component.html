@@ -1,0 +1,81 @@
+<div class="modal-content tournamentModal">
+  <div class="modal-header">
+    <h2 class="modal-title text-center w-100" style="font-weight: bold;">MAP EVENT-TOURNAMENT</h2>
+    <button type="button" class="btn-close ms-0" aria-label="Close"
+      (click)="activeModal.close()"></button>
+  </div>
+  <div class="modal-body" *ngIf="(eventListData$ | async) as data">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Tournament Name </h4>
+            <div>{{tournamentData.tournament_Name}}</div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Tournament Category </h4>
+            <div>{{tournamentData.tournament_Category_Name}}</div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Level </h4>
+            <div>{{tournamentData.tournament_Level}} </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Perioud Upto </h4>
+            <div>{{tournamentData.from_Date | date:"dd/MM/yyyy"}} - {{tournamentData.to_date | date:"dd/MM/yyyy"}}</div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <ng-container [formGroup]="eventCheckboxArrayForm">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>EVENT NAME</th>
+                    <th>EVENT TYPE</th>
+                    <th>GENDER</th>
+                    <th>DISCIPLINE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container formArrayName="eventCheckBox">
+                    <tr *ngFor="let checkBoxFormArray of eventCheckboxArray.controls; let i=index">
+                      <td>
+                        <input type="checkbox" [formControlName]="i"
+                          (change)="eventCheckboxChange(checkBoxFormArray.value,uncheckedList[i].event_id)">
+                      </td>
+                      <!-- {{uncheckedList[i].event_id}} -->
+                      <td>{{uncheckedList[i].event_name}}</td>
+                      <td>{{uncheckedList[i].event_type}}</td>
+                      <td>{{uncheckedList[i].gender_category}}</td>
+                      <td>{{uncheckedList[i].sport}}</td>
+                    </tr>
+                  </ng-container>
+                  <ng-container formArrayName="eventUnCheckbox">
+                    <tr *ngFor="let checkBoxFormArray of eventUncheckboxArray.controls; let i=index">
+                      <td>
+                        <input type="checkbox" [formControlName]="i">
+                      </td>
+                      <!-- {{mappedEvents[i].event_Id}} -->
+                      <td>{{mappedEvents[i].event_Name}}</td>
+                      <td>{{mappedEvents[i].event_Type}}</td>
+                      <td>{{mappedEvents[i].gender_category}}</td>
+                      <td>{{mappedEvents[i].sport_Name}}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary me-2" (click)="saveEvent()">Save</button>
+                <button type="button" class="btn btn-secondary"
+                  (click)="activeModal.close()">Cancel</button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <loader *ngIf="Loader"></loader>

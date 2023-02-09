@@ -1,0 +1,186 @@
+<div class="row">
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="main_1" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+      <div class="w-100">
+        <div class="section_bar">
+          <ul class="nav nav-pills nav_bar_height" id="pills-tab" role="tablist">
+            <li class="nav-item mx-2" role="presentation">
+              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                SECTION 1
+              </button>
+            </li>
+            <li class="nav-item mx-2" role="presentation">
+              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                SECTION 2
+              </button>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Main 1 -->
+        <div class="row" >
+          <div class="tab-content" id="pills-tabContent">
+            <!-- section one -->
+            <div *ngIf="do_sdo_developmentPlanForCoach$ | async as developmentDataofCoach;else loader" class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+              tabindex="0">
+              <div class="table-responsive">
+                <h4>Coach Development Plan</h4>
+                <table class="table table-bordered">
+                  <thead style="vertical-align: middle;">
+                    <tr>
+                      <th rowspan="2">CERTIFICATION/ DEGREE/COURSE</th>
+                      <th rowspan="2">PRESENT NUMBERS</th>
+                      <th colspan="5">
+                        NUMBERS TARGETED
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>{{this.year + 1}}</th>
+                      <th>{{this.year + 2}}</th>
+                      <th>{{this.year + 3}}</th>
+                      <th>{{this.year + 4}}</th>
+                      <th>{{this.year + 5}}</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let data of developmentDataofCoach">
+                    <tr>
+                      <td> {{data.DevelopmentLevel}}</td>
+                      <td>{{data.Detail}}</td>
+                      <td>{{data[this.year+1]}}</td>
+                      <td>{{data[this.year+2]}}</td>
+                      <td>{{data[this.year+3]}}</td>
+                      <td>{{data[this.year+4]}}</td>
+                      <td>{{data[this.year+5]}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- section two -->
+            <div *ngIf="do_sdo_developmentPlanForReferee$ | async as developmentDataofRefree" class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+              tabindex="0">
+              <div class="table-responsive my-4">
+                <h4>Referee & Judges Development Plan</h4>
+                <table class="table table-bordered">
+                  <thead style="vertical-align: middle;">
+                    <tr>
+                      <th rowspan="2">CERTIFICATION/ DEGREE/COURSE</th>
+                      <th rowspan="2">PRESENT NUMBERS</th>
+                      <th colspan="5">
+                        NUMBERS TARGETED
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>{{this.year+1}}</th>
+                      <th>{{this.year+2}}</th>
+                      <th>{{this.year+3}}</th>
+                      <th>{{this.year+4}}</th>
+                      <th>{{this.year+5}}</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let data of developmentDataofRefree">
+                    <tr>
+                      <td>{{data.DevelopmentLevel}}</td>
+                      <td>{{data.Detail}}</td>
+                      <td>{{data[this.year+1]}}</td>
+                      <td>{{data[this.year+2]}}</td>
+                      <td>{{data[this.year+3]}}</td>
+                      <td>{{data[this.year+4]}}</td>
+                      <td>{{data[this.year+5]}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="userDetail.role_id == 106 || 47">
+                <button *ngIf="isEditable" class="previous-btn me-3" (click)="openModal()">FINAL SUBMIT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-between">
+    <div class="col-auto">
+        <button type="button" class="btn my-1 left-arrow"><img src="../../../../../../assets/images/left_nav_arrow.svg" class="img-fluid" alt=""></button>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn my-1 right-arrow"><img src="../../../../../../assets/images/right_nav_arrow.svg" class="img-fluid" alt=""></button>
+    </div>
+  </div>
+  
+  <!-- <button>Click me </button> -->
+</div>
+
+
+<!-- DO modal window -->
+<ng-template #DOModal let-DOmodal>
+  <div class="modal-body submitActcModal">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modal-basic-title">SUBMIT ACTC</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="DOmodal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="DO_formSubmit">
+      <div class="d-flex justify-content-center align-items-center flex-wrap mb-3">
+        <div class="form-check mb-2 me-sm-3 me-xl-4">
+          <input value='backToNSF' type="radio" class="form-check-input" name="forwardTo" id="radio1"
+            formControlName="forwardTo">
+          <label class="form-check-label" for="radio1">BACK TO NSF</label>
+        </div>
+        <div class="form-check mb-2">
+          <input value='forwardToSDO' type="radio" class="form-check-input" name="forwardTo" id="radio2"
+            formControlName="forwardTo">
+          <label class="form-check-label" for="radio2">FORWARD TO SDO</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" rows="5" placeholder="Enter Comment" formControlName="comment"></textarea>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-secondary" (click)="finalSubmission(DO_formSubmit.value)">Ok</button>
+      </div>
+    </form>
+  </div>
+
+  
+</ng-template>
+
+
+<!-- DO modal window -->
+<ng-template #SDOModal let-SDOmodal>
+  <div class="modal-body submitActcModal">
+    <div class="modal-header">
+      <h4 class="modal-title text-center" id="modal-basic-title">SUBMIT ACTC</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="SDOmodal.dismiss('Cross click')"></button>
+    </div>
+    <form [formGroup]="SDO_formSubmit">
+      <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+        <div class="form-check mb-2 me-sm-3 me-xl-4">
+          <input type="radio" class="form-check-input" name="forwardTo" id="radio1" formControlName="forwardTo" value='backToDO'>
+          <label class="form-check-label" for="radio1">BACK TO DO</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="radio" class="form-check-input" name="forwardTo" id="radio2" formControlName="forwardTo" value='approve'>
+          <label class="form-check-label" for="radio2">APPROVE</label>
+        </div>
+        <div class="form-check mb-2">
+          <input type="radio" class="form-check-input" name="forwardTo" id="radio3" formControlName="forwardTo" value='reject'>
+          <label class="form-check-label" for="radio3">REJECT</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <textarea class="form-control" rows="5" placeholder="Enter Comment" formControlName="comment"></textarea>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-secondary" (click)="finalSubmission(SDO_formSubmit.value)">Ok</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+<ng-template #loader>
+    <loader></loader>
+  </ng-template>

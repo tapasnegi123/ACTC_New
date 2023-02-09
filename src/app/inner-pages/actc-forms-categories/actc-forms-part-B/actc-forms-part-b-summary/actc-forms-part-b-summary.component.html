@@ -1,0 +1,90 @@
+<form *ngIf="(nsf_SummaryData$ | async) as summaryData">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">SYNOPSIS REPORT (JUNIORS)</h2>
+    <div class="hl d-block mx-auto"></div>
+
+    <div class="table-1 padding-box">
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" style="min-width:40px !important; width: 30px !important;">S.NO</th>
+              <th scope="col">ITEM</th>
+              <th scope="col">SUB-CATEGORY</th>
+              <th scope="col">BUDGET</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 4 -->
+            <tr>
+              <td rowspan="3">01</td>
+              <td rowspan="3">National Coaching Camps</td>
+              <ng-container *ngFor="let data of summaryData">
+                <ng-container *ngIf="data.item == 'National Coaching Camps' && data.category == 'Training'">
+                  <td>{{data.category}}</td>
+                  <td>{{data.junior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <ng-container *ngFor="let data of summaryData">
+              <ng-container *ngIf="data.item == 'National Coaching Camps' && data.category != 'Training'">
+                <tr>
+                  <td>{{data.category}}</td>
+                  <td>{{data.junior}}</td>
+                </tr>
+              </ng-container>
+            </ng-container>
+
+            <tr>
+              <td>02</td>
+              <td>International Exposures</td>
+              <ng-container *ngFor="let data of summaryData">
+                <ng-container *ngIf="data.item == 'International Exposure' && data.category == ''">
+                  <td>{{data.category}}</td>
+                  <td>{{data.junior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <!-- row 3 -->
+            <tr>
+              <td>03</td>
+              <td>International Competitions in India</td>
+              <ng-container *ngFor="let data of summaryData">
+                <ng-container *ngIf="data.item == 'International Competitions in India' && data.category == ''">
+                  <td>{{data.category}}</td>
+                  <td>{{data.junior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+
+            <!-- row 4 -->
+            <tr>
+              <td>04</td>
+              <td>National Championships</td>
+              <ng-container *ngFor="let data of summaryData">
+                <!-- {{data | json}} -->
+                <ng-container *ngIf="data.item == 'National Championship' && data.category == ''">
+                  <td>{{data.category}}</td>
+                  <td>{{data.junior}}</td>
+                </ng-container>
+              </ng-container>
+            </tr>
+            <!-- TOTAL BUDGET -->
+            <tr>
+              <td colspan="3">
+                <p style="font-size:1.3rem ; text-align: center; font-weight:500" class="fw-bolder">TOTAL BUDGET
+                </p>
+              </td>
+              <td>{{totalJuniorCount}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <p style="font-size:1.3rem ; text-align: right !important; font-weight:500">TOTAL BUDGET 
+        </p> -->
+      </div>
+    </div>
+  </div>
+</form>

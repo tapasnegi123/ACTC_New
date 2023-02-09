@@ -1,0 +1,293 @@
+.search {
+  margin-top: -3rem;
+  margin-bottom: 3rem;
+
+  ::-webkit-input-placeholder {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+  }
+  .search-input {
+    font-size: 1.6rem;
+    background-color: white;
+    border: 3px solid !important;
+    border-color: #c7c7c7 !important;
+    // margin-bottom: 3rem;
+    box-shadow: 0px 3px 26px rgb(0 0 0 / 10%);
+    border-radius: 5px;
+    padding-left: 6rem !important;
+  }
+
+
+
+  .searchbar {
+    position: relative;
+  }
+  .search-icon {
+    position: relative;
+
+    img {
+      height: 2.4rem;
+      width: 2.4rem;
+      left: 3.5%;
+      top: 30%;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    .search-icon {
+      img {
+        height: 2.4rem;
+        width: 2.4rem;
+        left: 6%;
+      }
+    }
+  }
+}
+.search{
+  position: relative;
+}
+.search input{
+  padding: 0.75rem 1.4rem;
+}
+.search img{
+  position: absolute;
+  height: 1.3rem;
+  width: 1.3rem;
+  top: 30%;
+  left: 4%;
+  padding: 0.1rem;
+}
+.actc-box {
+  .box {
+    position: relative;
+  }
+  .box {
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 10px;
+    min-height: 20rem;
+    margin-bottom: 2rem;
+  }
+
+  .box-img {
+    left: 5%;
+    top: -30%;
+    background-color: white;
+    position: relative;
+    height: 9.2rem;
+    width: 9.2rem;
+    border: 1px solid #dedede;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+  }
+
+  .box-desc {
+    p {
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #000000;
+    }
+  }
+}
+
+.actc_icons {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.Icon-AICF{
+  background-image: url("/assets/images/chess-updated.svg");
+}
+.Icon-AIFF{
+  background-image: url("/assets/images/football-fredration.svg");
+}
+.icon-AISD{
+  background-image: url("/assets/images/deaf.svg");
+}
+.Icon-AITS{
+  background-image: url("/assets/images/tennis.svg");
+}
+.icon-ABFI{
+  background-image: url("/assets/images/baseball-india.png");
+}
+.Icon-AKFI{
+  background-image: url("/assets/images/amateur-kabaddi.png");
+}
+.icon-ASTF{
+  background-image: url("/assets/images/Amateur-Tennis.svg");
+}
+.Icon-AAOI{
+  background-image: url("/assets/images/Archery-association.svg");
+}
+.Icon-AFOI{
+  background-image: url("/assets/images/Athletics Federation  of India.svg");
+}
+.icon-APFI{
+  background-image: url("/assets/images/aatya-img.jpg");
+}
+.Icon-BDMT{
+  background-image: url("/assets/images/Badminton Association of India.svg");
+}
+.icon-BBDM{
+  background-image: url("/assets/images/Ball-Badminton.svg");
+}
+.icon-CPFI{
+  background-image: url("/assets/images/cycle-polo.jpg");
+}
+.Icon-CFOI{
+  background-image: url("/assets/images/Cycling\ Federation.svg");
+}
+.Icon-EFOI{
+  background-image: url("/assets/images/Equestrian\ Federation\ of\ India.svg");
+}
+.Icon-FAOI{
+  background-image: url("/assets/images/Fencing\ Association\ of\ India.svg");
+}
+.Icon-GYFI{
+  background-image: url("/assets/images/gymnastic\ federation\ of\ india.svg");
+}
+.Icon-HFOI{
+  background-image: url("/assets/images/Handball\ Federation.svg");
+}
+.Icon-HYIA{
+  background-image: url("/assets/images/layer1.svg");
+}
+.icon-INBB{
+  background-image: url("/assets/images/indian-bodybuilding.jpg");
+}
+.Icon-BSOI{
+  background-image: url("/assets/images/layer1.svg");
+}
+.Icon-BFOI{
+   background-image: url("/assets/images/layer1.svg");
+}
+.icon-BRFI{
+
+}
+.Icon-IGFU{
+  background-image: url("/assets/images/Indian\ Golf\ Union.svg");
+}
+.icon-IKFD{
+  background-image: url("/assets/images/ikf.jpg");
+}
+.Icon-IKCA{
+  background-image: url("/assets/images/Indian\ Kayaking\ and\ Canoeing\ Association.svg");
+}
+.icon-IPOA{
+  background-image: url("/assets/images/Indian\ Polo.svg");
+}
+.Icon-IRFU{
+  background-image: url("/assets/images/Indian\ Rugby\ Football\ Union.svg");
+}
+.icon-ITFD{
+  background-image: url("/assets/images/Indian\ Triathlon\ Federation.svg");
+}
+.Icon-IWLF{
+  background-image: url("/assets/images/Indian\ Weightlifting.svg");
+}
+.Icon-JFOI{
+  background-image: url("/assets/images/jfi.jpg");
+}
+.Icon-SQFI{
+  background-image: url("/assets/images/sqayofindia.jpg");
+}
+.Icon-KAOI{
+  background-image: url("/assets/images/Karate\ Association\ of\ India.svg");
+}
+.Icon-KKFI{
+  background-image: url("/assets/images/Kho-Kho\ Federation\ of\ India.svg");
+}
+.Icon-MFOI{
+  background-image: url("/assets/images/Mallakhamb\ Federation\ of\ India.svg");
+}
+.Icon-NRAI{
+  background-image: url("/assets/images/layer1-1.svg");
+}
+.icon-BBDM{
+  background-image: url("/assets/images/Ball\ Badminton.svg");
+}
+
+.icon-TOWR{
+  background-image: url("/assets/images/tof.jpg");
+}
+.Icon-VFOI{
+  background-image: url("/assets/images/volleyball.jpg");
+}
+.icon-YCTA{
+  background-image: url("/assets/images/yof.jpg");
+
+}
+
+
+
+
+
+
+// icons new
+
+.Icon-WAOI{
+  background-image: url("/assets/images/Netball-Federation-of-India.svg");
+}
+
+.Icon-WFOI{
+  background-image: url("/assets/images/wfoi.jpg");
+}
+
+.icon-FMSCI{
+  background-image: url("/assets/images/The-Federation-of-Motor-Sports-Clubs-of-India.svg");
+}
+
+.icon-TKFI{
+  background-image: url("/assets/images/Tenni-Koit-Federation-of-India.svg");
+}
+
+.icon-TPBFI{
+  background-image: url("/assets/images/Tenpin-Bowling-Federation-\(INDIA\).svg");
+}
+
+.Icon-TKWD{
+  background-image: url("/assets/images/Taekwondo-Federation-of-India.svg");
+}
+
+.Icon-TTFI{
+  background-image: url("/assets/images/Table-Tennis-Federation-of-India.svg"); 
+}
+
+.Icon-SWFI{
+  background-image: url("/assets/images/Swimming-Federation-of-India.svg");
+}
+
+.icon-SRFI{
+  background-image: url("/assets/images/Squash-Racket-Federation-of-India.svg");
+}
+
+.Icon-SAOI{
+  background-image: url("/assets/images/Softball-Association-of-India.svg");
+}
+
+.Icon-SFOI{
+  background-image: url("/assets/images/Sepaktakraw-Federation-of-India.svg");
+}
+
+.Icon-RFOI{
+  background-image: url("/assets/images/Rowing-Federation-of\ India.svg");
+}
+
+.icon-RSFI{
+  background-image: url("/assets/images/Roller-Skating-Federation-of-India.svg");
+}
+
+.icon-RBFI{
+  background-image: url("/assets/images/Roll-Ball-Federation-of-India.svg");
+}
+
+.icon-PCOI{
+  background-image: url("/assets/images/Paralympic-Committee-of-India-\(1\).svg");
+}
+
+.icon-NFOI{
+  background-image: url("/assets/images/Netball-Federation-of-India.svg");
+}
+
+.icon-NYSF{
+  background-image: url("/assets/images/National-Yogasana-Sports-Federation-of-India.svg");
+}

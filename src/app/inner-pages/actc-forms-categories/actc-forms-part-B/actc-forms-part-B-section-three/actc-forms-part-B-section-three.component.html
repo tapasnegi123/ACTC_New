@@ -1,0 +1,155 @@
+<form [formGroup]="sectionThreeForm" *ngIf="(completeData$ | async) as getPartBData">
+  <div class="section section-1 form-padding-box">
+    <h2 class="text-center">BRIEF REPORT OF NATIONAL CHAMPIONSHIP/COMPETITION</h2>
+    <div class="hl d-block mx-auto"></div>
+
+    <div class="table-1 padding-box">
+
+      <h4 class="text-start">3.1 Details of National Championship/Competitions organized in the last two years</h4>
+      <div class="table-responsive">
+        <table class="table  table-bordered" style="vertical-align: middle">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">NAME OF COMPETITION ORGANIZED</th>
+              <th scope="col" rowspan="2">AGE CATEGORY</th>
+              <th scope="col" rowspan="2">NUMBER OF PARTICIPATING STATES</th>
+              <th scope="col" rowspan="2">NUMBER OF PARTICIPATING ATHLETES</th>
+              <th scope="col" colspan="3">VENUE DETAILS</th>
+              <th scope="col" colspan="2">DATE OF COMPETITION</th>
+              <th scope="col" rowspan="2">BEST 5 PERFORMING STATES</th>
+              <th scope="col" rowspan="2">REMARK</th>
+              <th scope="col" rowspan="2">ACTION</th>
+            </tr>
+            <tr>
+              <th>CENTER NAME</th>
+              <th>STATE</th>
+              <th>CITY</th>
+              <th>FROM</th>
+              <TH>TO</TH>
+            </tr>
+          </thead>
+          <tbody formArrayName="Section">
+            <tr *ngFor="let first of FormArray.controls; let i = index " [formGroupName]="i">
+
+              <!--TournamentId-->
+              <td>
+                <select #Tournament class="form-select" formControlName="TournamentId"
+                  aria-label="Default select example"
+                  (change)="setVanueDetailsOnComptetionSelection(Tournament.value, i, FormArray)">
+                  <option value="" selected disabled>Select</option>
+                  <ng-container *ngFor="let competition of Event">
+                    <option [value]="competition.competitionId">{{competition?.competition}}</option>
+                  </ng-container>
+                </select>
+                <div *ngIf="FormArray.controls[i].get('TournamentId')?.touched">
+                  <div class="text-danger" *ngIf="FormArray.controls[i].get('TournamentId')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                </div>
+              </td>
+              <!--Age_Category-->
+              <td>
+                <select class="form-select" formControlName="Age_Category" aria-label="Default select example">
+                  <option value="" selected disabled>Select</option>
+                  <ng-container *ngFor="let agegroup of AgeGroup">
+                    <option [value]="agegroup.id">{{agegroup?.name}}</option>
+                  </ng-container>
+                </select>
+                <div *ngIf="FormArray.controls[i].get('Age_Category')?.touched">
+                  <div class="text-danger" *ngIf="FormArray.controls[i].get('Age_Category')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                </div>
+              </td>
+              <!--State_participate-->
+              <td>
+                <input type="text" formControlName="State_participate">
+                <div *ngIf="FormArray.controls[i].get('State_participate')?.touched">
+                  <div class="text-danger"
+                    *ngIf="FormArray.controls[i].get('State_participate')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger"
+                    *ngIf="FormArray.controls[i].get('State_participate')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                  </div>
+                </div>
+              </td>
+              <!--Athlete_participate-->
+              <td>
+                <input type="text" formControlName="Athlete_participate">
+                <div *ngIf="FormArray.controls[i].get('Athlete_participate')?.touched">
+                  <div class="text-danger"
+                    *ngIf="FormArray.controls[i].get('Athlete_participate')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+                  <div class="text-danger"
+                    *ngIf="FormArray.controls[i].get('Athlete_participate')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                  </div>
+                </div>
+              </td>
+              <!--Center_Name-->
+              <td>{{FormArray.controls[i].get("Center_Name")?.value }}</td>
+              <!--State_Id-->
+              <td>{{ FormArray.controls[i].get("State")?.value }}</td>
+              <!--City_Id-->
+              <td>{{ FormArray.controls[i].get("City")?.value }}</td>
+              <!--From_Date-->
+              <td>{{ FormArray.controls[i].get("From_Date")?.value | date:'dd-MM-yyyy' }}</td>
+              <!--To_Date-->
+              <td>{{ FormArray.controls[i].get("To_Date")?.value | date:'dd-MM-yyyy' }}</td>
+              <!-- Best5 -->
+              <td>
+                <ng-select #select placeholder="Select" [items]="State" bindLabel="name" placeholder="Select"
+                  bindValue="id" appendTo="body" [multiple]="true" [dropdownPosition]="'bottom'"
+                  [maxSelectedItems]="5" [closeOnSelect]="false" [hideSelected]="true" [virtualScroll]="true"
+                  notFoundText="No state found" [searchable]="false" [clearSearchOnAdd]="true"
+                  formControlName="Best5">
+                </ng-select>
+                <div *ngIf="FormArray.controls[i].get('Best5')?.touched">
+                  <div class="text-danger" *ngIf="FormArray.controls[i].get('Best5')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is Required.
+                  </div>
+                </div>
+              </td>
+
+              <!-- Remarks -->
+              <td><input type="text" formControlName="Remarks"></td>
+              <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                <div style="cursor: pointer;" (click)="RemoveField(i)">
+                  <img src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="">
+                  DELETE
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="btn add_btn mt-3" [hidden]="DisableAddButton(FormArray) || isDisabled"
+          (click)="AddNewField()">+ ADD</button>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex justify-content-between">
+          <div class="button-left">
+            <button type="button" class="btn me-2  previous-btn" (click)="GoToPreviousPage()">
+              PREVIOUS
+            </button>
+            <button type="button" class="btn ms-2  next-btn" (click)="NextButton(isDisabled,sectionThreeForm.value, sectionThreeForm)" [disabled]="DisableAddButton(FormArray) || !formListData.isfilledby_nsf">
+              NEXT
+            </button>
+          </div>
+          <div class="button-right">
+            <button [hidden]="isDisabled" type="button" class="btn  save-btn"
+              (click)="SaveForm(sectionThreeForm.value, sectionThreeForm)">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

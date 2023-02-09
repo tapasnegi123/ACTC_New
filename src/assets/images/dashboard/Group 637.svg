@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="545" height="348.5" viewBox="0 0 545 348.5">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1589bc"/>
+      <stop offset="0.498" stop-color="#42adca"/>
+      <stop offset="1" stop-color="#5ec1d1"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff6974"/>
+      <stop offset="0.481" stop-color="#ff7e71"/>
+      <stop offset="1" stop-color="#ff8b6f"/>
+    </linearGradient>
+    <filter id="Path_602" x="128.869" y="36.196" width="174.261" height="235.373" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.31"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_595" x="132.5" y="23.55" width="189.193" height="256.483" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.31"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <path id="Path_596" data-name="Path 596" d="M-4358.833,7045.333v106l-122.5-6.092,43.771-77.977Z" transform="translate(4481.333 -7045.333)" fill="none" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7065d0"/>
+      <stop offset="0.519" stop-color="#8f65ba"/>
+      <stop offset="1" stop-color="#9f64a9"/>
+    </linearGradient>
+    <clipPath id="clip-path-2">
+      <path id="Path_597" data-name="Path 597" d="M7.678,0,121.325,13.566,182.56,122.35,107.8,149.574,7.646,103.859.007,42.042Z" transform="matrix(0.999, -0.035, 0.035, 0.999, -0.02, 6.428)" fill="url(#linear-gradient)"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_602)">
+        <path id="Path_602-2" data-name="Path 602" d="M-4347,7054v105.943l67.221,110.28,87.976-29.738-19.826-117.715-33.456-59.478Z" transform="translate(4347 -7054)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient-2)"/>
+      </g>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Path_595)">
+        <path id="Path_595-2" data-name="Path 595" d="M-4347,7054v116.287l73.689,121.046,96.441-32.641-21.733-129.208-36.675-65.284Z" transform="translate(4347 -7054)" fill="#e18d85" stroke="#707070" stroke-width="1"/>
+      </g>
+    </clipPath>
+    <filter id="Ellipse_171" x="68" y="87.721" width="149" height="149.753" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_637" data-name="Group 637" transform="translate(-778.5 -412.928)">
+    <rect id="Rectangle_618" data-name="Rectangle 618" width="544" height="348" rx="8" transform="translate(779 412.928)" fill="#fff"/>
+    <line id="Line_3517" data-name="Line 3517" y1="254.475" transform="translate(1067.094 469.025)" fill="none" stroke="#707070" stroke-width="1" opacity="0.14"/>
+    <text id="All_Time" data-name="All Time" transform="translate(1253 445.928)" font-size="10" font-family="Lato-Regular, Lato"><tspan x="0" y="0">All Time</tspan></text>
+    <circle id="Ellipse_638" data-name="Ellipse 638" cx="4" cy="4" r="4" transform="translate(1096 487.5)" fill="#ff7572"/>
+    <circle id="Ellipse_639" data-name="Ellipse 639" cx="4" cy="4" r="4" transform="translate(1096 521.5)" fill="#7664cb"/>
+    <circle id="Ellipse_640" data-name="Ellipse 640" cx="4" cy="4" r="4" transform="translate(1096 555.5)" fill="#0f85ba"/>
+    <circle id="Ellipse_641" data-name="Ellipse 641" cx="4" cy="4" r="4" transform="translate(1096 589.5)" fill="#5f58f6"/>
+    <circle id="Ellipse_642" data-name="Ellipse 642" cx="4" cy="4" r="4" transform="translate(1096 623.5)" fill="#ff9696"/>
+    <circle id="Ellipse_643" data-name="Ellipse 643" cx="4" cy="4" r="4" transform="translate(1096 657.5)" fill="#7865cb"/>
+    <circle id="Ellipse_644" data-name="Ellipse 644" cx="4" cy="4" r="4" transform="translate(1096 691.5)" fill="#ff6974"/>
+    <path id="Polygon_19" data-name="Polygon 19" d="M4,0,8,5H0Z" transform="translate(1306 443.928) rotate(180)"/>
+    <g id="Mask_Group_16" data-name="Mask Group 16" transform="translate(796 449.025)" clip-path="url(#clip-path)">
+      <ellipse id="Ellipse_168" data-name="Ellipse 168" cx="101" cy="102" rx="101" ry="102" transform="translate(22 20)" fill="url(#linear-gradient-3)"/>
+    </g>
+    <g id="Mask_Group_17" data-name="Mask Group 17" transform="translate(793.014 541.465)" clip-path="url(#clip-path-2)">
+      <ellipse id="Ellipse_170" data-name="Ellipse 170" cx="101.5" cy="103" rx="101.5" ry="103" transform="translate(23.986 -72.441)" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="Mask_Group_18" data-name="Mask Group 18" transform="translate(916.869 455.672)" clip-path="url(#clip-path-3)">
+      <circle id="Ellipse_193" data-name="Ellipse 193" cx="103" cy="103" r="103" transform="translate(-102.87 13.354)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <g id="Mask_Group_15" data-name="Mask Group 15" transform="translate(920.5 443.025)" opacity="0.17" clip-path="url(#clip-path-4)">
+      <ellipse id="Ellipse_167" data-name="Ellipse 167" cx="113.143" cy="113.288" rx="113.143" ry="113.288" transform="translate(-113.143 14.177)" fill="#e18d85"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 778.5, 412.93)" filter="url(#Ellipse_171)">
+      <ellipse id="Ellipse_171-2" data-name="Ellipse 171" cx="64" cy="64.376" rx="64" ry="64.376" transform="translate(78.5 95.22)" fill="#fff"/>
+    </g>
+    <text id="Ownership" transform="translate(887 576.025)" font-size="14" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">Ownership</tspan></text>
+    <path id="Path_617" data-name="Path 617" d="M-6112,5690.5" transform="translate(6952 -5119.975)" fill="none" stroke="#707070" stroke-width="1"/>
+    <line id="Line_372" data-name="Line 372" y2="5" transform="translate(807.5 721.428)" fill="none" stroke="#f7f7f7" stroke-width="1"/>
+    <text id="_5_" data-name="5%" transform="translate(850.25 475.928)" font-size="10" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">5%</tspan></text>
+    <text id="_44_" data-name="44%" transform="translate(820 655.5)" font-size="10" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">44%</tspan></text>
+    <text id="National_Coaching_Camps_" data-name="National Coaching Camps  " transform="translate(1113 496)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0" xml:space="preserve">National Coaching Camps  </tspan></text>
+    <text id="Foreign_Exposure" data-name="Foreign Exposure" transform="translate(1113 530)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">Foreign Exposure</tspan></text>
+    <text id="Equipment" transform="translate(1113 564)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">Equipment</tspan></text>
+    <text id="National_Championship" data-name="National Championship" transform="translate(1113 598)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">National Championship</tspan></text>
+    <text id="International_Championship_in_India" data-name="International Championship in India" transform="translate(1113 631)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">International Championship in India</tspan></text>
+    <text id="Championship_1" data-name="Championship 1" transform="translate(1113 665)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">Championship 1</tspan></text>
+    <text id="Championship_2" data-name="Championship 2" transform="translate(1113 699)" font-size="12" font-family="Lato-Regular, Lato"><tspan x="0" y="0">Championship 2</tspan></text>
+    <text id="_2019" data-name="2019" transform="translate(818.303 714.523)" fill="#404040" font-size="8" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">2019</tspan></text>
+    <text id="_2021" data-name="2021" transform="translate(943.438 714.914)" fill="#404040" font-size="8" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">2021</tspan></text>
+    <text id="_2022" data-name="2022" transform="translate(1002.539 714.523)" fill="#404040" font-size="8" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">2022</tspan></text>
+    <rect id="Rectangle_15023" data-name="Rectangle 15023" width="43.129" height="20" rx="2" transform="translate(869.402 702.025)" fill="#f48071"/>
+    <g id="Rectangle_15022" data-name="Rectangle 15022" transform="translate(806.582 702.025)" fill="none" stroke="#dcdcdc" stroke-width="0.5">
+      <rect width="43.129" height="20" rx="2" stroke="none"/>
+      <rect x="0.25" y="0.25" width="42.629" height="19.5" rx="1.75" fill="none"/>
+    </g>
+    <g id="Rectangle_15024" data-name="Rectangle 15024" transform="translate(931.283 702.025)" fill="none" stroke="#dcdcdc" stroke-width="0.5">
+      <rect width="44.067" height="20" rx="2" stroke="none"/>
+      <rect x="0.25" y="0.25" width="43.567" height="19.5" rx="1.75" fill="none"/>
+    </g>
+    <g id="Rectangle_15025" data-name="Rectangle 15025" transform="translate(990.35 702.025)" fill="none" stroke="#dcdcdc" stroke-width="0.5">
+      <rect width="44.067" height="20" rx="2" stroke="none"/>
+      <rect x="0.25" y="0.25" width="43.567" height="19.5" rx="1.75" fill="none"/>
+    </g>
+    <text id="_2020" data-name="2020" transform="translate(881.121 714.918)" fill="#fff" font-size="8" font-family="Lato-Semibold, Lato" font-weight="600"><tspan x="0" y="0">2020</tspan></text>
+    <line id="Line_3520" data-name="Line 3520" y2="338" transform="translate(779 417.5)" fill="none" stroke="#e2e2e2" stroke-width="1"/>
+    <line id="Line_3522" data-name="Line 3522" x1="544" transform="translate(779.5 413.5)" fill="none" stroke="#e2e2e2" stroke-width="1"/>
+    <line id="Line_3523" data-name="Line 3523" x1="544" transform="translate(779.5 760.928)" fill="none" stroke="#e2e2e2" stroke-width="1"/>
+    <line id="Line_3521" data-name="Line 3521" y2="338" transform="translate(1323 417.5)" fill="none" stroke="#e2e2e2" stroke-width="1"/>
+  </g>
+</svg>

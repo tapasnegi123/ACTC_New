@@ -1,0 +1,313 @@
+.dashboard-content{
+    .vl{
+        height: 15px;
+        width: 1px;
+        background-color: #707070;
+        opacity: 25%;
+    }
+
+    th{
+        font-size: 1.9rem;
+        letter-spacing: 0.72px;
+    color: #000000;
+    text-transform: capitalize;
+    font-weight: 700;
+    // column-span: 1;
+    }
+    td{
+        font-size: 2.1rem;
+        letter-spacing: 0.72px;
+    color: #000000;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #C9C9C9;
+    // column-span: 2;
+    }
+
+    .section{
+        .btn{
+                    background-color: #FCB316;
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    color: white;
+                    letter-spacing: 0.9px;
+        }
+    }
+
+    .section-1{
+        th{
+            font-size: 1.4rem;
+            color: #000000;
+            text-align: center;
+            background-color: #F2F2F2;
+        }
+        td{
+            font-size: 1.4rem;
+            color: #000000;
+            font-weight: 700;
+            text-align: center;
+        }
+        input{
+            border:1px solid #707070 !important;
+            border-color:#707070 ;
+        }
+
+    }
+    .active-td{
+        color: #0A3D81;
+        text-decoration: underline;
+    }
+    h2{
+        color: #060606;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    letter-spacing: 0.57px;
+    }
+    color: #060606;
+
+
+    #forms{
+        background-color: #F2F2F2;
+        border: 1px solid #D5D5D5;
+        position: relative;
+    }
+
+    #form-parts{
+        position: absolute;
+        top: -10rem;
+        left: 0;
+    }
+
+    .form-parts{
+
+        p{
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .img{
+            background-color: #FFFFFF;
+            border: 1px solid #DEDEDE;
+            border-radius: 0.5rem;
+        }
+        img{
+            height: 80px;
+            width: 90px;
+            border-radius: 0.5rem;
+            filter:brightness(0.5);
+        }
+
+        @media screen and (max-width:576px) {
+            img{
+                width: 65px;
+                height: 55px;
+            }
+        }
+        @media screen and (max-width:350px) {
+            img{
+                width: 50px;
+                height: 40px;
+            }
+        }
+
+        .active-form-part{
+                img{
+                    filter: brightness(1) !important;
+                }
+            
+              .img{
+                background-color: #FCB316 !important;
+               
+              }
+            
+        }
+    }
+
+
+    .form-section{
+        .home{
+            
+                border: 0 !important;
+          
+        }
+       .nav-link{
+        font-size: 1.1rem;
+        color: #D1D1D1 !important;
+        line-height: 2.5;
+        letter-spacing: 0.47px;
+        margin-right: 1.5rem;
+        border: 0.4000000059604645px solid #C8C8C8 !important; 
+
+        img{
+            filter: brightness(1) !important;
+        }
+       }
+
+       
+        .form-tabs{
+            padding-left: 1.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: #0F4275;
+            font-weight: 900;
+           
+        
+            
+        }
+        .active{
+            background-color: white !important;
+            color: black !important;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 0.47px;
+            line-height: 2.5;
+            margin-right: 1.5rem;
+
+            img{
+                filter: brightness(0) !important;
+            }
+        }
+
+        .tab-pane{
+            width: 100% !important;
+            margin: 0 !important;
+        }
+    }
+
+    .section{
+        h2{
+            // font-size: 1.4rem;
+        }
+    }
+
+    
+}
+
+
+.form-section{
+
+    th{
+        font-size: 1.9rem;
+        letter-spacing: 0.72px;
+    color: #000000;
+    text-transform: capitalize;
+    font-weight: 700;
+    // column-span: 1;
+    }
+    td{
+        font-size: 2.1rem;
+        letter-spacing: 0.72px;
+    color: #000000;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #C9C9C9;
+    // column-span: 2;
+    }
+
+    .section{
+        .btn{
+                    background-color: #FCB316;
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    color: white;
+                    letter-spacing: 0.9px;
+        }
+
+        .previous-btn{
+            background-color: #E6E6E6 !important;
+        }
+        .next-btn{
+            background-color: #000000 !important;
+        }
+    }
+
+    .section-1{
+
+       
+
+        th{
+            font-size: 1.4rem;
+            color: #000000b0;
+            text-align: center;
+            background-color: #F2F2F2;
+        }
+        td{
+            font-size: 1.4rem;
+            color: #000000b0;
+            font-weight: 700;
+            text-align: center;
+        }
+        input{
+            border:1px solid #707070 !important;
+            border-color:#707070 ;
+        }
+    }
+    .active-td{
+        color: #0A3D81;
+        text-decoration: underline;
+    }
+
+    .home{
+        
+            border: 0 !important;
+      
+    }
+   .nav-link{
+    font-size: 1.1rem;
+    color: #D1D1D1 !important;
+    line-height: 2.5;
+    letter-spacing: 0.47px;
+    margin-right: 1.5rem;
+    border: 0.4000000059604645px solid #C8C8C8 !important; 
+
+    img{
+        filter: brightness(1) !important;
+    }
+   }
+
+   
+    .form-tabs{
+        padding-left: 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: #0F4275;
+        font-weight: 900;
+       
+    
+        
+    }
+    .active{
+        background-color: white !important;
+        color: black !important;
+        font-weight: 900;
+        font-size: 1.1rem;
+        letter-spacing: 0.47px;
+        line-height: 2.5;
+        margin-right: 1.5rem;
+
+        img{
+            filter: brightness(0) !important;
+        }
+    }
+
+    .tab-pane{
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    select{
+        font-size: 1.4rem;
+    }
+
+
+}
+
+
+
+#competition{
+    border: none !important;
+}
+
+
+

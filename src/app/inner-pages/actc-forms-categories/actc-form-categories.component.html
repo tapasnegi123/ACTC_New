@@ -1,0 +1,51 @@
+<div class="dashboard-content padding-box ">
+  <!-- Dashboard Heading and Horizontal line -->
+  <div class="container ">
+    <div class="dashboard-heading text-center">
+      <h2>ANNUAL CALENDAR FOR TRAINING AND COMPETITIONS FOR {{GetDateRange}} </h2>
+    </div>
+    <div class="hl d-block mx-auto mt-4" style="margin-bottom: 12rem;"></div>
+  </div>
+
+  <!-- Dashboard Form part Section -->
+  <div class="container margin-box-form px-5" id="forms">
+
+    <!-- Form part -->
+    <div class="container padding-box " >
+      <div class="container px-lg-5 px-md-0 px-0 mt-5" id="form-parts">
+        <div class="form-parts d-flex align-items-center text-center justify-content-around ">
+          <ng-container *ngFor="let btns of formCategories">
+            <div class="part-b d-flex flex-column "  (click)="ToggleTemplate(btns)">
+              <div><p>{{btns.category_Name}}</p></div>
+              <div class="img" [ngClass]="btns.is_Eanble?'green-cls-categories':''"><img [src]="btns.imgSrc" class=" p-4  " alt=""></div>
+             </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <ng-template [ngIf]="section == 1">
+      <app-actc-forms-part-A  (dataFromPartA)="DataFromChildComponent($event)" [year]="year" [userData]="userData"></app-actc-forms-part-A>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 2" >
+      <app-actc-forms-part-B [year]="year" (dataFromPartB)="DataFromChildComponent($event)" ></app-actc-forms-part-B>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 3" >
+      <app-part-c [year]="year" [userData]="userData"></app-part-c>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 4">
+      <app-part-d [userData]="userData" (dataFromPartD)="DataFromChildComponent($event)" [year]="year"></app-part-d>
+    </ng-template>
+
+    <ng-template [ngIf]="section == 5">
+      <app-part-e  [year]="year" (dataFromPartE)="DataFromChildComponent($event)"></app-part-e>
+    </ng-template>
+
+
+  </div>
+</div>
+
+

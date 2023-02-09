@@ -1,0 +1,838 @@
+<ng-container *ngIf="(completeData$ | async) as sectionBData;else loader ">
+  <form [formGroup]="SectionFourForm">
+    <div class="section section-1 form-padding-box">
+      <h2 class="text-center">ACTC(JUNIORS)</h2>
+      <!-- <div class="hl d-block mx-auto"></div> -->
+
+      <!--Selection & Preparation Camp-->
+      <div class="table-1 padding-box">
+
+        <h4 class="text-start">4.1 Selection & Preparation Camp</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">PURPOSE OF THE COACHING CAMP</th>
+                <th scope="col" rowspan="2">COMPETITION</th>
+                <th scope="col" rowspan="2">TEAM COMPOSITION</th>
+                <th scope="col" rowspan="2">AGE CATEGORY</th>
+                <th scope="col" rowspan="2">NO. OF PLAYERS</th>
+                <th scope="col" rowspan="2">COMPOSITION OF CAMPERS (NUMBER OF COACHES)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF CAMPERS (NUMBER OF SUPPORT STAFF)</th>
+                <th scope="col" colspan="3">VENUE DETAILS</th>
+                <th scope="col" colspan="2">DATE OF COMPETITION</th>
+                <th scope="col" rowspan="2">TOTAL DAYS</th>
+                <th scope="col" rowspan="2">TOTAL NO. OF PARTICIPANTS</th>
+                <th scope="col" rowspan="2">ESTIMATED EXPENDITURE</th>
+                <th scope="col" rowspan="2">ACTION</th>
+              </tr>
+              <tr>
+                <th>CENTER NAME</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>FROM</th>
+                <TH>TO</TH>
+              </tr>
+            </thead>
+            <tbody formArrayName="SectionOne">
+              <tr *ngFor="let first of FormArrayOne.controls ; let i = index" [formGroupName]="i">
+                <!-- PURPOSE OF THE COACHING CAMP -->
+                <td>
+                  <select formControlName="PurposeOfCoachingCamp" class="form-select"
+                    aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <option value="Pre Competition">Pre Competition</option>
+                    <option value="Training">Training</option>
+                  </select>
+                  <div *ngIf="FormArrayOne.controls[i].get('PurposeOfCoachingCamp')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('PurposeOfCoachingCamp')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!-- COMPETITION -->
+                <td>
+                  <select #Tournament_Id formControlName="Tournament_Id" class="form-select"
+                    aria-label="Default select example"
+                    (change)="setStateCityVal(i,Tournament_Id.value, FormArrayOne, 'State', 'City')">
+                    <option value="" disabled>Select</option>
+                    <ng-container *ngFor="let data of competitionDDArr">
+                      <option [value]="data.tournament_detail_id">{{data.tournament_name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayOne.controls[i].get('Tournament_Id')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('Tournament_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!--Team Composition-->
+                <td>
+                  <select formControlName="TeamComposition" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let composition of teamComposition">
+                      <option [value]="composition">{{composition}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayOne.controls[i].get('TeamComposition')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('TeamComposition')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!--AgeCategory-->
+                <td>
+                  <!-- <input type="text" formControlName="AgeCategory"> -->
+                  <select formControlName="AgeCategory" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of ageCatGroupDDArray">
+                      <option [ngValue]="category.id">{{category.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayOne.controls[i].get('AgeCategory')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('AgeCategory')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfPlayer-->
+                <td>
+                  <input type="text" formControlName="NoOfPlayer">
+                  <div *ngIf="FormArrayOne.controls[i].get('NoOfPlayer')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfPlayer')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfPlayer')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfCoaches-->
+                <td>
+                  <input type="text" formControlName="NoOfCoaches">
+                  <div *ngIf="FormArrayOne.controls[i].get('NoOfCoaches')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfCoaches')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfCoaches')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfSupportStaff-->
+                <td>
+                  <input type="text" formControlName="NoOfSupportStaff">
+                  <div *ngIf="FormArrayOne.controls[i].get('NoOfSupportStaff')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfSupportStaff')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('NoOfSupportStaff')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!-- <td><input type="text" ></td> -->
+                <td>{{FormArrayOne.controls[i].get("NameOfCenter")?.value}}</td>
+                <!--State-->
+                <td>{{FormArrayOne.controls[i].get("State")?.value}}</td>
+                <!--City-->
+                <td>{{FormArrayOne.controls[i].get("City")?.value}}</td>
+                <!--From-->
+                <td>{{ FormArrayOne.controls[i].get("Dates_From")?.value | date:"dd-MM-yyyy" }}</td>
+                <!--to-->
+                <td>{{ FormArrayOne.controls[i].get("Dates_To")?.value | date:"dd-MM-yyyy" }}</td>
+
+                <td> {{ FormArrayOne.controls[i].get("Dates_From")?.value |
+                  dateDifference:FormArrayOne.controls[i].get("Dates_To")?.value }}</td>
+                <td>
+                  {{+FormArrayOne.controls[i].get('NoOfPlayer')?.value +
+                  +FormArrayOne.controls[i].get('NoOfCoaches')?.value +
+                  +FormArrayOne.controls[i].get('NoOfSupportStaff')?.value}}
+                </td>
+                <td>
+                  <input type="text" formControlName="EstimatedExpenditure">
+                  <div *ngIf="FormArrayOne.controls[i].get('EstimatedExpenditure')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('EstimatedExpenditure')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayOne.controls[i].get('EstimatedExpenditure')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 8 digit only
+                    </div>
+                  </div>
+                </td>
+                <!-- <td><input type="text" formControlName="Remarks"></td> -->
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" (click)="RemoveField(i,'firstDelete')">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(FormArrayOne) || isDisabled" type="button" class="btn add_btn mt-3"
+            (click)="AddNewField('firstStep')">+ ADD</button>
+        </div>
+      </div>
+
+      <!--International Exposure-->
+      <div class="table-2 padding-box">
+        <h4 class="text-start">4.2 International Exposure</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">CATEGORY</th>
+                <th scope="col" rowspan="2">TEAM COMPOSITION</th>
+                <th scope="col" rowspan="2">AGE CATEGORY</th>
+                <th scope="col" rowspan="2">NAME OF COMPETITION</th>
+                <th scope="col" rowspan="2">LEVEL OF THE COMPETITION (NUMBER OF COUNTRIES EXPECTED TO PARTICIPATE)</th>
+                <th scope="col" rowspan="2">LEVEL OF THE COMPETITION (NUMBER OF TOP-RANKED COUNTRIES EXPECTED TO PARTICIPATE)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF PLAYERS)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF COACHES)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF SUPPORT STAFF)</th>
+                <th scope="col" colspan="3">VENUE DETAILS</th>
+                <th scope="col" colspan="2">DATE OF COMPETITION</th>
+                <th scope="col" rowspan="2">TOTAL DAYS</th>
+                <th scope="col" rowspan="2">TOTAL NO. OF PARTICIPANTS</th>
+                <th scope="col" rowspan="2">ESTIMATED EXPENDITURE</th>
+                <th scope="col" rowspan="2">REMARK</th>
+                <th scope="col" rowspan="2">ACTION</th>
+              </tr>
+              <tr>
+                <th>CENTER NAME</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>FROM</th>
+                <TH>TO</TH>
+              </tr>
+            </thead>
+            <tbody formArrayName="SectionTwo">
+              <tr *ngFor="let first of FormArrayTwo.controls; let i = index" [formGroupName]="i">
+                <!--Purpose-->
+                <td>
+                  <select formControlName="Purpose" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let purpose of purposeCategory">
+                      <option [value]="purpose">{{purpose}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayTwo.controls[i].get('Purpose')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('Purpose')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+                <!-- TeamComposition -->
+                <td>
+                  <select formControlName="TeamComposition" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of teamComposition">
+                      <option [value]="category">{{category}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayTwo.controls[i].get('TeamComposition')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('TeamComposition')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+                <!--AgeCategory-->
+                <td>
+                  <select formControlName="AgeCategory" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of ageCatGroupDDArray">
+                      <option [ngValue]="category.id">{{category.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayTwo.controls[i].get('AgeCategory')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('AgeCategory')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+                <!--COMPETITION-->
+                <td>
+                  <select #Tournament_Id formControlName="Tournament_Id" class="form-select"
+                    aria-label="Default select example"
+                    (change)="setStateCityVal(i,Tournament_Id.value, FormArrayTwo, 'Country', 'City')">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of internationalExposureCompDD">
+                      <option [value]="category.tournament_detail_id">{{category.tournament_name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayTwo.controls[i].get('Tournament_Id')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('Tournament_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfCountries-->
+                <td>
+                  <input type="text" formControlName="NoOfCountries">
+                  <div *ngIf="FormArrayTwo.controls[i].get('NoOfCountries')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfCountries')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfCountries')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 4 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NameOfTopRankedCountries-->
+                <td>
+                  <input type="text" formControlName="NameOfTopRankedCountries">
+                  <div *ngIf="FormArrayTwo.controls[i].get('NameOfTopRankedCountries')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NameOfTopRankedCountries')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                    *ngIf="FormArrayTwo.controls[i].get('NameOfTopRankedCountries')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                  </div>
+                  </div>
+                </td>
+                <!--NoOfPlayers-->
+                <td>
+                  <input type="text" formControlName="NoOfPlayers">
+                  <div *ngIf="FormArrayTwo.controls[i].get('NoOfPlayers')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfPlayers')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfPlayers')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfCoaches-->
+                <td>
+                  <input type="text" formControlName="NoOfCoaches">
+                  <div *ngIf="FormArrayTwo.controls[i].get('NoOfCoaches')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfCoaches')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfCoaches')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfSupportStaff-->
+                <td>
+                  <input type="text" formControlName="NoOfSupportStaff">
+                  <div *ngIf="FormArrayTwo.controls[i].get('NoOfSupportStaff')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfSupportStaff')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('NoOfSupportStaff')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NameOfCenter-->
+                <td>{{FormArrayTwo.controls[i].get("NameOfCenter")?.value }}</td>
+
+                <!--Country-->
+                <td>{{FormArrayTwo.controls[i].get("Country")?.value}}</td>
+
+                <!--City-->
+                <td>{{FormArrayTwo.controls[i].get("City")?.value}}</td>
+
+                <!--Dates_From-->
+                <td>{{ FormArrayTwo.controls[i].get("Dates_From")?.value | date:'dd-MM-yyyy' }}</td>
+
+                <!--Dates_To-->
+                <td>{{ FormArrayTwo.controls[i].get("Dates_To")?.value | date:'dd-MM-yyyy' }}</td>
+                <!--Total Days-->
+                <td>{{ FormArrayTwo.controls[i].get("Dates_From")?.value |
+                  dateDifference:FormArrayTwo.controls[i].get("Dates_To")?.value }}</td>
+                <!--TotalParticipants-->
+                <td>
+                  <!-- <input type="text" formControlName="TotalParticipants"> -->
+                  {{+FormArrayTwo.controls[i].get('NoOfPlayers')?.value +
+                  +FormArrayTwo.controls[i].get('NoOfCoaches')?.value +
+                  +FormArrayTwo.controls[i].get('NoOfSupportStaff')?.value}}
+                </td>
+                <!--EstimatedExpenditure-->
+                <td>
+                  <input type="text" formControlName="EstimatedExpenditure">
+                  <div *ngIf="FormArrayTwo.controls[i].get('EstimatedExpenditure')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('EstimatedExpenditure')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayTwo.controls[i].get('EstimatedExpenditure')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 8 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--Remarks-->
+                <td>
+                  <input type="text" formControlName="Remarks">
+                  <div *ngIf="FormArrayTwo.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger" *ngIf="FormArrayTwo.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 words only
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false|| isDisabled" class="border-0">
+                  <div style="cursor: pointer;" (click)="RemoveField(i,'secondDelete')">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(FormArrayTwo) || isDisabled" type="button" class="btn add_btn mt-3"
+            (click)="AddNewField('secondStep')">+ ADD</button>
+        </div>
+      </div>
+
+      <!--International Competitions in India-->
+      <div class="table-3 padding-box">
+
+        <h4 class="text-start">4.3 International Competitions in India</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">NAME OF COMPETITION</th>
+                <th scope="col" rowspan="2">AGE CATEGORY</th>
+                <th scope="col" rowspan="2">LEVEL OF THE COMPETITION (NUMBER OF COUNTRIES EXPECTED TO PARTICIPATE)</th>
+                <th scope="col" rowspan="2">LEVEL OF THE COMPETITION (NUMBER OF ATHLETES EXPECTED TO PARTICIPATE)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF PLAYERS)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF COACHES)</th>
+                <th scope="col" rowspan="2">COMPOSITION OF THE PARTICIPANTS (NUMBER OF SUPPORT STAFF)</th>
+                <th scope="col" colspan="3">VENUE DETAILS</th>
+                <th scope="col" colspan="2">DATE OF COMPETITION</th>
+                <th scope="col" rowspan="2">TOTAL DAYS</th>
+                <th scope="col" rowspan="2">TOTAL PARTICIPANTS</th>
+                <th scope="col" rowspan="2">INDIAN TEAM TOTAL</th>
+                <th scope="col" rowspan="2">ESTIMATED EXPENDITURE</th>
+                <th scope="col" rowspan="2">REMARK</th>
+                <th scope="col" rowspan="2">ACTION</th>
+              </tr>
+              <tr>
+                <th>CENTER NAME</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>FROM</th>
+                <TH>TO</TH>
+              </tr>
+            </thead>
+            <tbody formArrayName="SectionThree">
+              <tr *ngFor="let third of FormArrayThree.controls ; let i = index " [formGroupName]="i">
+                <!--Tournament_Id-->
+                <td>
+                  <select #Tournament_Id formControlName="Tournament_Id" class="form-select"
+                    aria-label="Default select example"
+                    (change)="setStateCityVal(i,Tournament_Id.value,FormArrayThree,'State','City')">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of internationalExposureCompDD">
+                      <option [value]="category.tournament_detail_id">{{category.tournament_name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayThree.controls[i].get('Tournament_Id')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('Tournament_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+                <!--AgeCategory-->
+                <td>
+                  <select formControlName="AgeCategory" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of ageCatGroupDDArray">
+                      <option [ngValue]="category.id">{{category.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayThree.controls[i].get('AgeCategory')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('AgeCategory')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i> This field is Required
+                    </div>
+                  </div>
+                </td>
+
+                <!--NoOfCountries-->
+                <td>
+                  <input type="text" formControlName="NoOfCountries">
+                  <div *ngIf="FormArrayThree.controls[i].get('NoOfCountries')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfCountries')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfCountries')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 4 digit only
+                    </div>
+                  </div>
+                </td>
+                <!-- NUMBER OF ATHLETES EXPECTED TO PARTICIPATE -->
+                <td>
+                  <input type="text" formControlName="NoOfAthletes">
+                  <div *ngIf="FormArrayThree.controls[i].get('NoOfAthletes')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfAthletes')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfAthletes')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfPlayers-->
+                <td>
+                  <input type="text" formControlName="NoOfPlayers">
+                  <div *ngIf="FormArrayThree.controls[i].get('NoOfPlayers')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfPlayers')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfPlayers')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 3 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfCoaches-->
+                <td>
+                  <input type="text" formControlName="NoOfCoaches">
+                  <div *ngIf="FormArrayThree.controls[i].get('NoOfCoaches')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfCoaches')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfCoaches')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NoOfSupportStaff-->
+                <td>
+                  <input type="text" formControlName="NoOfSupportStaff">
+                  <div *ngIf="FormArrayThree.controls[i].get('NoOfSupportStaff')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfSupportStaff')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('NoOfSupportStaff')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 2 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NameOfCenter-->
+                <td>
+                  <!-- <input type="text" formControlName="NameOfCenter"> -->
+                  {{FormArrayThree.controls[i].get("NameOfCenter")?.value}}
+                </td>
+                <!--State-->
+                <td>
+                  <!-- <input type="text" formControlName="State"> -->
+                  {{FormArrayThree.controls[i].get("State")?.value}}
+                </td>
+                <!--City-->
+                <td>
+                  <!-- <input type="text" formControlName="City"> -->
+                  {{FormArrayThree.controls[i].get("City")?.value}}
+                </td>
+                <!--Dates_From-->
+                <td>
+                  {{FormArrayThree.controls[i].get("Dates_From")?.value | date: 'dd-MM-yyyy'}}
+                </td>
+                <!--Dates_To-->
+                <td>
+                  {{FormArrayThree.controls[i].get("Dates_To")?.value | date: 'dd-MM-yyyy'}}
+                </td>
+                <!--TotalDays-->
+                <td>
+                  {{ FormArrayThree.controls[i].get("Dates_From")?.value |
+                  dateDifference:FormArrayThree.controls[i].get("Dates_To")?.value }}
+                </td>
+
+                <!-- TOTAL PARTICIPANTS -->
+                <td>
+                  {{+FormArrayThree.controls[i].get('NoOfPlayers')?.value +
+                  +FormArrayThree.controls[i].get('NoOfCoaches')?.value +
+                  +FormArrayThree.controls[i].get('NoOfSupportStaff')?.value}}
+                </td>
+                <!-- IndianTeamTotal -->
+                <td>
+                  <input type="text" formControlName="IndianTeamTotal">
+                  <div *ngIf="FormArrayThree.controls[i].get('IndianTeamTotal')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('IndianTeamTotal')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('IndianTeamTotal')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 4 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--EstimatedExpenditure-->
+                <td>
+                  <input type="text" formControlName="EstimatedExpenditure">
+                  <div *ngIf="FormArrayThree.controls[i].get('EstimatedExpenditure')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('EstimatedExpenditure')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayThree.controls[i].get('EstimatedExpenditure')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 8 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--Remarks-->
+                <td>
+                  <input type="text" formControlName="Remarks">
+                  <div *ngIf="FormArrayThree.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger" *ngIf="FormArrayThree.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 words only
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" (click)="RemoveField(i,'thirdDelete')">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto">
+                    DELETE
+                  </div>
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(FormArrayThree)|| isDisabled" type="button" class="btn add_btn mt-3"
+            (click)="AddNewField('thirdStep')">+ ADD</button>
+        </div>
+      </div>
+
+      <!--National Championship-->
+      <div class="table-4  padding-box">
+
+        <h4 class="text-start">4.4 National Championship</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col" rowspan="2">AGE CATEGORY</th>
+                <th scope="col" rowspan="2">EXPECTED NUMBER OF STATES AND UTS WHO WILL BE PARTICIPATING</th>
+                <th scope="col" colspan="3">VENUE DETAILS</th>
+                <th scope="col" colspan="2">DATE OF COMPETITION</th>
+                <th scope="col" rowspan="2">TOTAL DAYS</th>
+                <th scope="col" rowspan="2">ESTIMATED EXPENDITURE</th>
+                <th scope="col" rowspan="2">REMARK</th>
+                <th scope="col" rowspan="2">ACTION</th>
+              </tr>
+              <tr>
+                <th>CENTER NAME</th>
+                <th>STATE</th>
+                <th>CITY</th>
+                <th>FROM</th>
+                <TH>TO</TH>
+              </tr>
+            </thead>
+            <tbody formArrayName="SectionFour">
+              <tr *ngFor="let fourth of FormArrayFour.controls ; let i = index" [formGroupName]="i">
+                <!--AgeCategory-->
+                <td>
+                  <select formControlName="AgeCategory" class="form-select" aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let category of ageCatGroupDDArray">
+                      <option [value]="category.id">{{category.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayFour.controls[i].get('AgeCategory')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('AgeCategory')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!--NameOfStatesAndUTs-->
+                <td>
+                  <input type="text" formControlName="NameOfStatesAndUTs">
+                  <div *ngIf="FormArrayFour.controls[i].get('NameOfStatesAndUTs')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('NameOfStatesAndUTs')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('NameOfStatesAndUTs')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 4 digit only
+                    </div>
+                  </div>
+                </td>
+                <!--NameOfCenter-->
+                <td>
+                  <input type="text" formControlName="NameOfCenter">
+                  <div *ngIf="FormArrayFour.controls[i].get('NameOfCenter')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('NameOfCenter')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('NameOfCenter')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumeric upto 100 characters
+                    </div>
+                  </div>
+                </td>
+                <!--State_Id-->
+                <td>
+                  <!-- <input type="text" formControlName="State"> -->
+                  <select class="form-select" aria-label="Default select example" formControlName="State_Id">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let state of stateDDArray">
+                      <option [value]="state.id">{{state.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="FormArrayFour.controls[i].get('State_Id')?.touched">
+                    <div class="text-danger" *ngIf="FormArrayFour.controls[i].get('State_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!--City-->
+                <td>
+                  <input type="text" formControlName="City">
+                  <div *ngIf="FormArrayFour.controls[i].get('City')?.touched">
+                    <div class="text-danger" *ngIf="FormArrayFour.controls[i].get('City')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="FormArrayFour.controls[i].get('City')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Text Upto 100 Characters
+                    </div>
+                  </div>
+                </td>
+                <!-- Dates_From -->
+                <td>
+                  <!-- {{FormArrayFour.controls[i].get('Dates_From')?.value}} -->
+                  <input type="date" formControlName="Dates_From" (change)="SelectedDate(FormArrayFour,i,'Dates_From','Dates_To')" (keypress)="false" [min]="DatesOfCompetetionDFMin" [max]="DatesOfCompetetionDFMax">
+                  <div *ngIf="FormArrayFour.controls[i].get('Dates_From')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('Dates_From')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!-- Dates_To -->
+                <td>
+                  <!-- {{FormArrayFour.controls[i].get('Dates_To')?.value}} -->
+                  <input type="date" formControlName="Dates_To" (change)="SelectedDate(FormArrayFour,i,'Dates_From','Dates_To')" (keypress)="false" [min]="DatesOfCompetetionDTMin" [max]="DatesOfCompetetionDTMax">
+                  <div *ngIf="FormArrayFour.controls[i].get('Dates_To')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('Dates_To')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <!-- total days -->
+                <td>
+                  {{FormArrayFour.controls[i].get("Dates_From")?.value |
+                  dateDifference:FormArrayFour.controls[i].get("Dates_To")?.value}}
+                </td>
+                <!-- EsimatedExpenditure -->
+                <td>
+                  <input type="text" formControlName="EsimatedExpenditure">
+                  <div *ngIf="FormArrayFour.controls[i].get('EsimatedExpenditure')?.touched">
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('EsimatedExpenditure')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="FormArrayFour.controls[i].get('EsimatedExpenditure')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 8 digit only
+                    </div>
+                  </div>
+                </td>
+                <!-- Remarks -->
+                <td>
+                  <input type="text" formControlName="Remarks">
+                  <div *ngIf="FormArrayFour.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger" *ngIf="FormArrayFour.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Alphanumerical upto 100 words only
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;" (click)="RemoveField(i,'fourthDelete')">
+                    <img src="/assets/images/delete-table.svg" class="d-block mx-auto">
+                    DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisableAddButton(FormArrayFour) || isDisabled" type="button" class="btn add_btn mt-3"
+            (click)="AddNewField('fourthStep')">+ ADD</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div class="button-left">
+              <button type="button" class="btn me-2  previous-btn" (click)="GoToPreviousPage()">
+                PREVIOUS
+              </button>
+              <button
+                [disabled]="DisableAddButton(FormArrayOne) || DisableAddButton(FormArrayTwo) || DisableAddButton(FormArrayThree) || DisableAddButton(FormArrayFour) || !formListData.isfilledby_nsf"
+                type="button" class="btn ms-2  next-btn" (click)="NextButton(isDisabled,SectionFourForm.value)" >
+                NEXT
+              </button>
+            </div>
+            <div class="button-right">
+              <button [hidden]="isDisabled" type="button" class="btn  save-btn"
+                (click)="SaveForm(SectionFourForm.value)">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

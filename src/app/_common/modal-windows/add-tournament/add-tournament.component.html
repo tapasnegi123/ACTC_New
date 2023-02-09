@@ -1,0 +1,201 @@
+<div class="modal-content tournamentModal">
+  <div class="modal-header">
+    <h2 class="modal-title text-center w-100" style="font-weight: bold;">TOURNAMENT DETAILS</h2>
+    <button type="button" class="btn-close ms-0" aria-label="Close"
+      (click)="activeModal.close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container" [formGroup]="tournamentForm">
+        <div class="row">
+          <!-- Tournament Category -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Tournament Category <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example"
+              placeholder="Tournament Category" formControlName="tournamentCategoryId">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let data of tournamentCategoryList" [value]="data.tournament_category_id">
+                {{data.tournament_calegory_name}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('tournamentCategoryId')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentCategoryId')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Tournament Name  -->
+          <div class="col-lg-3 col-md-6 col-12 my-4" aria-disabled="expression">
+            <h4>Tournament Name <i class="text-danger">*</i></h4>
+            <input type="text" class="form-control" placeholder="Enter Tournament" formControlName="tournamentName">
+            <ng-container *ngIf="tournamentForm.get('tournamentName')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentName')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentName')?.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i>alphabeticals only
+              </div>
+            </ng-container>
+          </div>
+          <!-- Tournament Edition -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Tournament Edition <i class="text-danger">*</i></h4>
+            <input maxlength="2" type="text" class="form-control" placeholder="Tournament Edition"
+              formControlName="tournamentEdition">
+            <ng-container *ngIf="tournamentForm.get('tournamentEdition')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentEdition')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentEdition')?.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i>Numerical Upto 2 Digits Only
+              </div>
+            </ng-container>
+          </div>
+          <!-- Tournament Year -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Tournament Year <i class="text-danger">*</i></h4>
+            <input maxlength="4" type="text" class="form-control" placeholder="Tournament Year"
+              formControlName="tournamentYear">
+            <ng-container *ngIf="tournamentForm.get('tournamentYear')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentYear')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentYear')?.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i>please enter valid year
+              </div>
+            </ng-container>
+          </div>
+          <!-- Level -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Level <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example"
+              formControlName="tournamentLevel" placeholder="Level">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let level of tournamentLevel" [value]="level">{{level}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('tournamentLevel')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('tournamentLevel')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Category -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Category <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" placeholder="category" aria-label="Default select example"
+              formControlName="category">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let cate of category" [value]="cate">{{cate}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('category')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('category')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- age_group -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Age Category <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example" formControlName="age_group">
+              <option disabled value="" selected>Select</option>
+              <ng-container>
+                <option *ngFor="let data of ageDataList" [value]="data.id" [ngValue]="data.id">
+                  {{data.name}}/{{data.ageGroup}}</option>
+              </ng-container>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('age_group')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('age_group')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Start Date -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Start Date <i class="text-danger">*</i></h4>
+            <input type="date" class="form-control" formControlName="startDate"
+              [max]="MinMaxDate(tournamentForm,'endDate')"
+              (keypress)="false">
+            <ng-container *ngIf="tournamentForm.get('startDate')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('startDate')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- End Date  -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>End Date <i class="text-danger">*</i></h4>
+            <input type="date" class="form-control" formControlName="endDate"
+              [min]="MinMaxDate(tournamentForm,'startDate')"
+              (keypress)="false">
+            <ng-container *ngIf="tournamentForm.get('endDate')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('endDate')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Place -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Place <i class="text-danger">*</i></h4>
+            <input placeholder="Enter place" type="text" class="form-control" formControlName="place">
+            <ng-container *ngIf="tournamentForm.get('place')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('place')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+              <div class="text-danger" *ngIf="tournamentForm.get('place')?.errors?.['pattern']">
+                <i class="bi bi-exclamation-circle"></i>alphanumericals only
+              </div>
+            </ng-container>
+          </div>
+          <!-- Country -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Country <i class="text-danger">*</i></h4>
+            <select #country class="form-select form-control" aria-label="Default select example"
+              formControlName="country" (change)="countrySelect(country.value)">
+              <option disabled selected value="">Select</option>
+              <option *ngFor="let country of countryList" [value]="country.id">{{country.country_name}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('country')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('country')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- State -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>State <i class="text-danger">*</i></h4>
+            <select #state class="form-select form-control" aria-label="Default select example" placeholder="State"
+              formControlName="state" (change)="stateSelect(state.value)">
+              <option value="" selected disabled>Select</option>
+              <option *ngFor="let data of stateList" [value]="data.id">{{data.state_name}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('state')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('state')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- City -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>City <i class="text-danger">*</i></h4>
+            <select class="form-select form-control" aria-label="Default select example" placeholder="city"
+              formControlName="city">
+              <option value="" selected disabled>Select</option>
+              <option [value]="data.id" *ngFor="let data of cityList">{{data.city_name}}</option>
+            </select>
+            <ng-container *ngIf="tournamentForm.get('city')?.touched">
+              <div class="text-danger" *ngIf="tournamentForm.get('city')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Save/ Cancel -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="saveTournament()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="Loader"></loader>

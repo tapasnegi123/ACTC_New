@@ -1,0 +1,80 @@
+<div class="masters_tournament manage-actc-list">
+  <div class="container">
+    <div class="row align-items-center justify-content-between my-4">
+      <div class="col-auto">
+        <div class="list_heading ">
+          ACTC - TOURNAMENT
+        </div>
+      </div>
+      <div class="col-auto">
+        <div class="d-flex">
+          <div class="buttons">
+            <div style="display: flex;">
+              <button type="btn" class="btn add-buttons" routerLink="eventmaster">EVENT</button>
+              <button type="btn" class="btn add-buttons" (click)="addTournament()">ADD +</button>
+            </div>
+          </div>
+          <!-- search input -->
+          <div class="list_search ms-3">
+            <img src="/assets/images/search.svg" class="img-fluid" alt="">
+            <input #searchInput type="text" (keyup)="filter(searchInput.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Main Table -->
+    <div class="actc_list_table">
+      <div class="container">
+        <div class="table-responsive" *ngIf="(tournamentList$ | async)">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">S.NO</th>
+                <th scope="col">TOURNAMENT NAME</th>
+                <th scope="col">TOURNAMENT CATEGORY</th>
+                <th scope="col">CATEGORY</th>
+                <th scope="col">LEVEL</th>
+                <th scope="col">DATE</th>
+                <!-- <th scope="col">ALLOCATED ACHIEVEMENTS</th> -->
+                <th scope="col">VENUE</th>
+                <!-- <th scope="col">EVENT MAP</th> -->
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of listTournament | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index">
+                <td>{{listTournament.indexOf(data)+1}}</td>
+                <td>{{data.tournament_Name}}</td>
+                <td>{{data.tournament_Category_Name}}</td>
+                <td>{{data.category}}</td>
+                <td>{{data.tournament_Level}}</td>
+                <td>{{data.from_Date | date:'MMM dd YYYY'}} - {{data.to_date | date:'MMM dd YYYY'}}</td>
+                <td>{{data.venue}}</td>
+                <td>
+                  <div class="d-flex justify-content-around align-items-center text-center custom-action">
+                    <a><img src="/assets/images/edit-list.svg" class="d-block mx-auto"
+                        (click)="editTournamnetData(data)"></a>
+                    <a><img src="/assets/images/delete_bin.svg" class="d-block mx-auto text-center"
+                        (click)="deleteRow(data)"></a>
+                    <a><img src="/assets/images/favicon.ico" class="d-block mx-auto text-center"
+                        (click)="mapEvent(data)"></a>
+                  </div>
+                </td>
+              </tr>
+              <tr  *ngIf="listTournament.length == 0">
+                <td colspan="8"  class="no_data">No Data Found !</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ngb-pagination *ngIf="listTournament.length > 0" [collectionSize]="listTournament.length" [(page)]="page"
+          [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+        </ngb-pagination>
+        <div class="total_result">TOTAL - {{listTournament.length}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<loader *ngIf="Loader"></loader>

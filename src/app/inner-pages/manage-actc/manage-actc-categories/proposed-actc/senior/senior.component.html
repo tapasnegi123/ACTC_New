@@ -1,0 +1,625 @@
+<div class="row">
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="main_1" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+      <div class=" w-100 ">
+        <div class="section_bar">
+          <ul class="nav nav-pills nav_bar_height" id="pills-tab" role="tablist">
+            <li class="nav-item mx-2" role="presentation" *ngFor="let btns of navLinkBtns; let i = index">
+              <button class="nav-link" [ngClass]="section == btns.id?'active':''" data-bs-toggle="pill"
+                (click)="ToggleTemplate(btns.id)" type="button" role="tab" aria-controls="pills-home"
+                aria-selected="true">
+                {{ btns.name }}
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Main 1 -->
+        <div class="row" [formGroup]="proposedActcForm" *ngIf="allDD$|async">
+          <div class="tab-content" id="pills-tabContent">
+            <button *ngIf="isEditable && ToggleEditMode" class="btn  my-2 d-block ms-auto edit_btn_cls fs-3" (click)="ToggleEditableNonEditableView()"><img src="assets/images/edit-list.svg" alt="">Edit</button>
+            <button *ngIf="isEditable && !ToggleEditMode" class="btn  my-2 d-block ms-auto edit_btn_cls fs-3" (click)="ToggleEditableNonEditableView()"><i class="bi bi-x"></i>Cancel</button>
+            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+
+              <ng-template [ngIf]="section == 1">
+                <div class="table-responsive" *ngIf="(nationalCoachingCamps$ | async); else dataNotSubmitted">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th rowspan="2">S.NO</th>
+                        <th rowspan="2">PURPOSE</th>
+                        <th colspan="3">COMPOSITION OF PARTICIPANTS</th>
+                        <th colspan="2" style="min-width: 200px !important;">PERIOD</th>
+                        <th rowspan="2">TOTAL DAYS</th>
+                        <th rowspan="2">VENUE</th>
+                        <th rowspan="2">ESTIMATED EXPENDITURE (IN INR)</th>
+                        <th rowspan="2">SAI COMMENTS</th>
+                        <th rowspan="2">FINAL DECISION</th>
+                        <th rowspan="2">ACTION</th>
+                      </tr>
+                      <tr>
+                        <th>PLAYERS</th>
+                        <th>COACHES</th>
+                        <th>SUPPORT STAFF</th>
+                        <th>FROM</th>
+                        <th>TO</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="nationalCoachingCampsSection">
+                      <tr *ngFor="let form of SelectionAndPreparationCampFormArray.controls;let i = index"
+                        [formGroupName]="i">
+                        <td>{{i + 1}}</td>
+                        <ng-template [ngIf]="!ToggleEditMode" [ngIfElse]="editMode">
+                          <td><select formControlName="PurposeOfCoachingCamp" class="form-select"
+                              aria-label="Default select example">
+                              <option value="" disabled>Select</option>
+                              <ng-container *ngFor="let purpose of purposeOfCoachingCamp">
+                                <option [value]="purpose">{{purpose}}</option>
+                              </ng-container>
+                            </select></td>
+                          <td><input type="text" formControlName="NoOfPlayer"></td>
+                          <td><input type="text" formControlName="NoOfCoaches"></td>
+                          <td><input type="text" formControlName="NoOfSupportStaff"></td>
+                          <td><input type="date" formControlName="Dates_From"></td>
+                          <td><input type="date" formControlName="Dates_To"></td>
+                          <td>{{ SelectionAndPreparationCampFormArray.controls[i].get('Dates_From')?.value
+                            | dateDifference : SelectionAndPreparationCampFormArray.controls[i].get('Dates_To')?.value}}
+                          </td>
+                          <td>{{ SelectionAndPreparationCampControls[i].get('State')?.value + ',' +
+                            SelectionAndPreparationCampControls[i].get('City')?.value }}</td>
+                          <td><input type="text" formControlName="EstimatedExpenditure"></td>
+                        </ng-template>
+
+                        <ng-template #editMode>
+                          <td> {{ SelectionAndPreparationCampFormArray.controls[i].get('PurposeOfCoachingCamp')?.value
+                            }} </td>
+                          <td> {{ SelectionAndPreparationCampControls[i].get('NoOfPlayer')?.value }} </td>
+                          <td> {{ SelectionAndPreparationCampControls[i].get('NoOfCoaches')?.value }} </td>
+                          <td> {{ SelectionAndPreparationCampControls[i].get('NoOfSupportStaff')?.value }} </td>
+                          <td> {{ SelectionAndPreparationCampControls[i].get('Dates_From')?.value | date:'dd-MM-yyyy'}}
+                          </td>
+                          <td> {{ SelectionAndPreparationCampControls[i].get('Dates_To')?.value | date:'dd-MM-yyyy'}}
+                          </td>
+                          <td>{{ SelectionAndPreparationCampFormArray.controls[i].get('Dates_From')?.value
+                            | dateDifference : SelectionAndPreparationCampFormArray.controls[i].get('Dates_To')?.value
+                            }}</td>
+                          <td>{{ SelectionAndPreparationCampControls[i].get('State')?.value + ',' +
+                            SelectionAndPreparationCampControls[i].get('City')?.value }}</td>
+                          <td>{{SelectionAndPreparationCampControls[i].get('EstimatedExpenditure')?.value}}</td>
+                        </ng-template>
+
+                        <td><input type="text" formControlName="Sai_Comments"></td>
+                        <td><input type="text" formControlName="Final_Decision"></td>
+                        <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto"
+                            (click)="RemoveField(i,SelectionAndPreparationCampFormArray)" alt=""></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="section == 2">
+                <div class="table-responsive" *ngIf="(internationalExposure$ | async) ; else dataNotSubmitted">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th rowspan="2">S.NO</th>
+                        <th rowspan="2">AGE CATEGORY</th>
+                        <th rowspan="2">NAME OF COMPETITION</th>
+                        <th colspan="2">LEVEL OF COMPETITION</th>
+                        <th colspan="3">INDIAN TEAM COMPOSITION</th>
+                        <th rowspan="2">VENUE DETAILS</th>
+                        <th colspan="2" style="min-width:200px !important">DATE</th>
+                        <th rowspan="2">TOTAL DAYS</th>
+                        <th rowspan="2">TOTAL PARTICIPANTS</th>
+                        <th rowspan="2">ESTIMATED EXPENDITURE</th>
+                        <th rowspan="2">SAI COMMENTS</th>
+                        <th rowspan="2">FINAL DECISION</th>
+                        <th rowspan="2">ACTION</th>
+                      </tr>
+                      <tr>
+                        <th>NUMBER OF COUNTRIES EXPECTED TO PARTICIPATE</th>
+                        <th>NUMBER OF ATHLETES EXPECTED TO PARTICIPATE</th>
+                        <th>NUMBER OF PLAYERS</th>
+                        <th>NUMBER OF COACHES</th>
+                        <th>NUMBER OF SUPPORT STAFF</th>
+                        <th>FROM</th>
+                        <th>TO</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="internationalExposureSection">
+                      <tr *ngFor="let form of InternationalExposureFormArray.controls; let i = index"
+                        [formGroupName]="i">
+                        <td>{{i+1}}</td>
+
+                        <!--Age Category-->
+                        <td>
+                          <ng-template [ngIf]="!ToggleEditMode" [ngIfElse]="ageCategoryLabel">
+                            <select formControlName="AgeCategory" class="form-select"
+                              aria-label="Default select example">
+                              <option value="0" selected disabled>Select</option>
+                              <option *ngFor="let age of ageCategoryDDArray" [value]="age.id">{{age.name}}</option>
+                            </select>
+                          </ng-template>
+
+                          <ng-template #ageCategoryLabel>
+                            {{InternationalExposureFormArray.controls[i].get("AgeCategory_Name")?.value}}
+                          </ng-template>
+                        </td>
+                        <!--Tournament-->
+                        <td>
+                          <ng-template [ngIf]="!ToggleEditMode">
+                            <select formControlName="Tournament_Id" class="form-select"
+                              aria-label="Default select example">
+                              <option value="0" selected disabled>Select</option>
+                              <option *ngFor="let competition of competitionDD" [value]="competition.competitionId">
+                                {{competition.competition}}</option>
+                            </select>
+                          </ng-template>
+
+                          <ng-template [ngIf]="ToggleEditMode">
+                            {{InternationalExposureFormArray.controls[i].get('Tournament_Name')?.value}}
+                          </ng-template>
+                        </td>
+
+                        <ng-template [ngIf]="!ToggleEditMode">
+                          <td><input type="text" formControlName="NoOfCountries"></td>
+                          <td><input type="text" formControlName="NoOfPlayersExpected"></td>
+                          <td><input type="text" formControlName="NoOfPlayers"></td>
+                          <td><input type="text" formControlName="NoOfCoaches"></td>
+                          <td><input type="text" formControlName="NoOfSupportStaff"></td>
+                        </ng-template>
+
+                        <ng-template [ngIf]="ToggleEditMode">
+                          <td>{{InternationalExposureFormControls[i].get('NoOfCountries')?.value}}</td>
+                          <td>{{InternationalExposureFormControls[i].get('NoOfPlayersExpected')?.value}}</td>
+                          <td>{{InternationalExposureFormControls[i].get('NoOfPlayers')?.value}}</td>
+                          <td>{{InternationalExposureFormControls[i].get('NoOfCoaches')?.value}}</td>
+                          <td>{{InternationalExposureFormControls[i].get('NoOfSupportStaff')?.value}}</td>
+                        </ng-template>
+
+                        <!--VENUE-->
+                        <td> {{ InternationalExposureFormControls[i].get('Country')?.value + ',' +
+                          InternationalExposureFormControls[i].get('City')?.value }}</td>
+
+                        <ng-template [ngIf]="!ToggleEditMode">
+                          <td><input type="date" formControlName="Dates_From"></td>
+                          <td><input type="date" formControlName="Dates_To"></td>
+                        </ng-template>
+
+                        <ng-template [ngIf]="ToggleEditMode">
+                          <td>{{InternationalExposureFormControls[i].get('Dates_From')?.value | date:"dd-MM-yyyy"}}</td>
+                          <td>{{InternationalExposureFormControls[i].get('Dates_To')?.value | date:"dd-MM-yyyy"}}</td>
+                        </ng-template>
+
+                        <!--TOTAL DAYS-->
+                        <td>{{ InternationalExposureFormControls[i].get('Dates_From')?.value | dateDifference :
+                          InternationalExposureFormControls[i].get('Dates_To')?.value}}</td>
+
+                        <!--TOTAL PARTICIPANTS-->
+                        <td>{{InternationalExposureFormControls[i].get('NoOfPlayers')?.value +
+                          InternationalExposureFormControls[i].get('NoOfCoaches')?.value +
+                          InternationalExposureFormControls[i].get('NoOfSupportStaff')?.value }}</td>
+                        <ng-template [ngIf]="!ToggleEditMode">
+                          <td><input type="text" formControlName="EstimatedExpenditure"></td>
+                        </ng-template>
+
+                        <ng-template [ngIf]="ToggleEditMode">
+                          <td>{{ InternationalExposureFormControls[i].get("EstimatedExpenditure")?.value}}</td>
+                        </ng-template>
+
+                        <td><input type="text" formControlName="Sai_Comments"></td>
+                        <td><input type="text" formControlName="Final_Decision"></td>
+                        <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto"
+                            (click)="RemoveField(i,InternationalExposureFormArray)"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="section == 3">
+                <div class="table-responsive" *ngIf="(nationalChampionship$ | async) ; else dataNotSubmitted">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th rowspan="2">S.NO</th>
+                        <th rowspan="2">EXPECTED NUMBER OF STATES AND UT PARTICIPATING</th>
+                        <th rowspan="2">AGE CATEGORY</th>
+                        <th rowspan="2">VENUE</th>
+                        <th colspan="2" style="min-width:200px !important">DATE</th>
+                        <th rowspan="2">TOTAL DAYS</th>
+                        <th rowspan="2">ESTIMATED EXPENDITURES</th>
+                        <th rowspan="2">SAI COMMENTS</th>
+                        <th rowspan="2">FINAL DECISION</th>
+                        <th rowspan="2">ACTION</th>
+                      </tr>
+                      <tr>
+                        <th>FROM</th>
+                        <th>TO</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="nationalChampionship">
+                      <tr *ngFor="let form of NationalChampionshipFormArray.controls;let i = index" [formGroupName]="i">
+                        <td>{{i+1}}</td>
+                        <ng-template [ngIf]="ToggleEditMode" [ngIfElse]="editMode">
+                          <td>{{ NationalChampionshipControls[i].get('NameOfStatesAndUTs')?.value }}</td>
+                          <td>{{ NationalChampionshipControls[i].get('AgeCategory_Name')?.value }}</td>
+                          <td>{{ NationalChampionshipControls[i].get('City')?.value + ',' +
+                            NationalChampionshipControls[i].get('State')?.value}}</td>
+                          <td>{{ NationalChampionshipControls[i].get('Dates_From')?.value | date:'dd-MM-YYYY'}}</td>
+                          <td>{{ NationalChampionshipControls[i].get('Dates_To')?.value | date:'dd-MM-YYYY'}}</td>
+                          <td>{{ NationalChampionshipControls[i].get('Dates_From')?.value | dateDifference:
+                            NationalChampionshipControls[i].get('Dates_To')?.value}}</td>
+                          <td>{{ NationalChampionshipControls[i].get('EsimatedExpenditure')?.value }}</td>
+                        </ng-template>
+
+                        <ng-template #editMode>
+                          <td><input type="text" formControlName="NameOfStatesAndUTs"></td>
+                          <td><select formControlName="AgeCategory">
+                              <option value="0" disabled default>Select</option>
+                              <option *ngFor="let age of ageCategoryDDArray" [value]="age.id">{{age.name}}</option>
+                            </select></td>
+                          <td>{{ NationalChampionshipControls[i].get('City')?.value + ',' +
+                            NationalChampionshipControls[i].get('State')?.value}}</td>
+                          <td><input formControlName="Dates_From" type="date"></td>
+                          <td><input formControlName="Dates_To" type="date"></td>
+                          <td>{{ NationalChampionshipControls[i].get('Dates_From')?.value | dateDifference:
+                            NationalChampionshipControls[i].get('Dates_To')?.value}}</td>
+                          <td>{{ NationalChampionshipControls[i].get('EsimatedExpenditure')?.value }}</td>
+                        </ng-template>
+                        <td><input type="text" formControlName="Sai_Comments"></td>
+                        <td><input type="text" formControlName="Final_Decision"></td>
+                        <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto" alt=""
+                            (click)="RemoveField(i,NationalChampionshipFormArray)"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="section == 4">
+                <div class="table-responsive" *ngIf="(international_Compt_India$ | async) ; else dataNotSubmitted">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th rowspan="2">S.NO</th>
+                        <th rowspan="2">NAME OF COMPETITION</th>
+                        <th colspan="2">DETAILS</th>
+                        <th colspan="2" style="min-width: 200px !important;">PERIOD</th>
+                        <th rowspan="2">TOTAL DAYS</th>
+                        <th rowspan="2">VENUE</th>
+                        <th rowspan="2">ESTIMATED EXPENDITURE (IN INR)</th>
+                        <th rowspan="2">SAI RECOMMENDATIONS</th>
+                        <th rowspan="2">SAI COMMENTS</th>
+                        <th rowspan="2">FINAL DECISION</th>
+                        <th rowspan="2">ACTION</th>
+                      </tr>
+                      <tr>
+                        <th>CATEGORY/ AGE GROUP</th>
+                        <th>EXPECTED NO. OF COUNTRIES</th>
+                        <th>FROM</th>
+                        <th>TO</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="internationalComptIndia">
+                      <tr *ngFor="let form of InternationalComptIndiaFormControls;let i = index" [formGroupName]="i">
+                        <td>{{i+1}}</td>
+                        <ng-template [ngIf]="ToggleEditMode" [ngIfElse]="editMode">
+                          <td>{{InternationalComptIndiaFormControls[i].get('Tournament_Name')?.value}}</td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('AgeCategory_Name')?.value}}</td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('NoOfCountries')?.value}}</td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('Dates_From')?.value | date:'dd-MM-yyyy'}}
+                          </td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('Dates_To')?.value | date:'dd-MM-yyyy'}}</td>
+                          <td> {{InternationalComptIndiaFormControls[i].get('Dates_From')?.value |
+                            dateDifference: InternationalComptIndiaFormControls[i].get('Dates_To')?.value}}</td>
+                          <td> {{InternationalComptIndiaFormControls[i].get('NameOfCenter')?.value + ',' +
+                            InternationalComptIndiaFormControls[i].get('City')?.value }} </td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('EstimatedExpenditure')?.value}}</td>
+                          <td>{{InternationalComptIndiaFormControls[i].get('Remarks')?.value}}</td>
+                        </ng-template>
+
+                        <ng-template #editMode>
+                          <td>
+                            <select formControlName="Tournament_Id" class="form-select"
+                              aria-label="Default select example">
+                              <option value="0" disabled>Select</option>
+                              <option *ngFor="let competition of competitionDD" [value]="competition.competitionId">
+                                {{competition.competition}}
+                              </option>
+                            </select>
+                          </td>
+                          <td>
+                            <select formControlName="AgeCategory" class="form-select"
+                              aria-label="Default select example">
+                              <option value="0" selected disabled>Select</option>
+                              <option *ngFor="let age of ageCategoryDDArray" [value]="age.id">{{age.name}}</option>
+                            </select>
+                          </td>
+                          <td><input type="text" formControlName="NoOfCountries"></td>
+                          <td><input [max]="MinMaxDate(InternationalComptIndiaFormArray,'To_Date',i)" type="date"
+                              formControlName="Dates_From"></td>
+                          <td><input [min]="MinMaxDate(InternationalComptIndiaFormArray,'From_Date',i)" type="date"
+                              formControlName="Dates_To"></td>
+                          <td> {{InternationalComptIndiaFormControls[i].get('Dates_From')?.value |
+                            dateDifference: InternationalComptIndiaFormControls[i].get('Dates_To')?.value}}</td>
+                          <td> {{InternationalComptIndiaFormControls[i].get('NameOfCenter')?.value + ',' +
+                            InternationalComptIndiaFormControls[i].get('City')?.value }} </td>
+                          <td><input type="text" formControlName="EstimatedExpenditure"></td>
+                          <td><input type="text" formControlName="Remarks"></td>
+                        </ng-template>
+                        <td><input type="text" formControlName="Sai_Comments"></td>
+                        <td><input type="text" formControlName="Final_Decision"></td>
+                        <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto" alt=""
+                            (click)="RemoveField(i,InternationalComptIndiaFormArray)"></td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ng-template>
+
+              <ng-template [ngIf]="section == 5 ">
+                <ng-container *ngIf="(get_Remuneration$ | async) ; else dataNotSubmitted">
+                  <h3>1.1 COACHES AND SUPPORT STAFF</h3>
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>S.NO</th>
+                          <th>DESIGNATION</th>
+                          <th>LEVEL</th>
+                          <th>TENURE (IN MONTHS/DAYS)</th>
+                          <th>SALARY PER MONTH/DAY</th>
+                          <th>CURRENCY TYPE</th>
+                          <th>CURRENCY CONVERSION RATE</th>
+                          <th>ESTIMATED EXPENDITURE</th>
+                          <th>SAI COMMENTS</th>
+                          <th>FINAL DECISION</th>
+                          <th>ACTION</th>
+
+                        </tr>
+
+                      </thead>
+                      <tbody formArrayName="coachandsupportstafflist">
+                        <tr *ngFor="let form of CoachAndSupportStaffFormControls;let i = index" [formGroupName]="i">
+                          <td>{{i+1}}</td>
+                          <ng-template [ngIf]="ToggleEditMode" [ngIfElse]="editMode">
+                            <td>{{CoachAndSupportStaffFormControls[i].get("Designation")?.value}}</td>
+                            <td>{{CoachAndSupportStaffFormControls[i].get("Level")?.value}}</td>
+                            <td>{{CoachAndSupportStaffFormControls[i].get("TenureTime")?.value}}</td>
+                            <td>{{CoachAndSupportStaffFormControls[i].get("Salary")?.value}}</td>
+                            <td>{{CoachAndSupportStaffFormControls[i].get("Currency_Name")?.value}}</td>
+                            <td>{{CoachAndSupportStaffFormControls[i].get("CurrencyRate")?.value}}</td>
+                            <td>{{
+                              [CoachAndSupportStaffFormControls[i].get("Salary")?.value,
+                              CoachAndSupportStaffFormControls[i].get("TenureTime")?.value,CoachAndSupportStaffFormControls[i].get("CurrencyRate")?.value]
+                              | multiplication
+                              }}</td>
+                          </ng-template>
+
+                          <ng-template #editMode>
+                            <td><input type="text" formControlName="Designation"></td>
+                            <td><input type="text" formControlName="Level"></td>
+                            <td><input type="text" formControlName="TenureTime"></td>
+                            <td><input type="text" formControlName="Salary"></td>
+                            <td><select formControlName="CurrencyType" name="" id="">
+                                <option value="0">Select</option>
+                                <option *ngFor="let currency of currencyDDArray" [value]="currency.id">
+                                  {{currency?.name}}</option>
+                              </select></td>
+                            <td><input type="text" formControlName="CurrencyRate"></td>
+                            <td>{{
+                              [CoachAndSupportStaffFormControls[i].get("Salary")?.value,CoachAndSupportStaffFormControls[i].get("TenureTime")?.value,CoachAndSupportStaffFormControls[i].get("CurrencyRate")?.value]
+                              | multiplication}}</td>
+                          </ng-template>
+
+                          <td><input type="text" formControlName="Sai_Comments"></td>
+                          <td><input type="text" formControlName="Final_Decision"></td>
+                          <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto" alt="" (click)="RemoveField(i,CoachAndSupportStaffFormArray)"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="table-responsive mt-5">
+                    <h3 class="my-3">1.2 ADMINISTRATIVE</h3>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>S.NO</th>
+                          <th>DESIGNATION</th>
+                          <!-- <th>TENURE TYPE</th> -->
+                          <th>DATE OF JOINING</th>
+                          <th>DATE OF CONTRACT EXPIRY</th>
+                          <th>TOTAL DAYS</th>
+                          <th>SALARY PER DAY/MONTH</th>
+                          <th>ESTIMATED EXPENDITURE</th>
+                          <th>SAI COMMENTS</th>
+                          <th>FINAL DECISION</th>
+                          <th>ACTION</th>
+
+                        </tr>
+
+                      </thead>
+                      <tbody formArrayName="administrativeList">
+                        <tr *ngFor="let form of AdministrativeFormControls;let i = index" [formGroupName]="i">
+                          <td>{{i + 1}}</td>
+                          <ng-template [ngIf]="ToggleEditMode" [ngIfElse]="editMode">
+                            <td>{{AdministrativeFormControls[i].get("Designation")?.value}}</td>
+                            <!-- <td>{{AdministrativeFormControls[i].get("TenureType")?.value}}</td> -->
+                            <td>{{AdministrativeFormControls[i].get("Date_of_Joining")?.value | date:'dd-MM-YYYY'}}</td>
+                            <td>{{AdministrativeFormControls[i].get("Contract_Expiry_Date")?.value | date:'dd-MM-YYYY'}}
+                            </td>
+                            <td>{{ AdministrativeFormControls[i].get('Date_of_Joining')?.value
+                              | dateDifference : AdministrativeFormControls[i].get('Contract_Expiry_Date')?.value }}
+                            </td>
+                            <td>{{AdministrativeFormControls[i].get("Salary")?.value }}</td>
+                            <td>{{ AdministrativeFormControls[i].get('Date_of_Joining')?.value
+                              | expenditure: AdministrativeFormControls[i].get("Contract_Expiry_Date")?.value :
+                              AdministrativeFormControls[i].get("Salary")?.value }}</td>
+                          </ng-template>
+
+                          <ng-template #editMode>
+                            <td><input type="text" formControlName="Designation"></td>
+                            <td><input type="date" formControlName="Date_of_Joining"></td>
+                            <td><input type="date" formControlName="Contract_Expiry_Date"></td>
+                            <td>{{ AdministrativeFormControls[i].get('Date_of_Joining')?.value
+                              | dateDifference : AdministrativeFormControls[i].get('Contract_Expiry_Date')?.value }}
+                            </td>
+                            <td><input type="text" formControlName="Salary"></td>
+                            <td>{{ AdministrativeFormControls[i].get('Date_of_Joining')?.value
+                              | expenditure: AdministrativeFormControls[i].get("Contract_Expiry_Date")?.value :
+                              AdministrativeFormControls[i].get("Salary")?.value }}</td>
+                          </ng-template>
+
+                          <td><input type="text" formControlName="Sai_Comments"></td>
+                          <td><input type="text" formControlName="Final_Decision"></td>
+                          <td><img *ngIf="isEditable" src="/assets/images/delete_bin.svg" class="d-block mx-auto" alt="" (click)="RemoveField(i,AdministrativeFormArray)"></td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </ng-container>
+              </ng-template>
+
+              <ng-template [ngIf]="section == 6">
+                <ng-container *ngIf="(getEquipment$ | async); else dataNotSubmitted">
+                  <div class="table_1">
+                    <h3>1.1 Consumables</h3>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.NO</th>
+                            <th>NAME OF EQUIPMENT</th>
+                            <th>QUANTITY</th>
+                            <th>PRICE</th>
+                            <th>ESTIMATED PRICE</th>
+                            <th>SAI COMMENTS</th>
+                            <th>FINAL DECISION</th>
+                            <th>ACTION</th>
+
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="consumable">
+                          <tr *ngFor="let form of ConsumableFormControls;let i = index" [formGroupName]="i">
+
+                            <td>{{i + 1}}</td>
+                            <ng-template [ngIf]="ToggleEditMode">
+                              <td>{{ConsumableFormControls[i].get('Equipment_Name')?.value}}</td>
+                              <td>{{ConsumableFormControls[i].get('Quantity')?.value}}</td>
+                              <td>{{ConsumableFormControls[i].get('Price')?.value}}</td>
+                              <td>{{ConsumableFormControls[i].get('Expected_Price')?.value}}</td>
+                            </ng-template>
+
+                            <ng-template [ngIf]="!ToggleEditMode">
+                              <td>
+                                <select class="form-select" aria-label="Default select example"
+                                  formControlName="Equipment_Id">
+                                  <option value="0">Select</option>
+                                  <ng-container *ngFor="let equipment of equipmentDDArray">
+                                    <option *ngIf="equipment?.is_consumeable" [value]="equipment?.equipment_Id">
+                                      {{equipment?.equipment_Name}}
+                                    </option>
+                                  </ng-container>
+
+                                </select>
+                              </td>
+                              <td><input type="text" formControlName="Quantity"></td>
+                              <td><input type="text" formControlName="Price"> </td>
+                              <td><input type="text" formControlName="Expected_Price"> </td>
+                            </ng-template>
+                            <td><input type="text" formControlName="SAI_Comments"> </td>
+                            <td> <input type="text" formControlName="Final_Decision"></td>
+                            <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto"
+                                (click)="RemoveField(i,ConsumableFormArray)" alt=""></td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="table_2 mt-5">
+                    <h3>1.2 Non-Consumables</h3>
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th>S.NO</th>
+                            <th>NAME OF EQUIPMENT</th>
+                            <th>QUANTITY</th>
+                            <th>PRICE</th>
+                            <th>ESTIMATED PRICE</th>
+                            <th>SAI COMMENTS</th>
+                            <th>FINAL DECISON</th>
+                            <th>ACTION</th>
+
+                          </tr>
+
+                        </thead>
+                        <tbody formArrayName="nonConsumable">
+                          <tr *ngFor="let form of NonConsumableFormControls; let i = index" [formGroupName]="i">
+                            <td>0{{i+1}}</td>
+                            <ng-template [ngIf]="ToggleEditMode">
+                              <td>{{NonConsumableFormControls[i].get('Equipment_Name')?.value}}</td>
+                              <td>{{NonConsumableFormControls[i].get('Quantity')?.value}}</td>
+                              <td>{{NonConsumableFormControls[i].get('Price')?.value}}</td>
+                              <td>{{NonConsumableFormControls[i].get('Expected_Price')?.value}}</td>
+                            </ng-template>
+
+                            <ng-template [ngIf]="!ToggleEditMode">
+                              <td>
+                                <select class="form-select" aria-label="Default select example"
+                                  formControlName="Equipment_Id">
+                                  <option value="0">Select</option>
+                                  <ng-container *ngFor="let equipment of equipmentDDArray">
+                                    <option *ngIf="!equipment?.is_consumeable" [value]="equipment?.equipment_Id">
+                                      {{equipment?.equipment_Name}}
+                                    </option>
+                                  </ng-container>
+
+                                </select>
+                              </td>
+                              <td><input type="text" formControlName="Quantity"></td>
+                              <td><input type="text" formControlName="Price"> </td>
+                              <td><input type="text" formControlName="Expected_Price"> </td>
+                            </ng-template>
+                            <td><input type="text" formControlName="SAI_Comments"> </td>
+                            <td> <input type="text" formControlName="Final_Decision"></td>
+                            <td><img *ngIf="ToggleDelete" src="/assets/images/delete_bin.svg" class="d-block mx-auto"
+                                (click)="RemoveField(i,NonConsumableFormArray)" alt=""></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-template>
+
+              <ng-template #dataNotSubmitted>
+                <h2>Data not submitted yet</h2>
+              </ng-template>
+
+            </div>
+            <button *ngIf="isEditable" class="previous-btn me-3 my-2" (click)="Save(section)">SAVE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-between">
+  <div class="col-auto">
+      <button type="button" class="btn my-1 left-arrow"><img src="../../../../../../assets/images/left_nav_arrow.svg" class="img-fluid" alt=""></button>
+  </div>
+  <div class="col-auto">
+      <button type="button" class="btn my-1 right-arrow"><img src="../../../../../../assets/images/right_nav_arrow.svg" class="img-fluid" alt=""></button>
+  </div>
+</div>

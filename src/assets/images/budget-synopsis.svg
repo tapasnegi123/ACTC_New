@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="65" height="59" viewBox="0 0 65 59">
+  <g id="Group_580" data-name="Group 580" transform="translate(-992 -145)">
+    <g id="Rectangle_14143" data-name="Rectangle 14143" transform="translate(992 145)" fill="#fff" stroke="#dedede" stroke-width="1">
+      <rect width="65" height="59" rx="5" stroke="none"/>
+      <rect x="0.5" y="0.5" width="64" height="58" rx="4.5" fill="none"/>
+    </g>
+    <g id="medal-line" transform="translate(1005 155.001)">
+      <path id="Path_14358" data-name="Path 14358" d="M0,0H36V36H0Z" fill="none"/>
+      <path id="Path_14359" data-name="Path 14359" d="M16,9.5a12,12,0,1,1-12,12A12,12,0,0,1,16,9.5Zm0,3a9,9,0,1,0,9,9A9,9,0,0,0,16,12.5Zm0,2.25,1.984,4.02,4.435.645-3.21,3.127.757,4.419L16,24.874l-3.967,2.085.757-4.417L9.58,19.413l4.435-.645ZM25,2V6.5L22.954,8.207A14.9,14.9,0,0,0,17.5,6.574V2ZM14.5,2V6.574A14.9,14.9,0,0,0,9.046,8.206L7,6.5V2Z" transform="translate(2 0.999)" fill="#d9d9d9"/>
+    </g>
+  </g>
+</svg>

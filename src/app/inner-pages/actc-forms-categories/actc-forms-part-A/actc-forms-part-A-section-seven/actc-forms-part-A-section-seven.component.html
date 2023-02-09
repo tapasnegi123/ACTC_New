@@ -1,0 +1,267 @@
+<ng-container *ngIf="completeList$| async;else loader">
+  <form [formGroup]="sectionSevenForm">
+    <div class="section section-1 form-padding-box">
+      <h2 class="text-center">REQUIREMENT OF SPORTS EQUIPMENT</h2>
+      <div class="hl d-block mx-auto"></div>
+
+      <!--consumables-->
+      <div class="table-1 padding-box">
+
+        <h4 class="text-start">7.1 Consumables</h4> 
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col">NAME OF EQUIPMENT</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">CURRENCY TYPE</th>
+                <th scope="col">CURRENCY CONVERSION RATE</th>
+                <th scope="col">ESTIMATED PRICE</th>
+                <th scope="col">REMARKS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container formArrayName="firstSection">
+                <ng-container *ngFor="let first of FirstStepFormArray.controls; let i = index" [formGroupName]="i ">
+                  <tr>
+                    <!-- <td>01</td> -->
+                    <td>
+                      <select formControlName="Equipment_Id" class="form-select p-3"
+                        aria-label="Default select example">
+                        <option value="" selected disabled>Select</option>
+                        <ng-container *ngFor="let options of consumable">
+                          <option [value]="options.equipment_Id">{{options.equipment_Name}}</option>
+                        </ng-container>
+                      </select>
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Equipment_Id')?.touched">
+                        <div class="text-danger"
+                          *ngIf="FirstStepFormArray.controls[i].get('Equipment_Id')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                      </div>
+                    </td>
+                    <!-- Quantity -->
+                    <td>
+                      <input #Quantity type="text" formControlName="Quantity" (input)="resetEstimatedPrice(i,FirstStepFormArray)">
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Quantity')?.touched">
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Quantity')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Quantity')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>numerical upto 6 digits
+                        </div>
+                      </div>
+                    </td>
+                    <!-- Price -->
+                    <td>
+                      <input #Price type="text" formControlName="Price" (input)="resetEstimatedPrice(i,FirstStepFormArray)">
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Price')?.touched">
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Price')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Price')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>numerical upto 6 digits
+                        </div>
+                      </div>
+                    </td>
+                    <!-- Currency_Id -->
+                    <td>
+                      <select formControlName="Currency_Id" class="form-select p-3"
+                        aria-label="Default select example">
+                        <option value="" selected disabled>Select</option>
+                        <ng-container *ngFor="let options of currency">
+                          <option [value]="options.id">{{options.name}}</option>
+                        </ng-container>
+                      </select>
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Currency_Id')?.touched">
+                        <div class="text-danger"
+                          *ngIf="FirstStepFormArray.controls[i].get('Currency_Id')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      <input #Conversion_Rate type="text" formControlName="Conversion_Rate" (input)="calculateExpectedPrice(i,Quantity.value, Price.value, Conversion_Rate.value,FirstStepFormArray)">
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Conversion_Rate')?.touched">
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Conversion_Rate')?.errors?.['required']">
+                          <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                        </div>
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Conversion_Rate')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>Numerical upto 6 digits with 4 decimal
+                        </div>
+                      </div>
+                    </td>
+                    <!-- Expected_Price -->
+                    <td>
+                      {{(FirstStepFormArray.controls[i].get("Quantity")?.value * FirstStepFormArray.controls[i].get("Price")?.value * FirstStepFormArray.controls[i].get("Conversion_Rate")?.value).toFixed(3)}}
+                    </td>
+                    <td>
+                      <input type="text" formControlName="Remarks">
+                      <div *ngIf="FirstStepFormArray.controls[i].get('Remarks')?.touched">
+                        <div class="text-danger" *ngIf="FirstStepFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                          <i class="bi bi-exclamation-circle"></i>alphanumeric upto 100 words
+                        </div>
+                      </div>
+                    </td>
+                    <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                      <div style="cursor: pointer;"  (click)="RemoveField(i,'firstSection')">
+                        <img id="fourthStep"  src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="" >
+                          DELETE
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisabledBtn(FirstStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3" (click)="AddNewField('firstStep')">+ ADD</button>
+        </div>
+      </div>
+
+      <!--Non consumables-->
+      <div class="table-2 padding-box">
+
+        <h4 class="text-start">7.2 Non - Consumables</h4>
+        <div class="table-responsive">
+          <table class="table  table-bordered" style="vertical-align: middle">
+            <thead>
+              <tr>
+                <th scope="col">NAME OF EQUIPMENT</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">CURRENCY TYPE</th>
+                <th scope="col">CURRENCY CONVERSION RATE</th>
+                <th scope="col">ESTIMATED PRICE</th>
+                <th scope="col">REMARKS</th>
+                <th scope="col">ACTION</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="secondSection">
+              <tr *ngFor="let second of SecondStepFormArray.controls; let i = index" [formGroupName]="i">
+                <td>
+                  <select formControlName="Equipment_Id" class="form-select p-3"
+                    aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let options of (nonConsumable)">
+                      <option [ngValue]="options.equipment_Id">{{options.equipment_Name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Equipment_Id')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Equipment_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <input #Quantity type="text" formControlName="Quantity" (input)="resetEstimatedPrice(i,SecondStepFormArray)">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Quantity')?.touched">
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Quantity')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Quantity')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 6 digits
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <input #Price type="text" formControlName="Price" (input)="resetEstimatedPrice(i,SecondStepFormArray)">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Price')?.touched">
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Price')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Price')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>numerical upto 6 digits
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <select formControlName="Currency_Id" class="form-select p-3"
+                    aria-label="Default select example">
+                    <option value="" selected disabled>Select</option>
+                    <ng-container *ngFor="let options of currency">
+                      <option [ngValue]="options.id">{{options.name}}</option>
+                    </ng-container>
+                  </select>
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Currency_Id')?.touched">
+                    <div class="text-danger"
+                      *ngIf="SecondStepFormArray.controls[i].get('Currency_Id')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <input #Conversion_Rate formControlName="Conversion_Rate" type="text" (input)="calculateExpectedPrice(i,Quantity.value, Price.value, Conversion_Rate.value,SecondStepFormArray)">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Conversion_Rate')?.touched">
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Conversion_Rate')?.errors?.['required']">
+                      <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                    </div>
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Conversion_Rate')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>Numerical upto 6 digits with 4 decimal
+                    </div>
+                  </div>
+                </td>
+
+              
+                <td>
+                  <!-- <input formControlName="Expected_Price" type="text"> -->
+                  {{(SecondStepFormArray.controls[i].get("Quantity")?.value * SecondStepFormArray.controls[i].get("Price")?.value * SecondStepFormArray.controls[i].get("Conversion_Rate")?.value).toFixed(3)}}
+                </td>
+                <td>
+                  <input formControlName="Remarks" type="text">
+                  <div *ngIf="SecondStepFormArray.controls[i].get('Remarks')?.touched">
+                    <div class="text-danger" *ngIf="SecondStepFormArray.controls[i].get('Remarks')?.errors?.['pattern']">
+                      <i class="bi bi-exclamation-circle"></i>alphanumeric upto 100 words
+                    </div>
+                  </div>
+                </td>
+                <td [hidden]=" i == 0 ? true: false || isDisabled" class="border-0">
+                  <div style="cursor: pointer;"  id="fourthStep" (click)="RemoveField(i,'secondSection')">
+                    <img id="fourthStep"  src="/assets/images/delete-table.svg" class="d-block mx-auto" alt="" >
+                      DELETE
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end mb-2">
+          <button [hidden]="DisabledBtn(SecondStepFormArray) || isDisabled" type="button" class="btn add_btn mt-3" (click)="AddNewField('secondStep')">+ ADD</button>
+        </div>
+      </div>
+
+      
+
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <div class="button-left">
+              <button type="button" class="btn me-2  previous-btn" (click)="GoToPreviousForm()">
+                PREVIOUS
+              </button>
+              <button type="button" class="btn ms-2  next-btn" (click)="CheckForIsEditable(sectionSevenForm.value,sectionSevenForm)"
+              [disabled]="DisabledBtn(SecondStepFormArray) || DisabledBtn(FirstStepFormArray) || !formListData.isfilledby_nsf">
+                NEXT
+              </button>
+            </div>
+            <div class="button-right">
+              <button type="button" class="btn  save-btn" (click)="SaveForm(sectionSevenForm.value,sectionSevenForm)" [hidden]="isDisabled">SAVE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

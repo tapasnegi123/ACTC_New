@@ -1,0 +1,394 @@
+<div class="nsf_next_process padding-box">
+    <div class="container ">
+      <div class="row">
+        <div class="row text-center list_proposal ">
+          <h2>
+            LIST OF PROPOSALS
+          </h2>
+        </div>
+      </div>
+      <div class="row my-5">
+        <div class="form">
+          <form class="row align-items-center justify-content-lg-end justify-content-md-start justify-content-start ">
+            <div class="col-lg-3 col-md-3 col-12 my-2">
+              <h4 class="m-0">Financial Year</h4>
+              <select class="form-select mt-1" aria-label="Default select example">
+                <option selected disabled>2022-2023</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12 my-2">
+              <h4 class="m-0">Proposal Type</h4>
+              <select class="form-select mt-1" aria-label="Default select example">
+                <option selected disabled>ACTC</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12 my-2">
+              <h4 class="m-0">Proposal Status</h4>
+              <select class="form-select mt-1" aria-label="Default select example">
+                <option selected disabled>All
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="col-lg-2 col-md-3 col-12 my-2">
+              <h4 class="m-0">Proposal Amount</h4>
+              <select class="form-select mt-1" aria-label="Default select example">
+                <option selected disabled>More then 1cr</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          
+            <div class="col-lg-auto col-md-12 col-12 my-2">
+              
+              <button type="submit" style="background-color: #FCB316; color:white;" class="btn border form-btn ">SEARCH</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <hr style="color: #00000057;"/>
+    <div class="container">
+     
+      <div class="row proposal_table">
+        <div class="col-12">
+          <button type="button" class="btn form-btn d-block ms-auto mb-4" >ADD NEW PROPOSAL +</button>
+        </div>
+        <div class="col-12">
+         <div class="table-responsive">
+          <table class="table border border-start-0 border-end-0 table-striped" style=" border-color: transparent;">
+            <thead style="background-color: #F2F2F2;">
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Proposal Head</th>
+                <th scope="col">Category</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Proposed budget</th>
+                <th scope="col">Approved budget</th>
+                <th scope="col">Status</th>
+                <!-- <th scope="col">Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">1</td>
+                <td>NCC</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td (click)="NavigateToIndivisual()" style="color: #007db9;cursor:pointer;">Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <a href="#" class="text-decoration-none"><span style="line-height:1.5; color: #000; font-size: 1.1rem;">Edit</span></a>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <a href="#" class="text-decoration-none"><span style="line-height:1.5 ; color: #000; font-size: 1.1rem;">View</span></a>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>NCC</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td >Draft</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>NCC</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td class="pending" >Pending</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>NCC</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td class="rejected" >Rejected</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td >Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td  >Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td  >Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td  >Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td  >Yet to be initiated</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+              <tr>
+                <td scope="row">1</td>
+                <td>International Exposure</td>
+                <td>Senior</td>
+                <td>World Champion eeiois</td>
+                <td>22/05/22</td>
+                <td>05/03/23</td>
+                <td>2cr</td>
+                <td>2cr</td>
+                <td class="approved" >Approved</td>
+                <!-- <td>
+                  <div class="d-flex align-items-center justify-content-between  ">
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/edit-fill.svg" height="19px" width="19px" class="d-block" alt="">
+                     <span style="line-height:1.5; font-size: 1.1rem;">Edit</span>
+                    
+                    </div>
+                    <div class="table_hl">
+  
+                    </div>
+                    <div class="d-flex flex-column">
+                      <img src="/assets/images/eye-fill-1.svg" height="19px" width="19px" class="d-block" alt="">
+                      <span style="line-height:1.5 ; font-size: 1.1rem;">View</span>
+                    </div>
+                  </div>
+  
+                </td> -->
+              </tr>
+             
+              
+            </tbody>
+          </table>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- pagination -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+        <nav aria-label="Page navigation example"  >
+          <ul class="pagination d-flex justify-content-end border-0 ">
+            <li class="page-item">
+              <a class="page-link " href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item "><a class="page-link view" href="#">01</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>

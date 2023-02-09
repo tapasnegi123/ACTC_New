@@ -1,0 +1,92 @@
+<div class="present_performance" *ngIf="(presentPerformance$|async) ; else loader ">
+  <div class="container padding-box">
+    <div class="row align-items-center">
+        <div class="col-md-11 col-9">
+           <div class="d-flex flex-column align-items-center">
+            <div class="heading">
+                <h2>PRESENT PERFORMANCE</h2>
+            </div>
+            <div class="hl"></div>
+           </div>
+        </div>
+        <!-- <div class="col-md-1 col-3">
+           <div class="export_list_btn">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Export</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+           </div>
+        </div> -->
+    </div>
+
+
+    <!-- EDIT BUTTON -->
+    <!-- <div class="d-flex mt-2 align-items-left justify-content-end" style="cursor: pointer;" >
+      <img src="/assets/images/edit-list.svg" alt="">
+    <span style="font-size:1.3rem; font-weight:500; color:black; text-decoration:underline;">Edit</span>
+    </div> -->
+
+
+    <div class="row">
+        <div class="section_bar w-100">
+
+        </div>
+    </div>
+
+    <div class="manage_actc_table"  [formGroup]="presentPerformanceForm">
+       <div class="table-responsive">
+        <table class="table table-bordered text-center">
+            <thead>
+                <th colspan="6">ANY OTHER MAJOR COMPETITION ACHIEVEMENT</th>
+              <tr>
+                <th rowspan="2">S.NO</th>
+                <th rowspan="2">COMPETITION</th>
+                <th colspan="2">TARGET PREVIOUSLY SPECIFIED</th>
+                <th colspan="2">ACTUAL ACHIEVED</th>
+              </tr>
+              <tr>
+                <th>PARTICIPATION</th>
+                <th>MEDALS</th>
+                <th>PARTICIPATION</th>
+                <th>MEDALS</th>
+              </tr>
+            </thead>
+            <tbody formArrayName="presentPerformance">
+              <tr *ngFor="let form of PresentPerformanceFormArray.controls; let i = index" [formGroupName]="i">
+                <td>{{i+1}}</td>
+                <td>{{ PresentPerformanceFormArray.controls[i].get('tournament_name')?.value}}</td>
+                <td><input type="text" formControlName="previous_participation"></td>
+                <div *ngIf="PresentPerformanceFormArray.controls[i].get('tournament_name')?.touched">
+                  <div class="text-danger" *ngIf="PresentPerformanceFormArray.controls[i].get('tournament_name')?.errors?.['required']">
+                    <i class="bi bi-exclamation-circle"></i>This field is mandatory
+                  </div>
+
+                  <div class="text-danger" *ngIf="PresentPerformanceFormArray.controls[i].get('tournament_name')?.errors?.['pattern']">
+                    <i class="bi bi-exclamation-circle"></i>Incorrect pattern
+                  </div>
+                </div>
+                <td><input type="text" formControlName="previous_medal_won"></td>
+                <td>{{ PresentPerformanceFormArray.controls[i].get('participation')?.value}}</td>
+                <td>{{ PresentPerformanceFormArray.controls[i].get('medal_won')?.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+       </div>
+    </div>
+
+  </div>
+   <!-- Buttons -->
+   <div class="btns d-flex justify-content-between">
+    <div>
+    <button type="button" class="previous-btn" (click)="GoToNextSection()">NEXT</button>
+    </div>
+    <div *ngIf="CheckEditableStatus">
+      <button type="button" class="previous-btn" (click)="SaveData(presentPerformanceForm.value)">SAVE</button>
+    </div>
+  </div>
+</div>
+<ng-template #loader>
+  <loader></loader>
+</ng-template>

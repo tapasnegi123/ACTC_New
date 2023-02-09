@@ -1,0 +1,26 @@
+.ncc{
+    background-color: #F8F9FD;
+    font-size: 1.6rem;
+    .tabbing_bar{
+        background-color: white;
+        padding: 18px;
+        .section_bar_ncc{
+            background-color: #1F91C0;
+            padding-top: 5px ;
+            padding-bottom: 5px ;
+            padding-left: 5px;
+         .nav-link{
+            background-color: #086B94;
+            color: #FFFFFF;
+            margin: 0 5px;
+            border-radius: 2px;
+         
+         }
+         .active{
+            background-color: #FCFCFC;
+            color: black;
+         }
+        }
+    }
+  
+}

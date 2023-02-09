@@ -1,0 +1,47 @@
+<div class="modal-content tournamentModal">
+  <div class="modal-header">
+    <h2 class="modal-title text-center w-100" style="font-weight: bold;">AGE CATEGORY DETAILS</h2>
+    <button type="button" class="btn-close ms-0" aria-label="Close"
+      (click)="CloseModal(false)"></button>
+  </div>
+  <div class="modal-body">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container" [formGroup]="ageCategoryForm">
+        <div class="row">
+          <!-- Name -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Name<i class="text-danger">*</i></h4>
+            <input type="text" class="form-control" placeholder="Age Category Name" formControlName="name">
+            <ng-container *ngIf="ageCategoryForm.get('name')?.touched">
+              <div class="text-danger" *ngIf="ageCategoryForm.get('name')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Age Group -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Age Group <i class="text-danger">*</i></h4>
+            <input type="text" class="form-control" placeholder="Age Group" formControlName="ageGroup">
+            <ng-container *ngIf="ageCategoryForm.get('ageGroup')?.touched">
+              <div class="text-danger" *ngIf="ageCategoryForm.get('ageGroup')?.errors?.['required']">
+                <i class="bi bi-exclamation-circle"></i>This field is mandatory
+              </div>
+            </ng-container>
+          </div>
+          <!-- Sport Name -->
+          <div class="col-lg-3 col-md-6 col-12 my-4">
+            <h4>Sport Name <i class="text-danger">*</i></h4>
+            <input maxlength="2" type="text" class="form-control" placeholder="Sport Name" formControlName="sport_name">
+          </div>
+          <!-- Save/ Cancel -->
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="saveAgeCategory()">Save</button>
+            <button type="button" class="btn btn-secondary" (click)="CloseModal(false)">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<loader *ngIf="Loader"></loader>

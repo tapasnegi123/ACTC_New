@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="234.085" height="216.865" viewBox="0 0 234.085 216.865">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_14302" data-name="Path 14302" d="M-16806-19272.832l18.273,56.934,13.17-2.125v-63.309Z" transform="translate(16806 19281.332)" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <path id="Path_14303" data-name="Path 14303" d="M-16827.215-19077.967v-62.248l-10.2-74.355-21.67-65.43-50.986,31.443-35.262,86.25s8.492,28.893,10.193,36.117,19.971,36.961,25.068,42.063,23.8,13.6,27.619,13.17,45.037,0,45.037,0Z" transform="translate(16945.33 19280)" fill="#fcb316"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <path id="Path_14304" data-name="Path 14304" d="M-8284.452-6681.656l64.491,13.329,31.314,36.533,17.4,22.327-84.375,24.936-33.635-31.6-1.739-62.92Z" transform="translate(8291 6681.656)" fill="#fce1a6"/>
+    </clipPath>
+  </defs>
+  <g id="Group_450" data-name="Group 450" transform="translate(-847.945 -338.098)">
+    <ellipse id="Ellipse_484" data-name="Ellipse 484" cx="94.163" cy="94.163" rx="94.163" ry="94.163" transform="translate(877.852 351.639)" fill="#5d5d5d"/>
+    <g id="Mask_Group_3" data-name="Mask Group 3" transform="translate(937.385 345.904)" clip-path="url(#clip-path)">
+      <g id="Ellipse_485" data-name="Ellipse 485" transform="translate(-59.536 5.735)" stroke="#707070" stroke-width="1">
+        <ellipse cx="94.163" cy="94.163" rx="94.163" ry="94.163" stroke="none"/>
+        <ellipse cx="94.163" cy="94.163" rx="93.663" ry="93.663" fill="none"/>
+      </g>
+    </g>
+    <g id="Mask_Group_4" data-name="Mask Group 4" transform="translate(847.945 345.904)" clip-path="url(#clip-path-2)">
+      <ellipse id="Ellipse_486" data-name="Ellipse 486" cx="94.163" cy="94.163" rx="94.163" ry="94.163" transform="translate(29.903 5.735)" fill="#fcb316"/>
+    </g>
+    <text id="_5_" data-name="5%" transform="translate(914.381 348.098)" fill="#404040" font-size="10" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">5%</tspan></text>
+    <text id="_44_" data-name="44%" transform="translate(852.074 467.238)" fill="#404040" font-size="9" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="0">44%</tspan></text>
+    <g id="Mask_Group_5" data-name="Mask Group 5" transform="translate(962.281 344.621)" clip-path="url(#clip-path-3)">
+      <ellipse id="Ellipse_488" data-name="Ellipse 488" cx="94.163" cy="94.163" rx="94.163" ry="94.163" transform="translate(-84.429 7.018)" fill="#fce1a6"/>
+    </g>
+    <ellipse id="Ellipse_487" data-name="Ellipse 487" cx="54.196" cy="54.196" rx="54.196" ry="54.196" transform="translate(917.34 391.127)" fill="#fff"/>
+  </g>
+</svg>
